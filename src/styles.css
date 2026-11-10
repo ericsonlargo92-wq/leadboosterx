@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: oklch(0.98 0.003 247);
+  --surface: oklch(1 0 0);
+  --card: oklch(1 0 0);
+  --foreground: oklch(0.21 0.03 264);
+  --body: oklch(0.45 0.02 257);
+  --muted-foreground: oklch(0.55 0.02 257);
+  --border: oklch(0.92 0.01 247);
+  --border-strong: oklch(0.85 0.015 247);
+  --primary: oklch(0.54 0.21 256);
+  --primary-hover: oklch(0.48 0.21 257);
+  --primary-foreground: oklch(1 0 0);
+  --accent: oklch(0.72 0.13 197);
+  --accent-foreground: oklch(0.5 0.11 200);
+  --soft: oklch(0.96 0.02 250);
+  --soft-border: oklch(0.9 0.04 250);
+  --soft-cyan: oklch(0.97 0.03 200);
+  --hover: oklch(0.96 0.008 247);
+  --destructive: oklch(0.58 0.22 27);
+  --success: oklch(0.6 0.13 163);
+  --ring: var(--primary);
+  --input: var(--border);
+  --radius: 0.625rem;
+  color-scheme: light;
+}
+
+.dark {
+  --background: oklch(0.19 0.02 256);
+  --surface: oklch(0.25 0.03 256);
+  --card: oklch(0.25 0.03 256);
+  --foreground: oklch(0.98 0.003 247);
+  --body: oklch(0.83 0.015 247);
+  --muted-foreground: oklch(0.7 0.018 251);
+  --border: oklch(1 0 0 / 10%);
+  --border-strong: oklch(0.4 0.02 257);
+  --primary: oklch(0.62 0.19 256);
+  --primary-hover: oklch(0.54 0.21 256);
+  --primary-foreground: oklch(1 0 0);
+  --accent: oklch(0.78 0.13 200);
+  --accent-foreground: oklch(0.82 0.12 200);
+  --soft: oklch(0.62 0.19 256 / 0.14);
+  --soft-border: oklch(0.62 0.19 256 / 0.3);
+  --soft-cyan: oklch(0.78 0.13 200 / 0.14);
+  --hover: oklch(1 0 0 / 0.06);
+  --destructive: oklch(0.65 0.2 25);
+  --success: oklch(0.7 0.14 163);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-body: var(--body);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-soft: var(--soft);
+  --color-soft-border: var(--soft-border);
+  --color-soft-cyan: var(--soft-cyan);
+  --color-hover: var(--hover);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 14px);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--background);
+    color: var(--body);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--foreground);
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@keyframes brand-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-brand-gradient {
+  background-size: 200% auto;
+  animation: brand-gradient 6s ease-in-out infinite;
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(color-mix(in oklch, var(--foreground) 9%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-brand-gradient,
+  .animate-ping,
+  .animate-pulse,
+  .motion-beam {
+    animation: none !important;
+    transition: none !important;
+  }
+}
