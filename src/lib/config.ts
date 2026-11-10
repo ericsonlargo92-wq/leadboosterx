@@ -13,7 +13,7 @@ export const CONTACT = {
 
 // Cal.com booking page: https://cal.com/<username>/<event-slug>
 export const BOOKING = {
-  calLink: "ericsonlargo/strategy-call", // placeholder: replace with the real Cal.com link
+  calLink: "ericson-largo-zbq89g/30min",
   durationMinutes: 30,
 };
 export const bookingUrl = `https://cal.com/${BOOKING.calLink}`;
