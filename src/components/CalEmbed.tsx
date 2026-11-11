@@ -1,14 +1,13 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { BOOKING, bookingUrl } from "~/lib/config";
-import { useTheme } from "./theme-provider";
 
 // The Cal.com embed touches `window`, so it is loaded only in the browser after hydration.
 const CalInline = lazy(() => import("./CalInline"));
 
 export function CalEmbed() {
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
+  const theme = "dark" as const; // the site is dark-only
   useEffect(() => setMounted(true), []);
 
   return (
@@ -16,8 +15,7 @@ export function CalEmbed() {
       <div className="relative min-h-[640px] overflow-hidden rounded-2xl border border-border bg-surface">
         {mounted ? (
           <Suspense fallback={<CalSkeleton />}>
-            {/* Re-mount when the theme changes so Cal.com picks up the new colors. */}
-            <CalInline key={theme} calLink={BOOKING.calLink} theme={theme} />
+            <CalInline calLink={BOOKING.calLink} theme={theme} />
           </Suspense>
         ) : (
           <CalSkeleton />

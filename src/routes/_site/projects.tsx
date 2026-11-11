@@ -4,6 +4,7 @@ import { ArrowRight, ChevronDown, Maximize2 } from "lucide-react";
 import { Lightbox, type LightboxImage } from "~/components/Lightbox";
 import { Container, CtaBlock, Pill } from "~/components/ui";
 import { FILTERS, PROJECTS, type Project, type ProjectFilter } from "~/lib/projects";
+import { Reveal } from "~/components/motion";
 import { seo } from "~/lib/seo";
 import { card, cx, focusRing } from "~/lib/ui";
 
@@ -115,7 +116,7 @@ function ProjectCard({
   const flowId = `flow-${p.slug}`;
 
   return (
-    <li className={cx(card, "flex flex-col p-6", isLive && "lg:col-span-2")}>
+    <Reveal as="li" className={cx(card, "flex flex-col p-6", isLive && "lg:col-span-2")}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span
           className={cx(
@@ -145,7 +146,7 @@ function ProjectCard({
           </div>
           <p className="mt-4 text-sm leading-relaxed">{p.description}</p>
 
-          <div className="mt-5 rounded-xl border border-border bg-background p-4">
+          <div className="mt-5 rounded-xl border border-border bg-surface p-4">
             <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">Workflow</p>
             <ol id={flowId} className="mt-3 flex flex-wrap items-center gap-x-1.5 gap-y-2 text-xs">
               {nodes.map((n, i) => (
@@ -198,7 +199,7 @@ function ProjectCard({
                   type="button"
                   onClick={() => onOpenImage(img)}
                   aria-label={`Enlarge image: ${img.caption}`}
-                  className={cx("group relative block w-full overflow-hidden rounded-xl border border-border bg-background", focusRing)}
+                  className={cx("group relative block w-full overflow-hidden rounded-xl border border-border bg-surface", focusRing)}
                 >
                   <img
                     src={img.src}
@@ -225,6 +226,6 @@ function ProjectCard({
           <ArrowRight className="size-4" aria-hidden="true" />
         </Link>
       </div>
-    </li>
+    </Reveal>
   );
 }

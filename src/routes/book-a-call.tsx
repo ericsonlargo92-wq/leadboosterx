@@ -2,7 +2,6 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft, CheckCircle2, Info } from "lucide-react";
 import { BrandLogo } from "~/components/BrandLogo";
 import { CalEmbed } from "~/components/CalEmbed";
-import { ThemeToggle } from "~/components/theme-provider";
 import { AmbientGlow, Container } from "~/components/ui";
 import { seo } from "~/lib/seo";
 import { card, cx, focusRing } from "~/lib/ui";
@@ -34,7 +33,7 @@ const GOOD_TO_KNOW = [
 function BookACallPage() {
   return (
     <div className="min-h-dvh">
-      <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/70 backdrop-blur-xl">
         <Container className="flex h-16 items-center justify-between gap-3">
           <Link to="/" className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX home">
             <BrandLogo size="sm" />
@@ -45,7 +44,6 @@ function BookACallPage() {
               <span className="hidden sm:inline">Back to site</span>
               <span className="sm:hidden">Back</span>
             </Link>
-            <ThemeToggle />
           </div>
         </Container>
       </header>

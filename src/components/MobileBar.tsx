@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
-import { ThemeToggle } from "./theme-provider";
 import { SidebarContent } from "./Sidebar";
 import { cx, focusRing } from "~/lib/ui";
 
@@ -32,12 +31,11 @@ export function MobileBar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 flex h-16 items-center justify-between gap-3 border-b border-border bg-surface/90 px-4 backdrop-blur lg:hidden">
+      <header className="sticky top-0 z-40 flex h-16 items-center justify-between gap-3 border-b border-border bg-background/70 px-4 backdrop-blur-xl lg:hidden">
         <Link to="/" className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX home">
           <BrandLogo size="sm" />
         </Link>
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <button
             ref={menuBtn}
             type="button"
@@ -70,7 +68,7 @@ export function MobileBar() {
           aria-label="Menu"
           inert={!open}
           className={cx(
-            "absolute inset-y-0 left-0 w-72 max-w-[85vw] overflow-y-auto border-r border-border bg-surface shadow-xl transition-transform duration-200 ease-out motion-reduce:transition-none",
+            "absolute inset-y-0 left-0 w-72 max-w-[85vw] overflow-y-auto border-r border-border bg-background/90 backdrop-blur-2xl shadow-xl transition-transform duration-200 ease-out motion-reduce:transition-none",
             open ? "translate-x-0" : "-translate-x-full",
           )}
         >

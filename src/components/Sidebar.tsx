@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, FolderGit2, HelpCircle, Home, Package, UserRound, type LucideIcon } from "lucide-react";
 import { CTA_LABEL } from "~/lib/offer";
 import { BrandLogo } from "./BrandLogo";
-import { ThemeToggle } from "./theme-provider";
 import { quarterLabel } from "~/lib/seo";
 import { btnPrimary, cx, focusRing } from "~/lib/ui";
 
@@ -23,7 +22,6 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         <Link to="/" onClick={onNavigate} className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX home">
           <BrandLogo size="md" />
         </Link>
-        <ThemeToggle />
       </div>
 
       <ProfileCard />
@@ -58,7 +56,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
       </nav>
 
       <div className="mt-auto">
-        <Link to="/book-a-call" onClick={onNavigate} className={cx(btnPrimary, "w-full")}>
+        <Link to="/book-a-call" onClick={onNavigate} className={cx(btnPrimary, "w-full whitespace-nowrap px-4")}>
           {CTA_LABEL}
           <ArrowUpRight className="size-4" aria-hidden="true" />
         </Link>
@@ -104,7 +102,7 @@ function ProfileCard() {
 
 export function Sidebar() {
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 overflow-y-auto border-r border-border bg-surface lg:block">
+    <aside className="glass fixed inset-y-3 left-3 z-30 hidden w-[16.5rem] overflow-y-auto rounded-3xl lg:block">
       <SidebarContent />
     </aside>
   );

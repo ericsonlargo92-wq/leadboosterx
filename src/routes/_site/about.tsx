@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BarChart3, Check, Globe2, Headphones, PhoneCall, Sparkles, Trophy, type LucideIcon } from "lucide-react";
 import { Container, CtaBlock, Pill } from "~/components/ui";
+import { Reveal, STAGGER } from "~/components/motion";
 import { seo } from "~/lib/seo";
 import { card, cx, gradientText } from "~/lib/ui";
 
@@ -133,7 +134,7 @@ function AboutPage() {
         </h2>
         <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6">
           {CAREER.map((c, i) => (
-            <li key={c.title} className={cx(card, "relative p-5")}>
+            <Reveal as="li" delay={i * STAGGER} key={c.title} className={cx(card, "relative p-5")}>
               <div className="flex items-center justify-between">
                 <span className="inline-flex size-9 items-center justify-center rounded-lg bg-soft text-primary">
                   <c.icon className="size-4" aria-hidden="true" />
@@ -142,7 +143,7 @@ function AboutPage() {
               </div>
               <h3 className="mt-4 font-semibold">{c.title}</h3>
               <p className="mt-1.5 text-sm">{c.text}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </section>

@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CalendarCheck, Check, Clock, ShieldCheck, Sparkles, Timer, Users, Zap } from "lucide-react";
 import { BookCallButton, Container, CtaBlock, Pill } from "~/components/ui";
 import { GUARANTEE, PACKAGES, PRICING_NOTE } from "~/lib/offer";
+import { Reveal, STAGGER } from "~/components/motion";
 import { seo } from "~/lib/seo";
 import { card, cx } from "~/lib/ui";
 
@@ -36,7 +37,7 @@ function PackagesPage() {
 
       <ul className="mt-10 grid gap-5 lg:grid-cols-3">
         {PACKAGES.map((p, i) => (
-          <li
+          <Reveal as="li" delay={i * STAGGER}
             key={p.name}
             className={cx(
               card,
@@ -71,7 +72,7 @@ function PackagesPage() {
               <p className="mb-3 text-xs text-muted-foreground">{PRICING_NOTE}</p>
               <BookCallButton className="w-full" />
             </div>
-          </li>
+          </Reveal>
         ))}
       </ul>
 

@@ -1,0 +1,89 @@
+{
+  "total": 55.35,
+  "cues": [
+    {
+      "id": "hook",
+      "text": "You paid for that lead. So why didn't it turn into a booked call?",
+      "start": 0,
+      "end": 3.74
+    },
+    {
+      "id": "gaps",
+      "text": "Most leads aren't lost to bad ads. They're lost in the gaps.",
+      "start": 4.02,
+      "end": 8.12
+    },
+    {
+      "id": "slow",
+      "text": "A form comes in at 9 pm. Nobody replies until tomorrow, and they've already booked someone else.",
+      "start": 8.29,
+      "end": 14.07
+    },
+    {
+      "id": "silence",
+      "text": "Others never hear back after one message.",
+      "start": 14.88,
+      "end": 16.93
+    },
+    {
+      "id": "noshow",
+      "text": "Some book, forget, and never show up.",
+      "start": 17.37,
+      "end": 19.76
+    },
+    {
+      "id": "system",
+      "text": "LeadBoosterX fixes that with one connected system.",
+      "start": 20.36,
+      "end": 23.3
+    },
+    {
+      "id": "ads",
+      "text": "Meta Ads bring in the right people.",
+      "start": 23.91,
+      "end": 25.59
+    },
+    {
+      "id": "funnel",
+      "text": "A focused funnel turns clicks into leads.",
+      "start": 26.4,
+      "end": 28.71
+    },
+    {
+      "id": "followup",
+      "text": "And automatic follow-up replies right away, books the call, and sends reminders until they show.",
+      "start": 28.92,
+      "end": 33.89
+    },
+    {
+      "id": "coaches",
+      "text": "Coaches and online programs get more discovery calls.",
+      "start": 34.49,
+      "end": 37.23
+    },
+    {
+      "id": "home",
+      "text": "Home service businesses get more booked estimates.",
+      "start": 37.56,
+      "end": 40.42
+    },
+    {
+      "id": "promise",
+      "text": "Everything is built in your own accounts, tested end to end, and live in 14 days, or I keep working for free until it is.",
+      "start": 40.94,
+      "end": 48.09
+    },
+    {
+      "id": "contract",
+      "text": "No long-term contract.",
+      "start": 48.53,
+      "end": 49.89
+    },
+    {
+      "id": "cta",
+      "text": "Book a free growth call. In 30 minutes, you'll know exactly where your leads are leaking.",
+      "start": 50,
+      "end": 55.35
+    }
+  ]
+}

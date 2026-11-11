@@ -5,6 +5,7 @@ import {
   BellRing,
   Check,
   Clock,
+  PlayCircle,
   GraduationCap,
   Hammer,
   MessageSquareOff,
@@ -16,6 +17,8 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
+import { Explainer } from "~/components/Explainer";
+import { Reveal, STAGGER } from "~/components/motion";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
 import { CTA_MICROCOPY, GUARANTEE, LAUNCH_DAYS, RESULTS, TRUST } from "~/lib/offer";
 import { seo } from "~/lib/seo";
@@ -111,6 +114,7 @@ function HomePage() {
       <section className="relative isolate overflow-hidden">
         <AmbientGlow grid />
         <Container className="pb-14 pt-12 sm:pt-20 lg:pb-20">
+          <Reveal>
           <Pill dot>For coaches, online programs &amp; home service businesses</Pill>
           <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
             Get More Booked Calls{" "}— <span className={gradientText}>Not Just More Leads.</span>
@@ -130,15 +134,40 @@ function HomePage() {
             </Link>
           </div>
           <p className="mt-3 text-sm text-muted-foreground">{CTA_MICROCOPY}</p>
+          <Link
+            to="/"
+            hash="explainer"
+            className={cx("mt-5 inline-flex items-center gap-2 rounded-full text-sm font-semibold text-accent-foreground hover:text-foreground", focusRing)}
+          >
+            <PlayCircle className="size-5" aria-hidden="true" />
+            Watch the 1-minute explainer
+          </Link>
+          </Reveal>
 
           <ul className="mt-10 grid gap-3 border-t border-border pt-6 sm:grid-cols-3" aria-label="Background">
-            {TRUST.map((t) => (
-              <li key={t} className="flex items-start gap-2 text-sm text-foreground">
+            {TRUST.map((t, i) => (
+              <Reveal as="li" delay={0.2 + i * STAGGER} key={t} className="flex items-start gap-2 text-sm text-foreground">
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
                 {t}
-              </li>
+              </Reveal>
             ))}
           </ul>
+        </Container>
+      </section>
+
+      {/* Explainer */}
+      <section id="explainer" className="scroll-mt-20" aria-labelledby="explainer-title">
+        <Container className="pb-16 lg:pb-20">
+          <Reveal>
+            <Pill>In one minute</Pill>
+            <h2 id="explainer-title" className="mt-5 text-3xl font-bold sm:text-4xl">
+              How It Works, Start to Finish
+            </h2>
+            <p className="mt-3 max-w-2xl">Where leads slip through, the system that catches them, and what you can expect in the first 14 days.</p>
+          </Reveal>
+          <Reveal delay={0.1} className="mt-8">
+            <Explainer />
+          </Reveal>
         </Container>
       </section>
 
@@ -151,7 +180,7 @@ function HomePage() {
           </h2>
           <ol className="mt-8 grid gap-4 md:grid-cols-3">
             {LEAKS.map((l, i) => (
-              <li key={l.title} className={cx(card, "p-6")}>
+              <Reveal as="li" delay={i * STAGGER} key={l.title} className={cx(card, "p-6")}>
                 <div className="flex items-center justify-between">
                   <span className="inline-flex size-10 items-center justify-center rounded-xl bg-destructive/10 text-destructive">
                     <l.icon className="size-5" aria-hidden="true" />
@@ -160,7 +189,7 @@ function HomePage() {
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">{l.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed">{l.text}</p>
-              </li>
+              </Reveal>
             ))}
           </ol>
           <blockquote className="mt-10 max-w-3xl border-l-[3px] border-primary pl-5 font-display text-xl font-semibold text-foreground sm:text-2xl">
@@ -177,8 +206,9 @@ function HomePage() {
             Built for How Your Business Actually Sells
           </h2>
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
-            {PATHS.map((p) => (
-              <article key={p.id} id={p.id} className={cx(card, "flex flex-col p-6 sm:p-8")}>
+            {PATHS.map((p, i) => (
+              <Reveal key={p.id} delay={i * STAGGER} className="flex">
+              <article id={p.id} className={cx(card, "flex flex-1 flex-col p-6 sm:p-8")}>
                 <div className="flex items-center gap-3">
                   <span className="inline-flex size-11 items-center justify-center rounded-xl bg-soft text-primary">
                     <p.icon className="size-5" aria-hidden="true" />
@@ -204,6 +234,7 @@ function HomePage() {
                   </Link>
                 </div>
               </article>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -238,8 +269,8 @@ function HomePage() {
             Live in {LAUNCH_DAYS} Days
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {STEPS.map((s) => (
-              <li key={s.title} className={cx(card, "group relative overflow-hidden p-6")}>
+            {STEPS.map((s, i) => (
+              <Reveal as="li" delay={i * STAGGER} key={s.title} className={cx(card, "group relative overflow-hidden p-6")}>
                 <span className="inline-flex size-10 items-center justify-center rounded-xl bg-soft text-primary">
                   <s.icon className="size-5" aria-hidden="true" />
                 </span>
@@ -250,7 +281,7 @@ function HomePage() {
                   aria-hidden="true"
                   className="motion-beam absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-primary to-accent transition-transform duration-500 group-hover:scale-x-100"
                 />
-              </li>
+              </Reveal>
             ))}
           </ol>
 

@@ -3,7 +3,7 @@
   "exclude": ["node_modules", ".output", "dist", "_originals"],
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "lib": ["DOM", "DOM.Iterable", "ES2023"],
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",

@@ -23,7 +23,7 @@ const EMPTY: Required<ContactInput> = {
 };
 
 const inputClass =
-  "mt-1.5 block w-full rounded-xl border border-input bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/30 aria-[invalid=true]:border-destructive";
+  "mt-1.5 block w-full rounded-xl border border-input bg-surface px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/30 aria-[invalid=true]:border-destructive";
 
 export function ContactForm() {
   const [values, setValues] = useState<Required<ContactInput>>(EMPTY);
@@ -124,7 +124,7 @@ export function ContactForm() {
                 onClick={() => toggleHelp(opt)}
                 className={cx(
                   "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
-                  on ? "border-primary bg-soft text-primary" : "border-border bg-background text-body hover:bg-hover",
+                  on ? "border-primary bg-soft text-primary" : "border-border bg-surface text-body hover:bg-hover",
                   focusRing,
                 )}
               >

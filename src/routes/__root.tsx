@@ -12,7 +12,8 @@ import {
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
 import { AlertTriangle, ArrowLeft, Compass, RotateCcw } from "lucide-react";
-import { ThemeProvider, themeScript } from "~/components/theme-provider";
+import { MotionConfig } from "motion/react";
+import { GlowBackdrop } from "~/components/GlowBackdrop";
 import { SiteLayout } from "~/components/SiteLayout";
 import { Container } from "~/components/ui";
 import { seo } from "~/lib/seo";
@@ -28,7 +29,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       path: "/",
     });
     return {
-      meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, { name: "theme-color", content: "#2563EB" }, ...base.meta],
+      meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, { name: "theme-color", content: "#0B1120" }, ...base.meta],
       links: [
         { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -39,7 +40,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         },
         { rel: "stylesheet", href: appCss },
       ],
-      scripts: [{ children: themeScript }],
     };
   },
   shellComponent: RootDocument,
@@ -52,16 +52,17 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
+      <MotionConfig reducedMotion="user">
+        <GlowBackdrop />
         <Outlet />
-      </ThemeProvider>
+      </MotionConfig>
     </QueryClientProvider>
   );
 }
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>

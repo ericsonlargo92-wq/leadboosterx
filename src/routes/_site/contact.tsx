@@ -90,7 +90,7 @@ function ContactPage() {
         </div>
 
         {/* Contact block */}
-        <section id="contact" aria-labelledby="contact-title" className="relative isolate mt-16 overflow-hidden rounded-3xl border border-soft-border bg-background p-5 sm:p-8 lg:p-10">
+        <section id="contact" aria-labelledby="contact-title" className="relative isolate mt-16 overflow-hidden rounded-3xl border border-soft-border bg-surface p-5 sm:p-8 lg:p-10">
           <AmbientGlow />
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
             <div>
