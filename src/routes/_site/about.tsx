@@ -35,7 +35,7 @@ const CAREER: { title: string; text: string; icon: LucideIcon }[] = [
   { title: "Appointment Setting", text: "Discovery calls, qualification, and booked consultations.", icon: PhoneCall },
   {
     title: "Sales",
-    text: "Closing QuickBooks deals with business owners and accountants. Recognized as QBOA King (2023–2024).",
+    text: "Closing QuickBooks deals with business owners and accountants.",
     icon: Trophy,
   },
   {
