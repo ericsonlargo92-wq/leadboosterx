@@ -1,16 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, FolderGit2, HelpCircle, Home, SlidersHorizontal, UserRound, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, FolderGit2, HelpCircle, Home, Package, UserRound, type LucideIcon } from "lucide-react";
+import { CTA_LABEL } from "~/lib/offer";
 import { BrandLogo } from "./BrandLogo";
 import { ThemeToggle } from "./theme-provider";
 import { quarterLabel } from "~/lib/seo";
 import { btnPrimary, cx, focusRing } from "~/lib/ui";
 
-type NavItem = { to: "/" | "/projects" | "/services" | "/about" | "/contact"; label: string; icon: LucideIcon };
+type NavItem = { to: "/" | "/projects" | "/packages" | "/about" | "/contact"; label: string; icon: LucideIcon };
 
 export const NAV: NavItem[] = [
   { to: "/", label: "Home", icon: Home },
   { to: "/projects", label: "Projects", icon: FolderGit2 },
-  { to: "/services", label: "Services", icon: SlidersHorizontal },
+  { to: "/packages", label: "Packages", icon: Package },
   { to: "/about", label: "About", icon: UserRound },
   { to: "/contact", label: "FAQs & Contact", icon: HelpCircle },
 ];
@@ -58,7 +59,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
 
       <div className="mt-auto">
         <Link to="/book-a-call" onClick={onNavigate} className={cx(btnPrimary, "w-full")}>
-          Book a Strategy Call
+          {CTA_LABEL}
           <ArrowUpRight className="size-4" aria-hidden="true" />
         </Link>
         <p className="mt-2 text-center text-xs text-muted-foreground">Free 30-minute call. No obligation.</p>

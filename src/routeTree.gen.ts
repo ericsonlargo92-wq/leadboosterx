@@ -14,6 +14,7 @@ import { Route as BookACallRouteImport } from './routes/book-a-call'
 import { Route as SiteIndexRouteImport } from './routes/_site/index'
 import { Route as SiteAboutRouteImport } from './routes/_site/about'
 import { Route as SiteContactRouteImport } from './routes/_site/contact'
+import { Route as SitePackagesRouteImport } from './routes/_site/packages'
 import { Route as SitePrivacyRouteImport } from './routes/_site/privacy'
 import { Route as SiteProjectsRouteImport } from './routes/_site/projects'
 import { Route as SiteServicesRouteImport } from './routes/_site/services'
@@ -42,6 +43,11 @@ const SiteContactRoute = SiteContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => SiteRoute,
 } as any)
+const SitePackagesRoute = SitePackagesRouteImport.update({
+  id: '/packages',
+  path: '/packages',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SitePrivacyRoute = SitePrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/book-a-call': typeof BookACallRoute
   '/about': typeof SiteAboutRoute
   '/contact': typeof SiteContactRoute
+  '/packages': typeof SitePackagesRoute
   '/privacy': typeof SitePrivacyRoute
   '/projects': typeof SiteProjectsRoute
   '/services': typeof SiteServicesRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByTo {
   '/book-a-call': typeof BookACallRoute
   '/about': typeof SiteAboutRoute
   '/contact': typeof SiteContactRoute
+  '/packages': typeof SitePackagesRoute
   '/privacy': typeof SitePrivacyRoute
   '/projects': typeof SiteProjectsRoute
   '/services': typeof SiteServicesRoute
@@ -82,6 +90,7 @@ export interface FileRoutesById {
   '/book-a-call': typeof BookACallRoute
   '/_site/about': typeof SiteAboutRoute
   '/_site/contact': typeof SiteContactRoute
+  '/_site/packages': typeof SitePackagesRoute
   '/_site/privacy': typeof SitePrivacyRoute
   '/_site/projects': typeof SiteProjectsRoute
   '/_site/services': typeof SiteServicesRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
     | '/book-a-call'
     | '/about'
     | '/contact'
+    | '/packages'
     | '/privacy'
     | '/projects'
     | '/services'
@@ -102,6 +112,7 @@ export interface FileRouteTypes {
     | '/book-a-call'
     | '/about'
     | '/contact'
+    | '/packages'
     | '/privacy'
     | '/projects'
     | '/services'
@@ -112,6 +123,7 @@ export interface FileRouteTypes {
     | '/book-a-call'
     | '/_site/about'
     | '/_site/contact'
+    | '/_site/packages'
     | '/_site/privacy'
     | '/_site/projects'
     | '/_site/services'
@@ -160,6 +172,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteContactRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/packages': {
+      id: '/_site/packages'
+      path: '/packages'
+      fullPath: '/packages'
+      preLoaderRoute: typeof SitePackagesRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/privacy': {
       id: '/_site/privacy'
       path: '/privacy'
@@ -187,6 +206,7 @@ declare module '@tanstack/react-router' {
 interface SiteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
   SiteContactRoute: typeof SiteContactRoute
+  SitePackagesRoute: typeof SitePackagesRoute
   SitePrivacyRoute: typeof SitePrivacyRoute
   SiteProjectsRoute: typeof SiteProjectsRoute
   SiteServicesRoute: typeof SiteServicesRoute
@@ -196,6 +216,7 @@ interface SiteRouteChildren {
 const SiteRouteChildren: SiteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
   SiteContactRoute: SiteContactRoute,
+  SitePackagesRoute: SitePackagesRoute,
   SitePrivacyRoute: SitePrivacyRoute,
   SiteProjectsRoute: SiteProjectsRoute,
   SiteServicesRoute: SiteServicesRoute,

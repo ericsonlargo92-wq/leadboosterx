@@ -10,9 +10,9 @@ import { card, cx, focusRing } from "~/lib/ui";
 export const Route = createFileRoute("/book-a-call")({
   head: () =>
     seo({
-      title: "Book a Strategy Call — LeadBoosterX",
+      title: "Book a Free Growth Call — LeadBoosterX",
       description:
-        "Book a free 30-minute growth strategy call with Ericson Largo to look at your lead sources, follow-up and the first system worth building.",
+        "Book a free 30-minute growth call with Ericson Largo to look at your lead sources, follow-up and the first system worth building.",
       path: "/book-a-call",
     }),
   component: BookACallPage,
@@ -53,10 +53,10 @@ function BookACallPage() {
       <main id="main" className="relative isolate overflow-x-clip">
         <AmbientGlow grid />
         <Container className="py-10 sm:py-14">
-          <h1 className="text-4xl font-bold sm:text-5xl">Book a Growth Strategy Call</h1>
+          <h1 className="text-4xl font-bold sm:text-5xl">Book Your Free Growth Call</h1>
           <p className="mt-4 max-w-2xl text-lg">
             A free 30-minute call to look at how leads come in today, where they're slipping through, and what to fix
-            first. Pick a time that works for you below.
+            first. You'll leave with a clear plan — whether or not we work together. Pick a time below.
           </p>
 
           <div className="mt-10 grid gap-8 lg:grid-cols-12">

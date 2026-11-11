@@ -20,11 +20,27 @@ export const Route = createFileRoute("/_site/contact")({
 const FAQS = [
   {
     q: "What kinds of businesses do you work with?",
-    a: "Mostly appointment-based and service businesses — coaches, consultants, clinics, med spas, home services, real estate, and online programs. If you sell through calls, consultations, or bookings, the systems I build fit well.",
+    a: "Mainly coaches and online programs, and home service businesses. If you sell through discovery calls, consultations, or estimates, the systems I build fit well. Other appointment-based businesses are welcome to book a call too.",
   },
   {
-    q: "What services do you offer?",
-    a: "Lead generation, Meta Ads, GoHighLevel CRM setup, funnels and landing pages, AI chat and voice receptionists, and follow-up automation. Most clients use a few of these together as one system.",
+    q: "What do you actually do?",
+    a: "I build and run Meta Ads, a funnel, and automatic follow-up as one system, so leads get a fast reply, book a call, and get reminded until they show up. There are three packages: a Follow-Up System, a Full Growth System (ads + funnel + follow-up), and monthly Growth Management.",
+  },
+  {
+    q: "What does it cost?",
+    a: "It depends on your setup — how many offers you run, whether you already have ads and a CRM, and which package fits. I'll scope it on the free call and send a clear quote before any work starts.",
+  },
+  {
+    q: "What do I need to provide?",
+    a: "Access to your ad account, CRM and calendar, the details of your offer, and any photos, videos or testimonials you want to use. I'll send a short checklist once we agree to work together.",
+  },
+  {
+    q: "What happens if it's not live in 14 days?",
+    a: "I keep working for free until it is. The 14 days start once I have access to your accounts and the assets we agree on.",
+  },
+  {
+    q: "Do I need to sign a long-term contract?",
+    a: "No. The build is a one-time project, and monthly management is month-to-month. You can stop anytime.",
   },
   {
     q: "Do you only generate leads?",

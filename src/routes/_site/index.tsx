@@ -1,50 +1,108 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
+  ArrowDown,
   ArrowRight,
-  CalendarCheck,
-  CheckCircle2,
-  Filter,
-  Magnet,
-  MousePointerClick,
-  RotateCcw,
-  Send,
+  BellRing,
+  Check,
+  Clock,
+  GraduationCap,
+  Hammer,
+  MessageSquareOff,
+  Rocket,
   ShieldCheck,
   Target,
-  Trophy,
-  UserPlus,
+  TrendingUp,
+  UserX,
+  Wrench,
+  type LucideIcon,
 } from "lucide-react";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
+import { CTA_MICROCOPY, GUARANTEE, LAUNCH_DAYS, RESULTS, TRUST } from "~/lib/offer";
 import { seo } from "~/lib/seo";
-import { btnSecondary, card, cx, gradientText } from "~/lib/ui";
+import { btnSecondary, card, cx, focusRing, gradientText } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/")({
   head: () =>
     seo({
-      title: "LeadBoosterX — Lead Generation, CRM & Automation by Ericson Largo",
+      title: "LeadBoosterX — Meta Ads, Funnels & Follow-Up That Book More Calls",
       description:
-        "Lead generation, Meta Ads, GoHighLevel CRM and follow-up automation that turn inquiries into booked appointments and customers.",
+        "Done-for-you Meta Ads, funnels and follow-up for coaches, online programs and home service businesses. Every lead gets a fast reply, a reason to book, and reminders. Live in 14 days.",
       path: "/",
     }),
   component: HomePage,
 });
 
-const STEPS = [
-  { n: "01", title: "Traffic", text: "Meta Ads & search", icon: MousePointerClick },
-  { n: "02", title: "Leads", text: "Opt-ins & forms", icon: UserPlus },
-  { n: "03", title: "Qualification", text: "Questions & lead scoring", icon: Filter },
-  { n: "04", title: "Appointment", text: "Synced calendar", icon: CalendarCheck },
-  { n: "05", title: "Follow-Up", text: "SMS & email sequences", icon: Send },
-  { n: "06", title: "Customer", text: "Closed revenue", icon: Trophy },
+const LEAKS: { title: string; text: string; icon: LucideIcon }[] = [
+  {
+    title: "Slow replies",
+    text: "A lead fills out your form at 9 pm. Nobody answers until tomorrow. By then they've booked someone else.",
+    icon: Clock,
+  },
+  {
+    title: "One try, then silence",
+    text: "Most leads don't book on the first message. Without follow-up, they're gone.",
+    icon: MessageSquareOff,
+  },
+  {
+    title: "No-shows",
+    text: "They booked, then forgot. No reminder, no reschedule, no second chance.",
+    icon: UserX,
+  },
 ];
 
-const PILLARS = [
-  { n: "01", title: "Attract", text: "Generate attention and qualified traffic.", icon: Target },
-  { n: "02", title: "Capture", text: "Turn interest into leads and conversations.", icon: Magnet },
-  { n: "03", title: "Convert", text: "Qualify prospects and book appointments.", icon: CheckCircle2 },
-  { n: "04", title: "Follow Up", text: "Automate follow-up so opportunities don't disappear.", icon: RotateCcw },
+const PATHS = [
+  {
+    id: "coaches",
+    audience: "Coaches & Online Programs",
+    icon: GraduationCap,
+    headline: "Fill your calendar with discovery calls from people who are ready to buy.",
+    points: [
+      "Opt-in or application funnel that screens out tire-kickers",
+      "Instant reply and booking link the moment someone opts in",
+      "Call reminders and no-show follow-up",
+      "Failed-payment recovery for members",
+    ],
+  },
+  {
+    id: "home-services",
+    audience: "Home Service Businesses",
+    icon: Hammer,
+    headline: "Turn ad clicks into booked estimates before your competitor calls back.",
+    points: [
+      "Quote-request page built for phones",
+      "Instant text-back and booking for every new lead",
+      "Estimate reminders and follow-up on unsold quotes",
+      "Review requests after the job is done",
+    ],
+  },
 ];
 
-const CHIPS = ["Lead Generation", "Meta Ads", "GoHighLevel CRM"];
+const STEPS: { days: string; title: string; text: string; icon: LucideIcon }[] = [
+  {
+    days: "Days 1–3",
+    title: "Strategy & offer",
+    text: "We agree on who you're targeting, the offer, and what a qualified lead looks like.",
+    icon: Target,
+  },
+  {
+    days: "Days 4–10",
+    title: "Build",
+    text: "Funnel, CRM, booking calendar, and follow-up sequences — all set up in your own account.",
+    icon: Wrench,
+  },
+  {
+    days: "Days 11–14",
+    title: "Test & launch",
+    text: "Every path is tested end to end, then the ads go live.",
+    icon: Rocket,
+  },
+  {
+    days: "After launch",
+    title: "Optimize",
+    text: "Weekly optimization and a plain-English monthly report.",
+    icon: TrendingUp,
+  },
+];
 
 function HomePage() {
   return (
@@ -52,111 +110,181 @@ function HomePage() {
       {/* Hero */}
       <section className="relative isolate overflow-hidden">
         <AmbientGlow grid />
-        <Container className="pb-16 pt-12 sm:pt-20 lg:pb-24">
-          <Pill dot>Remote Specialist · Meta Ads · Funnels · Automation</Pill>
+        <Container className="pb-14 pt-12 sm:pt-20 lg:pb-20">
+          <Pill dot>For coaches, online programs &amp; home service businesses</Pill>
           <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Helping You Save Time, Reduce Busywork, <span className={gradientText}>and Grow Your Business.</span>
+            Get More Booked Calls{" "}— <span className={gradientText}>Not Just More Leads.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg">
-            Sales, marketing, and automation systems that help businesses generate qualified leads, book more
-            appointments, and convert more customers.
+            I build and run your Meta Ads, funnel, and follow-up as one system — so every lead gets a fast reply, a reason
+            to book, and reminders until they show up.{" "}
+            <strong className="font-semibold text-foreground">
+              Live in {LAUNCH_DAYS} days. No long-term contract.
+            </strong>
           </p>
-          <ul className="mt-6 flex flex-wrap gap-2" aria-label="Specialties">
-            {CHIPS.map((c) => (
-              <li key={c} className="rounded-lg border border-border bg-surface px-2.5 py-1 font-mono text-xs text-body">
-                {c}
-              </li>
-            ))}
-            <li className="rounded-lg border border-accent/30 bg-soft-cyan px-2.5 py-1 font-mono text-xs text-accent-foreground">
-              AI Automation
-            </li>
-          </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <BookCallButton />
-            <Link to="/projects" className={btnSecondary}>
-              View My Work
-              <ArrowRight className="size-4" aria-hidden="true" />
+            <Link to="/" hash="how-it-works" className={btnSecondary}>
+              See How It Works
+              <ArrowDown className="size-4" aria-hidden="true" />
             </Link>
           </div>
-          <p className="mt-6 flex items-start gap-2 text-sm text-muted-foreground">
-            <ShieldCheck className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
-            10+ years across sales, customer support, operations, and revenue-focused roles.
-          </p>
+          <p className="mt-3 text-sm text-muted-foreground">{CTA_MICROCOPY}</p>
 
-          {/* Customer Acquisition Process */}
-          <div className="mt-14">
-            <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Customer Acquisition Process</p>
-            <ol className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
-              {STEPS.map((s, i) => (
-                <li key={s.n} className="relative">
-                  <div className={cx(card, "group relative h-full overflow-hidden p-4 transition-colors hover:border-soft-border")}>
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs text-muted-foreground">{s.n}</span>
-                      <s.icon className="size-4 text-primary" aria-hidden="true" />
-                    </div>
-                    <p className="mt-3 font-display font-semibold text-foreground">{s.title}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">{s.text}</p>
-                    <span
-                      aria-hidden="true"
-                      className="motion-beam absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-primary to-accent transition-transform duration-500 group-hover:scale-x-100"
-                    />
-                  </div>
-                  {i < STEPS.length - 1 && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute -right-2.5 top-1/2 z-10 hidden -translate-y-1/2 text-sm text-border-strong xl:block"
-                    >
-                      →
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ol>
+          <ul className="mt-10 grid gap-3 border-t border-border pt-6 sm:grid-cols-3" aria-label="Background">
+            {TRUST.map((t) => (
+              <li key={t} className="flex items-start gap-2 text-sm text-foreground">
+                <ShieldCheck className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
+                {t}
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* Problem */}
+      <section className="border-t border-border bg-surface/60" aria-labelledby="leaks-title">
+        <Container className="py-16 lg:py-20">
+          <Pill>The real problem</Pill>
+          <h2 id="leaks-title" className="mt-5 text-3xl font-bold sm:text-4xl">
+            Where Your Leads Are Leaking
+          </h2>
+          <ol className="mt-8 grid gap-4 md:grid-cols-3">
+            {LEAKS.map((l, i) => (
+              <li key={l.title} className={cx(card, "p-6")}>
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex size-10 items-center justify-center rounded-xl bg-destructive/10 text-destructive">
+                    <l.icon className="size-5" aria-hidden="true" />
+                  </span>
+                  <span className="font-mono text-xs text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+                </div>
+                <h3 className="mt-4 text-lg font-semibold">{l.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed">{l.text}</p>
+              </li>
+            ))}
+          </ol>
+          <blockquote className="mt-10 max-w-3xl border-l-[3px] border-primary pl-5 font-display text-xl font-semibold text-foreground sm:text-2xl">
+            Ads get attention. The system behind them decides whether you get paid.
+          </blockquote>
+        </Container>
+      </section>
+
+      {/* Two paths */}
+      <section aria-labelledby="paths-title">
+        <Container className="py-16 lg:py-20">
+          <Pill>Who it's for</Pill>
+          <h2 id="paths-title" className="mt-5 text-3xl font-bold sm:text-4xl">
+            Built for How Your Business Actually Sells
+          </h2>
+          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+            {PATHS.map((p) => (
+              <article key={p.id} id={p.id} className={cx(card, "flex flex-col p-6 sm:p-8")}>
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex size-11 items-center justify-center rounded-xl bg-soft text-primary">
+                    <p.icon className="size-5" aria-hidden="true" />
+                  </span>
+                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">{p.audience}</p>
+                </div>
+                <h3 className="mt-5 text-2xl font-bold leading-snug">{p.headline}</h3>
+                <ul className="mt-5 space-y-2.5">
+                  {p.points.map((pt) => (
+                    <li key={pt} className="flex items-start gap-2.5 text-sm text-foreground">
+                      <Check className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto pt-6">
+                  <Link
+                    to="/book-a-call"
+                    className={cx("inline-flex items-center gap-1.5 rounded text-sm font-semibold text-primary hover:underline", focusRing)}
+                  >
+                    Map out my system
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                </div>
+              </article>
+            ))}
           </div>
         </Container>
       </section>
 
-      {/* Positioning */}
-      <section className="border-t border-border bg-surface/60">
-        <Container className="py-16 lg:py-24">
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
-            <div>
-              <Pill>Positioning</Pill>
-              <h2 className="mt-5 text-3xl font-bold sm:text-4xl">More Than Lead Generation.</h2>
-              <p className="mt-4 text-lg">
-                Getting leads is only one part of the problem. The real opportunity is what happens after someone
-                raises their hand.
-              </p>
-              <blockquote className="mt-6 border-l-[3px] border-primary pl-5 text-foreground">
-                “I combine marketing, sales, CRM, and automation to help businesses move prospects from first
-                interaction to booked appointment — and ultimately to paying customer.”
-              </blockquote>
-            </div>
-            <ul className="grid gap-4 sm:grid-cols-2">
-              {PILLARS.map((p) => (
-                <li
-                  key={p.n}
-                  className={cx(card, "p-5 transition-all duration-200 hover:-translate-y-1 hover:border-primary motion-reduce:hover:translate-y-0")}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="inline-flex size-10 items-center justify-center rounded-xl bg-soft text-primary">
-                      <p.icon className="size-5" aria-hidden="true" />
-                    </span>
-                    <span className="font-mono text-xs text-muted-foreground">{p.n}</span>
-                  </div>
-                  <h3 className="mt-4 text-lg font-semibold">{p.title}</h3>
-                  <p className="mt-1 text-sm">{p.text}</p>
+      {/* Results: hidden until a client approves sharing numbers */}
+      {RESULTS.length > 0 && (
+        <section className="border-t border-border bg-surface/60" aria-labelledby="results-title">
+          <Container className="py-16 lg:py-20">
+            <Pill>Results</Pill>
+            <h2 id="results-title" className="mt-5 text-3xl font-bold sm:text-4xl">
+              Real Numbers From Real Builds
+            </h2>
+            <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+              {RESULTS.map((r) => (
+                <li key={r.label} className={cx(card, "p-6")}>
+                  <p className="font-display text-4xl font-bold text-primary">{r.value}</p>
+                  <p className="mt-2 font-semibold text-foreground">{r.label}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{r.context}</p>
                 </li>
               ))}
             </ul>
-          </div>
+          </Container>
+        </section>
+      )}
 
-          <div className="relative isolate mt-14 overflow-hidden rounded-3xl border border-soft-border bg-surface p-8 sm:p-10">
+      {/* How it works */}
+      <section id="how-it-works" className="scroll-mt-20 border-t border-border bg-surface/60" aria-labelledby="how-title">
+        <Container className="py-16 lg:py-20">
+          <Pill>How it works</Pill>
+          <h2 id="how-title" className="mt-5 text-3xl font-bold sm:text-4xl">
+            Live in {LAUNCH_DAYS} Days
+          </h2>
+          <ol className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {STEPS.map((s) => (
+              <li key={s.title} className={cx(card, "group relative overflow-hidden p-6")}>
+                <span className="inline-flex size-10 items-center justify-center rounded-xl bg-soft text-primary">
+                  <s.icon className="size-5" aria-hidden="true" />
+                </span>
+                <p className="mt-4 font-mono text-xs uppercase tracking-[0.14em] text-accent-foreground">{s.days}</p>
+                <h3 className="mt-1 text-lg font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed">{s.text}</p>
+                <span
+                  aria-hidden="true"
+                  className="motion-beam absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-primary to-accent transition-transform duration-500 group-hover:scale-x-100"
+                />
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-success/30 bg-success/8 p-6 sm:flex-row sm:items-start">
+            <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-success/15 text-success">
+              <BellRing className="size-6" aria-hidden="true" />
+            </span>
+            <div>
+              <p className="font-display text-xl font-bold text-foreground">{GUARANTEE.headline}</p>
+              <p className="mt-1">{GUARANTEE.contract}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{GUARANTEE.fineprint}</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Final CTA */}
+      <section aria-labelledby="final-cta-title">
+        <Container className="py-16 lg:py-20">
+          <div className="relative isolate overflow-hidden rounded-3xl border border-soft-border bg-surface p-8 sm:p-12">
             <AmbientGlow />
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 className="text-2xl font-bold sm:text-3xl">Ready to Move Beyond Just Leads?</h2>
-                <p className="mt-2">Let's map out your full customer acquisition system.</p>
+              <div className="max-w-2xl">
+                <h2 id="final-cta-title" className="text-2xl font-bold sm:text-3xl">
+                  Find Out Where Your Leads Are Leaking.
+                </h2>
+                <p className="mt-2">
+                  On a free 30-minute call we'll look at how leads come in today, where they slip through, and what to
+                  fix first. {" "}
+                  <Link to="/packages" className={cx("rounded font-semibold text-primary hover:underline", focusRing)}>
+                    See the packages
+                  </Link>
+                  .
+                </p>
               </div>
               <BookCallButton className="shrink-0" />
             </div>

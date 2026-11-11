@@ -85,18 +85,21 @@ function AboutPage() {
             Get Seen. <span className={gradientText}>Get Leads.</span> Get Customers.
           </h1>
           <div className="mt-6 space-y-4 text-base leading-relaxed">
+            <p className="font-display text-xl font-semibold leading-snug text-foreground">
+              Most businesses don't lose customers because of bad marketing. They lose them in the gaps — the inquiry
+              nobody answered, the follow-up that never happened, the payment that failed and was never chased.
+            </p>
             <p>
               I'm Ericson Largo, founder of LeadBoosterX. I've spent more than ten years in sales, customer support,
               operations, and revenue roles — including five years supporting and selling QuickBooks for Intuit, where I
               went from customer support to appointment setting to closing deals with business owners and accountants.
             </p>
             <p>
-              That's where I learned that most businesses don't lose customers because of bad marketing. They lose them
-              in the gaps — the inquiry nobody answered, the follow-up that never happened, the payment that failed and
-              was never chased.
+              That's where I saw the gaps up close: deals that were won or lost on how fast someone called back and
+              whether anyone followed up.
             </p>
             <p>
-              Today I build the systems that close those gaps: ads that bring in the right people, a CRM that keeps every
+              Today I build the systems that close those gaps for coaches, online programs, and home service businesses: ads that bring in the right people, a CRM that keeps every
               lead moving, and automation that follows up while you focus on the work. I also handle revenue recovery and
               financial operations, so I understand what happens after the sale too.
             </p>

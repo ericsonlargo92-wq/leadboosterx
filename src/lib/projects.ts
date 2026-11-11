@@ -1,7 +1,7 @@
 import { Bot, CreditCard, Funnel, Megaphone, Workflow, type LucideIcon } from "lucide-react";
 
 export type ProjectFilter = "automation" | "meta-ads" | "funnels";
-export type ProjectLabel = "Live Build (redacted)" | "Concept Project" | "Demo Build" | "Sample System";
+export type ProjectLabel = "Real build — client details redacted" | "Concept Project" | "Demo Build" | "Sample System";
 
 export type Project = {
   slug: string;
@@ -27,7 +27,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "payment-recovery",
     title: "Payment Recovery Pipeline",
-    label: "Live Build (redacted)",
+    label: "Real build — client details redacted",
     category: "CRM / Automation",
     filter: "automation",
     icon: CreditCard,

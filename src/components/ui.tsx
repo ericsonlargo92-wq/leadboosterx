@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { btnPrimary, cx } from "~/lib/ui";
+import { CTA_LABEL } from "~/lib/offer";
 
 /** Page width + padding used by every section. */
 export function Container({ children, className }: { children: ReactNode; className?: string }) {
@@ -39,7 +40,7 @@ export function AmbientGlow({ grid = false }: { grid?: boolean }) {
   );
 }
 
-export function BookCallButton({ className, label = "Book a Strategy Call" }: { className?: string; label?: string }) {
+export function BookCallButton({ className, label = CTA_LABEL }: { className?: string; label?: string }) {
   return (
     <Link to="/book-a-call" className={cx(btnPrimary, className)}>
       {label}

@@ -11,3 +11,4 @@ dist
 _originals
 *.log
 .DS_Store
+.claude

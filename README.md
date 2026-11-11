@@ -19,6 +19,7 @@ Copy `.env.example` to `.env` and add a Resend key to test the contact form loca
 | What | File |
 | --- | --- |
 | Email, Facebook, Cal.com link, site URL | `src/lib/config.ts` |
+| Offer: CTA label, 14-day promise, packages, trust lines, approved results | `src/lib/offer.ts` |
 | Projects (cards, workflows, tools) | `src/lib/projects.ts` |
 | Pages | `src/routes/_site/*.tsx` (with sidebar) and `src/routes/book-a-call.tsx` |
 | Contact email sending (server only) | `src/lib/contact.server.ts` |

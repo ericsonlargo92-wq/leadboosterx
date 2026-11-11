@@ -22,9 +22,9 @@ import appCss from "~/styles.css?url";
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
     const base = seo({
-      title: "LeadBoosterX — Lead Generation, CRM & Automation by Ericson Largo",
+      title: "LeadBoosterX — Meta Ads, Funnels & Follow-Up That Book More Calls",
       description:
-        "Lead generation, Meta Ads, GoHighLevel CRM and follow-up automation that turn inquiries into booked appointments and customers.",
+        "Done-for-you Meta Ads, funnels and follow-up for coaches, online programs and home service businesses. Live in 14 days, no long-term contract.",
       path: "/",
     });
     return {

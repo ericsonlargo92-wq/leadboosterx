@@ -3,6 +3,7 @@ import { ArrowUpRight, Facebook, Mail } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { NAV } from "./Sidebar";
 import { CONTACT } from "~/lib/config";
+import { CTA_LABEL } from "~/lib/offer";
 import { btnPrimary, cx, focusRing } from "~/lib/ui";
 
 export function Footer() {
@@ -16,11 +17,11 @@ export function Footer() {
               <BrandLogo size="md" />
             </Link>
             <p className="text-sm font-medium text-foreground">Ericson Largo · Lead Generation &amp; Automation</p>
-            <p className="font-mono text-xs text-muted-foreground">Meta Ads · GoHighLevel · CRM · Follow-Up Automation</p>
+            <p className="font-mono text-xs text-muted-foreground">Ads · Funnels · Follow-Up for coaches, online programs &amp; home services</p>
           </div>
           <div className="flex flex-col gap-6 md:items-end">
             <Link to="/book-a-call" className={btnPrimary}>
-              Book a Strategy Call
+              {CTA_LABEL}
               <ArrowUpRight className="size-4" aria-hidden="true" />
             </Link>
             <nav aria-label="Footer">

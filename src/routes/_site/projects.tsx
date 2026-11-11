@@ -89,7 +89,7 @@ function ProjectsPage() {
       </ul>
 
       <div className="mt-16">
-        <CtaBlock title="Want a system like this for your business?" />
+        <CtaBlock title="Want a system like this behind your ads?" />
       </div>
 
       <Lightbox image={lightbox} onClose={closeLightbox} />
@@ -108,7 +108,7 @@ function ProjectCard({
   onToggle: () => void;
   onOpenImage: (img: LightboxImage) => void;
 }) {
-  const isLive = p.label.startsWith("Live");
+  const isLive = p.label.startsWith("Real build");
   const isAutomation = p.filter === "automation";
   const nodes = open ? p.workflow : p.workflow.slice(0, PREVIEW_NODES);
   const hidden = p.workflow.length - PREVIEW_NODES;
