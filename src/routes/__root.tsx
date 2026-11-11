@@ -23,7 +23,7 @@ import appCss from "~/styles.css?url";
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
     const base = seo({
-      title: "LeadBoosterX — Meta Ads, Funnels & Follow-Up That Book More Calls",
+      title: "LeadBoosterX — Practical Lead Generation & AI Automation for Growing Businesses",
       description:
         "Done-for-you Meta Ads, funnels and follow-up for coaches, online programs and home service businesses. Live in 14 days, no long-term contract.",
       path: "/",

@@ -27,7 +27,7 @@ import { btnSecondary, card, cx, focusRing, gradientText } from "~/lib/ui";
 export const Route = createFileRoute("/_site/")({
   head: () =>
     seo({
-      title: "LeadBoosterX — Meta Ads, Funnels & Follow-Up That Book More Calls",
+      title: "LeadBoosterX — Practical Lead Generation & AI Automation for Growing Businesses",
       description:
         "Done-for-you Meta Ads, funnels and follow-up for coaches, online programs and home service businesses. Every lead gets a fast reply, a reason to book, and reminders. Live in 14 days.",
       path: "/",
@@ -115,13 +115,13 @@ function HomePage() {
         <AmbientGlow grid />
         <Container className="pb-14 pt-12 sm:pt-20 lg:pb-20">
           <Reveal>
-          <Pill dot>For coaches, online programs &amp; home service businesses</Pill>
+          <Pill dot>Digital Marketing &amp; AI Automation</Pill>
           <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Get More Booked Calls{" "}— <span className={gradientText}>Not Just More Leads.</span>
+            Practical Lead Generation &amp; AI Automation <span className={gradientText}>for Growing Businesses.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg">
-            I build and run your Meta Ads, funnel, and follow-up as one system — so every lead gets a fast reply, a reason
-            to book, and reminders until they show up.{" "}
+            Meta Ads, funnels, and AI-powered follow-up that turn your leads into booked calls — built for coaches, online
+            programs, and home service businesses.{" "}
             <strong className="font-semibold text-foreground">
               Live in {LAUNCH_DAYS} days. No long-term contract.
             </strong>
@@ -176,8 +176,9 @@ function HomePage() {
         <Container className="py-16 lg:py-20">
           <Pill>The real problem</Pill>
           <h2 id="leaks-title" className="mt-5 text-3xl font-bold sm:text-4xl">
-            Where Your Leads Are Leaking
+            Get More Booked Calls{" "}— <span className={gradientText}>Not Just More Leads.</span>
           </h2>
+          <p className="mt-4 max-w-2xl text-lg">Most leads aren't lost to bad ads. Here's where they leak:</p>
           <ol className="mt-8 grid gap-4 md:grid-cols-3">
             {LEAKS.map((l, i) => (
               <Reveal as="li" delay={i * STAGGER} key={l.title} className={cx(card, "p-6")}>
