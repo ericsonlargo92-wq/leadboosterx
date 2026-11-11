@@ -14,7 +14,6 @@ export const GUARANTEE = {
 /** Only real, checkable claims. */
 export const TRUST = [
   "5 years at Intuit, from customer support to closing deals",
-  "QBOA King, 2023–2024",
   "Live GoHighLevel systems running for a membership business",
 ];
 

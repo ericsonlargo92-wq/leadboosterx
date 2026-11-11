@@ -144,7 +144,7 @@ function HomePage() {
           </Link>
           </Reveal>
 
-          <ul className="mt-10 grid gap-3 border-t border-border pt-6 sm:grid-cols-3" aria-label="Background">
+          <ul className="mt-10 grid gap-3 border-t border-border pt-6 sm:grid-cols-2" aria-label="Background">
             {TRUST.map((t, i) => (
               <Reveal as="li" delay={0.2 + i * STAGGER} key={t} className="flex items-start gap-2 text-sm text-foreground">
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />

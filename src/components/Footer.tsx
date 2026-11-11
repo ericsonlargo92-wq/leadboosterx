@@ -1,10 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Facebook, Mail } from "lucide-react";
+import { Facebook, Mail } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { NAV } from "./Sidebar";
 import { CONTACT } from "~/lib/config";
-import { CTA_LABEL } from "~/lib/offer";
-import { btnPrimary, cx, focusRing } from "~/lib/ui";
+import { cx, focusRing } from "~/lib/ui";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -20,10 +19,6 @@ export function Footer() {
             <p className="font-mono text-xs text-muted-foreground">Ads · Funnels · Follow-Up for coaches, online programs &amp; home services</p>
           </div>
           <div className="flex flex-col gap-6 md:items-end">
-            <Link to="/book-a-call" className={btnPrimary}>
-              {CTA_LABEL}
-              <ArrowUpRight className="size-4" aria-hidden="true" />
-            </Link>
             <nav aria-label="Footer">
               <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
                 {NAV.map((n) => (
