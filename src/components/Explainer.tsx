@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
+import { useReducedMotion } from "motion/react";
 import {
   ArrowUpRight,
   CalendarCheck,
@@ -22,12 +23,13 @@ import {
   Zap,
 } from "lucide-react";
 import cueData from "~/data/explainer-cues.json";
+import wordGroups from "~/data/explainer-words.json";
 import { BrandLogo } from "./BrandLogo";
 import { cx, focusRing } from "~/lib/ui";
 
 /*
- * A ~55 second animated explainer rendered live in the page. The AI voiceover (/audio/explainer-voice.mp3)
- * is the clock: every frame is computed from the audio playhead, so it can be paused and scrubbed.
+ * A ~57 second animated explainer rendered live in the page. The soundtrack (/audio/explainer-mix.mp3:
+ * AI voiceover, ducked piano music and sound effects) is the clock: every frame is computed from the audio playhead, so it can be paused and scrubbed.
  * Scene changes are pinned to the voiceover's line timings (src/data/explainer-cues.json, from ElevenLabs).
  * The stage scales with its own width (container query units), and switches to a taller layout on phones.
  */
@@ -35,7 +37,9 @@ import { cx, focusRing } from "~/lib/ui";
 type Cue = { id: string; text: string; start: number; end: number };
 const CUES = cueData.cues as Cue[];
 const C = Object.fromEntries(CUES.map((c) => [c.id, c])) as Record<string, Cue>;
-const TOTAL = cueData.total + 1.5;
+/** Length of the mixed soundtrack (voice + music + sound effects). */
+const MIX_TOTAL = 57.2;
+const TOTAL = MIX_TOTAL;
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const easeOut = (v: number) => 1 - Math.pow(1 - v, 3);
@@ -136,7 +140,7 @@ function Intro({ t }: SceneProps) {
           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">So why didn't it book?</span>
         </h3>
       </div>
-      <Panel style={fadeUp(t, 0.8, 0.6)} className="w-full @xl:w-[19em]">
+      <Panel style={{ ...fadeUp(t, 0.75, 0.5), rotate: `${t > 0.75 && t < 1.5 ? Math.sin((t - 0.75) * 50) * 2.5 * (1.5 - t) : 0}deg` }} className="w-full @xl:w-[19em]">
         <div className="flex items-center gap-[0.7em]">
           <Icon icon={UserPlus} />
           <div>
@@ -390,6 +394,140 @@ function Cta({ t }: SceneProps) {
   );
 }
 
+/* ---------- B-roll ---------- */
+
+/** Stock footage (Pixabay Content License, see docs/licenses.md), one shot every ~2.5–4 s, timed to the voice. */
+const SHOTS: { src: string; start: number; end: number }[] = [
+  { src: "01-hook", start: 0, end: 4.0 },
+  { src: "02-night", start: 4.0, end: 8.25 },
+  { src: "03-clock", start: 8.25, end: 11.2 },
+  { src: "04-sleep", start: 11.2, end: 14.85 },
+  { src: "05-phone", start: 14.85, end: 17.35 },
+  { src: "06-empty-room", start: 17.35, end: 20.25 },
+  { src: "07-system", start: 20.25, end: 23.85 },
+  { src: "08-scroll", start: 23.85, end: 26.35 },
+  { src: "09-funnel", start: 26.35, end: 28.85 },
+  { src: "10-reply", start: 28.85, end: 31.5 },
+  { src: "11-booking", start: 31.5, end: 34.4 },
+  { src: "12-coaching", start: 34.4, end: 37.5 },
+  { src: "13-contractor", start: 37.5, end: 40.85 },
+  { src: "14-plan", start: 40.85, end: 44.6 },
+  { src: "15-build", start: 44.6, end: 48.45 },
+  { src: "16-handshake", start: 48.45, end: 50.0 },
+  { src: "17-calm", start: 50.0, end: TOTAL + 1 },
+];
+
+function BRoll({ t, playing, started }: { t: number; playing: boolean; started: boolean }) {
+  const refs = useRef<(HTMLVideoElement | null)[]>([]);
+  const active = Math.max(0, SHOTS.findLastIndex((s) => t >= s.start));
+
+  // Keep the active clip in step with the soundtrack; pause the rest.
+  useEffect(() => {
+    refs.current.forEach((v, i) => {
+      if (!v) return;
+      if (i !== active) {
+        if (!v.paused) v.pause();
+        return;
+      }
+      const want = Math.max(0, t - SHOTS[i].start);
+      if (Number.isFinite(v.duration) && want < v.duration && Math.abs(v.currentTime - want) > (playing ? 0.3 : 0.05)) v.currentTime = want;
+      if (playing && v.paused) v.play().catch(() => {});
+      if (!playing && !v.paused) v.pause();
+    });
+  }, [t, active, playing]);
+
+  return (
+    <div aria-hidden="true" className="absolute inset-0 overflow-hidden bg-background">
+      {!started && <img src="/broll/01-hook.jpg" alt="" className="absolute inset-0 size-full object-cover" />}
+      {SHOTS.map((s, i) => {
+        const near = i >= active - 1 && i <= active + 2;
+        const local = t - s.start;
+        const len = s.end - s.start;
+        const inOpacity = i === active ? clamp01(local / 0.3) : i === active - 1 && t - SHOTS[active].start < 0.3 ? 1 : 0;
+        // slow push in / pull out, alternating per shot
+        const k = clamp01(local / len);
+        const scale = i % 2 === 0 ? 1.04 + k * 0.08 : 1.12 - k * 0.08;
+        return (
+          <video
+            key={s.src}
+            ref={(el) => {
+              refs.current[i] = el;
+            }}
+            src={started && near ? `/broll/${s.src}.mp4` : undefined}
+            muted
+            playsInline
+            preload={started && near ? "auto" : "none"}
+            className="absolute inset-0 size-full object-cover will-change-transform"
+            style={{
+              opacity: started ? inOpacity : 0,
+              zIndex: i === active ? 2 : 1,
+              transform: `scale(${scale}) translateX(${(i % 3 - 1) * k * 1.2}%)`,
+            }}
+          />
+        );
+      })}
+      {/* tint + vignette so text stays readable on any footage */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-br from-background/85 via-background/60 to-glow-blue/35" />
+      <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_35%,var(--background)_100%)] opacity-80" />
+    </div>
+  );
+}
+
+/* ---------- Camera snaps on key words ---------- */
+
+type Word = { w: string; s: number; e: number };
+const WORD_GROUPS = wordGroups as Word[][];
+const ALL_WORDS = WORD_GROUPS.flat();
+const SNAP_WORDS = ["gaps.", "tomorrow,", "never", "connected", "right", "discovery", "estimates.", "14", "free", "contract.", "leaking."];
+const SNAPS = SNAP_WORDS.map((sw) => ALL_WORDS.find((w) => w.w.toLowerCase() === sw)?.s).filter((v): v is number => v != null);
+
+/** Camera scale: a slow drift plus a quick snap between two sizes on each key word. */
+function cameraScale(t: number) {
+  const passed = SNAPS.filter((s) => t >= s);
+  const n = passed.length;
+  const since = n ? t - passed[n - 1] : 99;
+  const target = n % 2 === 1 ? 1.045 : 1;
+  const prev = n % 2 === 1 ? 1 : 1.045;
+  const snap = prev + (target - prev) * easeOut(clamp01(since / 0.18));
+  return snap + Math.sin(t / 6) * 0.006;
+}
+
+/* ---------- Word-by-word captions ---------- */
+
+function KineticCaption({ t }: { t: number }) {
+  const gi = WORD_GROUPS.findIndex((g, i) => {
+    const next = WORD_GROUPS[i + 1];
+    return t >= g[0].s - 0.12 && t < (next ? Math.min(next[0].s - 0.12, g.at(-1)!.e + 0.9) : g.at(-1)!.e + 1.2);
+  });
+  if (gi < 0) return null;
+  const g = WORD_GROUPS[gi];
+  return (
+    <p
+      aria-hidden="true"
+      key={gi}
+      className="absolute inset-x-[4%] bottom-[3.5%] z-30 mx-auto w-fit max-w-[92%] rounded-[0.6em] bg-background/75 px-[0.8em] py-[0.35em] text-center font-display text-[1.25em] font-bold leading-snug backdrop-blur @xl:text-[1.15em]"
+      style={{ animation: "caption-in 0.18s ease-out" }}
+    >
+      {g.map((w, i) => {
+        const spoken = t >= w.s;
+        const now = t >= w.s && t <= w.e + 0.08;
+        return (
+          <span
+            key={i}
+            className={cx(
+              "inline-block transition-colors duration-100",
+              i < g.length - 1 && "mr-[0.3em]",
+              now ? "text-accent [text-shadow:0_0_14px_var(--glow-cyan)]" : spoken ? "text-foreground" : "text-foreground/35",
+            )}
+          >
+            {w.w}
+          </span>
+        );
+      })}
+    </p>
+  );
+}
+
 /* ---------- Player ---------- */
 
 export function Explainer() {
@@ -401,6 +539,7 @@ export function Explainer() {
   const [ended, setEnded] = useState(false);
   const [muted, setMuted] = useState(false);
   const [captions, setCaptions] = useState(true);
+  const reduce = useReducedMotion();
 
   const tick = useCallback(() => {
     const a = audioRef.current;
@@ -417,12 +556,12 @@ export function Explainer() {
       a.currentTime = 0;
       setEnded(false);
     }
+    setStarted(true);
     try {
       await a.play();
     } catch {
       return;
     }
-    setStarted(true);
     setPlaying(true);
     cancelAnimationFrame(raf.current);
     raf.current = requestAnimationFrame(tick);
@@ -443,16 +582,17 @@ export function Explainer() {
     setStarted(true);
   };
 
-  // While idle before first play, show a fully-built intro frame as the poster.
+  // Before the first play, show a fully built intro frame as the poster.
   const shownT = started ? t : 3.6;
   const sceneIndex = SCENES.findLastIndex((s) => shownT >= s.start);
   const scene = SCENES[Math.max(0, sceneIndex)];
   const next = SCENES[sceneIndex + 1];
   const local = shownT - scene.start;
-  const fadeIn = sceneIndex === 0 ? 1 : clamp01(local / 0.35);
-  const fadeOut = next ? clamp01((next.start - shownT) / 0.3) : 1;
-  const cue = CUES.find((c) => shownT >= c.start && shownT <= c.end + 0.35);
+  const fadeIn = sceneIndex === 0 ? 1 : easeOut(clamp01(local / 0.4));
+  const fadeOut = next ? clamp01((next.start - shownT) / 0.25) : 1;
   const Comp = scene.Comp;
+  // whip-pan light streak across scene changes
+  const streak = !reduce && sceneIndex > 0 && local < 0.45 ? local / 0.45 : null;
 
   return (
     <div>
@@ -462,20 +602,32 @@ export function Explainer() {
           role="img"
           aria-label="Animated explainer: how LeadBoosterX turns leads into booked calls. A transcript is available below."
         >
-          {/* stage light */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="absolute -left-[15%] -top-[25%] size-[60%] rounded-full bg-glow-blue/40 blur-[5em]" />
-            <div className="absolute -bottom-[25%] -right-[10%] size-[55%] rounded-full bg-glow-cyan/25 blur-[5em]" />
-            <div className="bg-dot-grid absolute inset-0 opacity-50" />
+          {/* camera: B-roll and scene move together */}
+          <div className="absolute inset-0 origin-center will-change-transform" style={{ transform: `scale(${started && !reduce ? cameraScale(shownT) : 1})` }}>
+            <BRoll t={shownT} playing={playing} started={started} />
+            <div
+              className="absolute inset-0 z-20 px-[6%] pb-[24%] pt-[6%] [text-shadow:0_2px_18px_rgb(0_0_0/0.45)] @xl:pb-[10%]"
+              style={{
+                opacity: Math.min(fadeIn, fadeOut),
+                transform: `translateX(${(1 - fadeIn) * 7 - (1 - fadeOut) * 7}%)`,
+                filter: fadeIn < 1 || fadeOut < 1 ? `blur(${(1 - Math.min(fadeIn, fadeOut)) * 6}px)` : undefined,
+              }}
+            >
+              <Comp t={local} />
+            </div>
           </div>
 
-          <div className="absolute inset-0 px-[6%] pb-[24%] pt-[6%] @xl:pb-[9%]" style={{ opacity: Math.min(fadeIn, fadeOut) }}>
-            <Comp t={local} />
-          </div>
+          {streak !== null && (
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-0 z-20 w-[45%] -skew-x-12 bg-gradient-to-r from-transparent via-accent/25 to-transparent"
+              style={{ left: `${-50 + streak * 160}%` }}
+            />
+          )}
 
-          {/* CTA button is real and clickable in the last scene */}
+          {/* the CTA button is real and clickable in the last scene */}
           {scene.id === "cta" && started && (
-            <div className="absolute inset-x-0 bottom-[16%] flex justify-center @xl:bottom-[12%]" style={fadeUp(local, 1.8, 0.6)}>
+            <div className="absolute inset-x-0 bottom-[22%] z-30 flex justify-center @xl:bottom-[16%]" style={fadeUp(local, 1.8, 0.6)}>
               <Link
                 to="/book-a-call"
                 className={cx(
@@ -489,27 +641,28 @@ export function Explainer() {
             </div>
           )}
 
-          {captions && started && cue && scene.id !== "cta" && (
-            <p
-              aria-hidden="true"
-              className="absolute inset-x-[5%] bottom-[3.5%] mx-auto w-fit max-w-[90%] rounded-[0.5em] bg-background/80 px-[0.8em] py-[0.35em] text-center text-[0.95em] leading-snug text-foreground backdrop-blur"
-            >
-              {cue.text}
-            </p>
+          {captions && started && <KineticCaption t={shownT} />}
+
+          {/* progress line */}
+          {started && (
+            <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-30 h-[3px] bg-white/10">
+              <div className="h-full bg-gradient-to-r from-primary to-accent" style={{ width: `${(Math.min(t, TOTAL) / TOTAL) * 100}%` }} />
+            </div>
           )}
 
           {!started && (
             <button
               type="button"
               onClick={play}
-              className={cx("group absolute inset-0 flex flex-col items-center justify-center gap-[0.8em] bg-background/88 backdrop-blur-lg", focusRing)}
+              className={cx("group absolute inset-0 z-40 flex flex-col items-center justify-center gap-[0.8em] bg-background/70 backdrop-blur-[3px]", focusRing)}
               aria-label="Play the 1-minute explainer"
             >
-              <span className="glow inline-flex size-[4.5em] items-center justify-center rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground transition-transform duration-300 group-hover:scale-110 motion-reduce:group-hover:scale-100">
-                <Play className="ml-[0.2em] size-[1.8em]" aria-hidden="true" />
+              <span className="glow relative inline-flex size-[4.5em] items-center justify-center rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground transition-transform duration-300 group-hover:scale-110 motion-reduce:group-hover:scale-100">
+                <span className="absolute inset-0 animate-ping rounded-full bg-primary/40" aria-hidden="true" />
+                <Play className="relative ml-[0.2em] size-[1.8em]" aria-hidden="true" />
               </span>
-              <span className="text-[1.15em] font-semibold text-foreground">Watch the 1-minute explainer</span>
-              <span className="text-[0.85em] text-muted-foreground">{clock(cueData.total)} · voiceover with captions</span>
+              <span className="text-[1.25em] font-semibold text-foreground">Watch the 1-minute explainer</span>
+              <span className="text-[0.85em] text-muted-foreground">{clock(MIX_TOTAL)} · voiceover, music and captions</span>
             </button>
           )}
         </div>
@@ -526,14 +679,14 @@ export function Explainer() {
           {ended ? <RotateCcw className="size-4" aria-hidden="true" /> : playing ? <Pause className="size-4" aria-hidden="true" /> : <Play className="ml-0.5 size-4" aria-hidden="true" />}
         </button>
         <span className="w-[5.5rem] shrink-0 font-mono text-xs text-muted-foreground">
-          {clock(Math.min(t, cueData.total))} / {clock(cueData.total)}
+          {clock(Math.min(t, MIX_TOTAL))} / {clock(MIX_TOTAL)}
         </span>
         <input
           type="range"
           min={0}
-          max={cueData.total}
+          max={MIX_TOTAL}
           step={0.1}
-          value={Math.min(t, cueData.total)}
+          value={Math.min(t, MIX_TOTAL)}
           onChange={(e) => seek(Number(e.target.value))}
           aria-label="Seek"
           className="h-1.5 min-w-0 flex-1 cursor-pointer accent-[var(--primary)]"
@@ -568,7 +721,7 @@ export function Explainer() {
 
       <audio
         ref={audioRef}
-        src="/audio/explainer-voice.mp3"
+        src="/audio/explainer-mix.mp3"
         preload="metadata"
         onEnded={() => {
           setPlaying(false);
