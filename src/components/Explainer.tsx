@@ -1,3 +1,29 @@
+/*
+ * ============================================================================================
+ *  EXPLAINER PLAYER TEMPLATE  (website-explainer-video skill)
+ * --------------------------------------------------------------------------------------------
+ *  Copy to src/components/Explainer.tsx and adapt. Reference build: LeadBoosterX (2026-11-11).
+ *
+ *  Data it reads (written by the skill's scripts):
+ *    ~/data/explainer-cues.json   { total, cues: [{ id, text, start, end }] }     (tts.mjs / timeline.py)
+ *    ~/data/explainer-words.json  [[{ w, s, e }, ...], ...] caption groups          (timeline.py)
+ *    ~/data/explainer-shots.json  { total, poster, shots: [{ src, start, end }] }   (broll-cut.mjs)
+ *    /audio/explainer-mix.mp3     the soundtrack = the clock                         (mix.mjs)
+ *    /broll/<src>.mp4             B-roll clips
+ *
+ *  Site dependencies to swap for the target site's own: cx + focusRing (class helpers), BrandLogo,
+ *  TanStack Link (use the site's router link or <a>), design tokens used in classes
+ *  (glass, glow, sheen, bg-background, text-primary, from-primary to-accent, bg-glow-blue,
+ *  bg-glow-cyan, bg-soft, bg-soft-cyan, text-accent-foreground, bg-success, text-destructive, bg-dot-grid),
+ *  motion/react (useReducedMotion), lucide-react icons. Add the `caption-in` keyframes to the CSS:
+ *    @keyframes caption-in { from { opacity: 0; transform: translateY(0.4em) scale(0.97); } to { opacity: 1; transform: none; } }
+ *  tsconfig lib needs ES2023 (findLastIndex).
+ *
+ *  SCENES below are the LeadBoosterX example. Rewrite them for each new script: one scene per
+ *  story beat, every reveal pinned to a cue (rel("cueId", "sceneId")) or a word (wordAt("word")),
+ *  so the picture moves exactly when the voice says it.
+ * ============================================================================================
+ */
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { useReducedMotion } from "motion/react";
@@ -23,6 +49,7 @@ import {
   Zap,
 } from "lucide-react";
 import cueData from "~/data/explainer-cues.json";
+import shotData from "~/data/explainer-shots.json";
 import wordGroups from "~/data/explainer-words.json";
 import { BrandLogo } from "./BrandLogo";
 import { cx, focusRing } from "~/lib/ui";
@@ -38,7 +65,7 @@ type Cue = { id: string; text: string; start: number; end: number };
 const CUES = cueData.cues as Cue[];
 const C = Object.fromEntries(CUES.map((c) => [c.id, c])) as Record<string, Cue>;
 /** Length of the mixed soundtrack (voice + music + sound effects). */
-const MIX_TOTAL = 57.2;
+const MIX_TOTAL = shotData.total;
 const TOTAL = MIX_TOTAL;
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
@@ -66,6 +93,10 @@ const SCENES: { id: string; start: number; Comp: (p: SceneProps) => ReactNode }[
   { id: "promise", start: C.promise.start - 0.15, Comp: Promise14 },
   { id: "cta", start: C.cta.start - 0.15, Comp: Cta },
 ];
+/** Absolute time (s) the voice starts saying `word` (first match at/after `after` seconds). Pin reveals to words. */
+const wordAt = (word: string, after = 0) =>
+  (wordGroups as { w: string; s: number }[][]).flat().find((x) => x.s >= after && x.w.toLowerCase().replace(/[^a-z0-9']/g, "").startsWith(word.toLowerCase()))?.s ?? after;
+void wordAt; // used by scenes you write
 /** Time of cue `id` relative to the start of scene `scene`. */
 const rel = (id: string, scene: string) => C[id].start - SCENES.find((s) => s.id === scene)!.start;
 
@@ -124,7 +155,7 @@ function Icon({ icon: I, tone = "blue" }: { icon: typeof Zap; tone?: "blue" | "r
   );
 }
 
-/* ---------- Scenes (t = seconds since the scene started) ---------- */
+/* ---------- Scenes (t = seconds since the scene started) — EXAMPLE: LeadBoosterX. Rewrite per script. ---------- */
 
 function Intro({ t }: SceneProps) {
   const waited = Math.max(0, t - 1.2) * 1500; // fast-forwarding "minutes waited"
@@ -397,25 +428,7 @@ function Cta({ t }: SceneProps) {
 /* ---------- B-roll ---------- */
 
 /** Stock footage (Pixabay Content License, see docs/licenses.md), one shot every ~2.5–4 s, timed to the voice. */
-const SHOTS: { src: string; start: number; end: number }[] = [
-  { src: "01-hook", start: 0, end: 4.0 },
-  { src: "02-night", start: 4.0, end: 8.25 },
-  { src: "03-clock", start: 8.25, end: 11.2 },
-  { src: "04-sleep", start: 11.2, end: 14.85 },
-  { src: "05-phone", start: 14.85, end: 17.35 },
-  { src: "06-empty-room", start: 17.35, end: 20.25 },
-  { src: "07-system", start: 20.25, end: 23.85 },
-  { src: "08-scroll", start: 23.85, end: 26.35 },
-  { src: "09-funnel", start: 26.35, end: 28.85 },
-  { src: "10-reply", start: 28.85, end: 31.5 },
-  { src: "11-booking", start: 31.5, end: 34.4 },
-  { src: "12-coaching", start: 34.4, end: 37.5 },
-  { src: "13-contractor", start: 37.5, end: 40.85 },
-  { src: "14-plan", start: 40.85, end: 44.6 },
-  { src: "15-build", start: 44.6, end: 48.45 },
-  { src: "16-handshake", start: 48.45, end: 50.0 },
-  { src: "17-calm", start: 50.0, end: TOTAL + 1 },
-];
+const SHOTS: { src: string; start: number; end: number }[] = shotData.shots;
 
 function BRoll({ t, playing, started }: { t: number; playing: boolean; started: boolean }) {
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -438,7 +451,7 @@ function BRoll({ t, playing, started }: { t: number; playing: boolean; started: 
 
   return (
     <div aria-hidden="true" className="absolute inset-0 overflow-hidden bg-background">
-      {!started && <img src="/broll/01-hook.jpg" alt="" className="absolute inset-0 size-full object-cover" />}
+      {!started && <img src={`/broll/${shotData.poster}`} alt="" className="absolute inset-0 size-full object-cover" />}
       {SHOTS.map((s, i) => {
         const near = i >= active - 1 && i <= active + 2;
         const local = t - s.start;

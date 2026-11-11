@@ -1,0 +1,91 @@
+{
+ "total": 57.2,
+ "poster": "01-hook.jpg",
+ "shots": [
+  {
+   "src": "01-hook",
+   "start": 0,
+   "end": 4.0
+  },
+  {
+   "src": "02-night",
+   "start": 4.0,
+   "end": 8.25
+  },
+  {
+   "src": "03-clock",
+   "start": 8.25,
+   "end": 11.2
+  },
+  {
+   "src": "04-sleep",
+   "start": 11.2,
+   "end": 14.85
+  },
+  {
+   "src": "05-phone",
+   "start": 14.85,
+   "end": 17.35
+  },
+  {
+   "src": "06-empty-room",
+   "start": 17.35,
+   "end": 20.25
+  },
+  {
+   "src": "07-system",
+   "start": 20.25,
+   "end": 23.85
+  },
+  {
+   "src": "08-scroll",
+   "start": 23.85,
+   "end": 26.35
+  },
+  {
+   "src": "09-funnel",
+   "start": 26.35,
+   "end": 28.85
+  },
+  {
+   "src": "10-reply",
+   "start": 28.85,
+   "end": 31.5
+  },
+  {
+   "src": "11-booking",
+   "start": 31.5,
+   "end": 34.4
+  },
+  {
+   "src": "12-coaching",
+   "start": 34.4,
+   "end": 37.5
+  },
+  {
+   "src": "13-contractor",
+   "start": 37.5,
+   "end": 40.85
+  },
+  {
+   "src": "14-plan",
+   "start": 40.85,
+   "end": 44.6
+  },
+  {
+   "src": "15-build",
+   "start": 44.6,
+   "end": 48.45
+  },
+  {
+   "src": "16-handshake",
+   "start": 48.45,
+   "end": 50.0
+  },
+  {
+   "src": "17-calm",
+   "start": 50.0,
+   "end": 58.2
+  }
+ ]
+}
