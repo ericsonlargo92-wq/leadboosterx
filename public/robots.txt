@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://leadboosterx.vercel.app/sitemap.xml
+Sitemap: https://www.leadboosterx.com/sitemap.xml

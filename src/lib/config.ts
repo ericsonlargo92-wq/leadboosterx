@@ -1,8 +1,8 @@
 // Single source of truth for site-wide settings. No GoHighLevel IDs live here.
 
 // Public URL of the deployed site. Used for sitemap, canonical and og:image URLs.
-// Change this once a custom domain is connected in Vercel.
-export const SITE_URL = "https://leadboosterx.vercel.app";
+// Custom domain (Cloudflare DNS → Vercel). leadboosterx.com 308-redirects here.
+export const SITE_URL = "https://www.leadboosterx.com";
 
 export const SITE_NAME = "LeadBoosterX";
 
