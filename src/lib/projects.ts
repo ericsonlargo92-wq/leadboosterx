@@ -1,6 +1,5 @@
 import { Bot, CreditCard, Funnel, Workflow, type LucideIcon } from "lucide-react";
-
-export type ProjectFilter = "automation" | "funnels";
+import { STAGES, type StageId } from "./offer";
 export type ProjectLabel = "Real build — client details redacted" | "Concept Project" | "Demo Build" | "Sample System";
 
 export type Project = {
@@ -8,7 +7,8 @@ export type Project = {
   title: string;
   label: ProjectLabel;
   category: string;
-  filter: ProjectFilter;
+  /** Which of the three stages this build covers, in Capture → Nurture → Close order. Drives the filters and the stage tags. */
+  stages: StageId[];
   icon: LucideIcon;
   description: string;
   workflow: string[];
@@ -16,10 +16,11 @@ export type Project = {
   images?: { src: string; alt: string; caption: string }[];
 };
 
-export const FILTERS: { id: "all" | ProjectFilter; label: string }[] = [
+export type ProjectFilter = "all" | StageId;
+
+export const FILTERS: { id: ProjectFilter; label: string }[] = [
   { id: "all", label: "All" },
-  { id: "automation", label: "Automation" },
-  { id: "funnels", label: "Funnels" },
+  ...STAGES.map((s) => ({ id: s.id, label: s.name })),
 ];
 
 export const PROJECTS: Project[] = [
@@ -28,7 +29,7 @@ export const PROJECTS: Project[] = [
     title: "Payment Recovery Pipeline",
     label: "Real build — client details redacted",
     category: "CRM / Automation",
-    filter: "automation",
+    stages: ["nurture", "close"],
     icon: CreditCard,
     description:
       "A GoHighLevel system for a membership business: a failed Stripe payment opens a pipeline opportunity, alerts the team, and moves through stages — contacted, no answer, voicemail, callback, payment link sent, recovered or cancelled — as call outcomes are logged.",
@@ -60,7 +61,7 @@ export const PROJECTS: Project[] = [
     title: "AI Receptionist + Lead Booking System",
     label: "Concept Project",
     category: "AI Automation",
-    filter: "automation",
+    stages: ["capture", "nurture", "close"],
     icon: Bot,
     description:
       "An AI assistant that answers new inquiries right away, asks qualifying questions, and books good-fit leads straight into the calendar — with the conversation and notes saved to the CRM.",
@@ -72,7 +73,7 @@ export const PROJECTS: Project[] = [
     title: "Home Service Lead Generation Funnel",
     label: "Demo Build",
     category: "Funnels / Conversion",
-    filter: "funnels",
+    stages: ["capture", "nurture", "close"],
     icon: Funnel,
     description:
       "A focused landing page and booking flow for a home service business: clear offer, short qualifying form, instant booking, and automatic follow-up for anyone who doesn't book.",
@@ -84,7 +85,7 @@ export const PROJECTS: Project[] = [
     title: "Sales Pipeline & Follow-Up Automation",
     label: "Sample System",
     category: "CRM / Sales Automation",
-    filter: "automation",
+    stages: ["nurture", "close"],
     icon: Workflow,
     description:
       "A CRM pipeline where every lead has a stage, an owner and a next step, with automatic reminders and follow-ups so warm leads never sit untouched.",

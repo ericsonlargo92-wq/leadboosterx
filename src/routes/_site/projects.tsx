@@ -4,6 +4,8 @@ import { ArrowRight, ChevronDown, Maximize2 } from "lucide-react";
 import { Lightbox, type LightboxImage } from "~/components/Lightbox";
 import { Container, CtaBlock, Pill } from "~/components/ui";
 import { FILTERS, PROJECTS, type Project, type ProjectFilter } from "~/lib/projects";
+import { STAGES } from "~/lib/offer";
+import { STAGE_ICONS } from "~/lib/stage-icons";
 import { Reveal } from "~/components/motion";
 import { seo } from "~/lib/seo";
 import { card, cx, focusRing } from "~/lib/ui";
@@ -22,13 +24,13 @@ export const Route = createFileRoute("/_site/projects")({
 const PREVIEW_NODES = 4;
 
 function ProjectsPage() {
-  const [filter, setFilter] = useState<"all" | ProjectFilter>("all");
+  const [filter, setFilter] = useState<ProjectFilter>("all");
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const [lightbox, setLightbox] = useState<LightboxImage | null>(null);
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
-  const visible = filter === "all" ? PROJECTS : PROJECTS.filter((p) => p.filter === filter);
-  const count = (id: "all" | ProjectFilter) => (id === "all" ? PROJECTS.length : PROJECTS.filter((p) => p.filter === id).length);
+  const visible = filter === "all" ? PROJECTS : PROJECTS.filter((p) => p.stages.includes(filter));
+  const count = (id: ProjectFilter) => (id === "all" ? PROJECTS.length : PROJECTS.filter((p) => p.stages.includes(id)).length);
 
   return (
     <Container className="py-12 sm:py-16">
@@ -110,7 +112,6 @@ function ProjectCard({
   onOpenImage: (img: LightboxImage) => void;
 }) {
   const isLive = p.label.startsWith("Real build");
-  const isAutomation = p.filter === "automation";
   const nodes = open ? p.workflow : p.workflow.slice(0, PREVIEW_NODES);
   const hidden = p.workflow.length - PREVIEW_NODES;
   const flowId = `flow-${p.slug}`;
@@ -126,7 +127,7 @@ function ProjectCard({
         >
           {p.label}
         </span>
-        <span className={cx("font-mono text-xs uppercase tracking-wider", isAutomation ? "text-accent-foreground" : "text-primary")}>
+        <span className="font-mono text-xs uppercase tracking-wider text-primary">
           {p.category}
         </span>
       </div>
@@ -136,14 +137,27 @@ function ProjectCard({
           <div className="flex items-start gap-4">
             <span
               className={cx(
-                "inline-flex size-11 shrink-0 items-center justify-center rounded-xl",
-                isAutomation ? "bg-soft-cyan text-accent-foreground" : "bg-soft text-primary",
+                "inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-soft text-primary",
               )}
             >
               <p.icon className="size-5" aria-hidden="true" />
             </span>
             <h2 className="pt-1.5 text-xl font-semibold">{p.title}</h2>
           </div>
+          <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Stages this build covers">
+            {STAGES.filter((s) => p.stages.includes(s.id)).map((s) => {
+              const Icon = STAGE_ICONS[s.id];
+              return (
+                <li
+                  key={s.id}
+                  className="inline-flex items-center gap-1 rounded-md border border-soft-border bg-soft px-2 py-0.5 text-xs font-semibold text-primary"
+                >
+                  <Icon className="size-3.5" aria-hidden="true" />
+                  {s.name}
+                </li>
+              );
+            })}
+          </ul>
           <p className="mt-4 text-sm leading-relaxed">{p.description}</p>
 
           <div className="mt-5 rounded-xl border border-border bg-surface p-4">

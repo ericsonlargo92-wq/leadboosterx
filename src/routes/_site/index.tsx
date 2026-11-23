@@ -7,12 +7,9 @@ import {
   Building2,
   Check,
   ClipboardList,
-  Handshake,
   Inbox,
-  Magnet,
   MessageSquareOff,
   PlayCircle,
-  RefreshCw,
   Rocket,
   ShieldCheck,
   TrendingUp,
@@ -25,6 +22,7 @@ import { Reveal, STAGGER } from "~/components/motion";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
 import { CREDENTIAL, CTA_MICROCOPY, GUARANTEE, RESULTS, STAGES, TRUST } from "~/lib/offer";
 import { seo } from "~/lib/seo";
+import { STAGE_ICONS } from "~/lib/stage-icons";
 import { btnSecondary, card, cx, focusRing, gradientText } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/")({
@@ -38,7 +36,6 @@ export const Route = createFileRoute("/_site/")({
   component: HomePage,
 });
 
-const STAGE_ICONS: Record<(typeof STAGES)[number]["id"], LucideIcon> = { capture: Magnet, nurture: RefreshCw, close: Handshake };
 
 const LEAKS: { stage: string; title: string; text: string; icon: LucideIcon }[] = [
   {

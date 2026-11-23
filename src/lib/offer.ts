@@ -59,6 +59,8 @@ export const STAGES = [
   },
 ] as const;
 
+export type StageId = (typeof STAGES)[number]["id"];
+
 export type Package = {
   name: string;
   tagline: string;
