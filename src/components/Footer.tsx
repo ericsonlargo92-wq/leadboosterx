@@ -15,8 +15,8 @@ export function Footer() {
             <Link to="/" className={cx("inline-block rounded-lg", focusRing)} aria-label="LeadBoosterX Revenue Systems, home">
               <BrandLogo size="md" />
             </Link>
-            <p className="text-sm font-medium text-foreground">Ericson Largo · Lead Generation &amp; Automation</p>
-            <p className="font-mono text-xs text-muted-foreground">Ads · Funnels · Follow-Up for coaches, online programs &amp; home services</p>
+            <p className="text-sm font-medium text-foreground">Ericson Largo · GoHighLevel Specialist</p>
+            <p className="font-mono text-xs text-muted-foreground">HighLevel Certified Admin · Capture · Nurture · Close</p>
           </div>
           <div className="flex flex-col gap-6 md:items-end">
             <nav aria-label="Footer">

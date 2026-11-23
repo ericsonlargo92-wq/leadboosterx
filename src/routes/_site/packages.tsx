@@ -10,9 +10,9 @@ import { card, cx } from "~/lib/ui";
 export const Route = createFileRoute("/_site/packages")({
   head: () =>
     seo({
-      title: "Packages — Ads, Funnels & Follow-Up Systems | LeadBoosterX",
+      title: "Packages — GoHighLevel Capture, Nurture & Close Systems | LeadBoosterX",
       description:
-        "Three ways to work together: a Follow-Up System, a Full Growth System (Meta Ads + funnel + follow-up), and monthly Growth Management. Live in 14 days, no long-term contract.",
+        "Three ways to work together: the Complete Capture → Nurture → Close System, a Single-Stage Build, and monthly GoHighLevel Management. Live in 14 days, no long-term contract.",
       path: "/packages",
     }),
   component: PackagesPage,
@@ -31,7 +31,7 @@ function PackagesPage() {
       <Pill>Packages</Pill>
       <h1 className="mt-5 max-w-3xl text-4xl font-bold sm:text-5xl">Pick Where You Want to Start.</h1>
       <p className="mt-4 max-w-2xl text-lg">
-        Every package is built in your own accounts, tested end to end before launch, and comes with the same promise:
+        Every package is built in your own GoHighLevel account, tested end to end before launch, and comes with the same promise:
         live in 14 days, no long-term contract.
       </p>
 
@@ -120,7 +120,7 @@ function PackagesPage() {
       <div className="mt-20">
         <CtaBlock
           title="Not sure which package fits?"
-          text="Tell me how leads come in today. I'll recommend the smallest system that fixes the biggest leak."
+          text="Tell me where your GoHighLevel setup stands. I'll recommend the smallest build that fixes the biggest leak."
         />
       </div>
     </Container>

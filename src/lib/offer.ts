@@ -1,7 +1,10 @@
 // The core offer, in one place. Pages read from here so the promise stays consistent everywhere.
+// Positioning (approved 2026-11-24): certified GoHighLevel specialist — one system that Captures, Nurtures and Closes.
 
 export const CTA_LABEL = "Book a Free Growth Call";
 export const CTA_MICROCOPY = "30 minutes. You'll leave with a clear plan — whether or not we work together.";
+
+export const CREDENTIAL = "HighLevel Certified Admin";
 
 export const LAUNCH_DAYS = 14;
 
@@ -13,9 +16,50 @@ export const GUARANTEE = {
 
 /** Only real, checkable claims. */
 export const TRUST = [
-  "5 years at Intuit, from customer support to closing deals",
+  CREDENTIAL,
   "Live GoHighLevel systems running for a membership business",
+  "5 years at Intuit, from customer support to closing deals",
 ];
+
+/** The three stages of the system, built inside GoHighLevel. */
+export const STAGES = [
+  {
+    id: "capture",
+    name: "Capture",
+    promise: "Every lead lands in one place.",
+    builds: [
+      "Funnels and landing pages",
+      "Forms, surveys and quizzes",
+      "Website chat widget",
+      "Missed-call text-back",
+      "Leads from your ads and website",
+    ],
+  },
+  {
+    id: "nurture",
+    name: "Nurture",
+    promise: "Every lead gets followed up — automatically.",
+    builds: [
+      "Pipelines with clear stages",
+      "SMS and email follow-up sequences",
+      "Instant replies and AI conversations",
+      "Appointment reminders",
+      "Reactivation campaigns for old leads",
+    ],
+  },
+  {
+    id: "close",
+    name: "Close",
+    promise: "More conversations become customers.",
+    builds: [
+      "Calendars and online booking",
+      "Confirmations and no-show recovery",
+      "Every deal tracked to won or lost",
+      "Invoices, payment links and text-to-pay",
+      "Review requests after the sale",
+    ],
+  },
+] as const;
 
 export type Package = {
   name: string;
@@ -28,42 +72,39 @@ export type Package = {
 
 export const PACKAGES: Package[] = [
   {
-    name: "Follow-Up System",
-    tagline: "Stop losing the leads you already get.",
-    who: "For businesses that already get leads but lose too many.",
+    name: "Complete Capture → Nurture → Close System",
+    tagline: "All three stages, built and connected.",
+    who: "For businesses that want GoHighLevel working end to end — new to GHL or rebuilding.",
     includes: [
-      "CRM pipeline set up around how you sell",
-      "Instant reply to every new lead",
-      "Booking calendar and confirmation flow",
-      "Appointment reminders",
-      "No-show and reschedule follow-up",
-      "Nurture follow-up for leads who don't book yet",
-    ],
-    timing: `Live in ${LAUNCH_DAYS} days`,
-  },
-  {
-    name: "Full Growth System",
-    tagline: "Ads, funnel, and follow-up built as one system.",
-    who: "For businesses that want a steady flow of booked calls, end to end.",
-    includes: [
-      "Everything in the Follow-Up System",
-      "Meta Ads campaign setup (Facebook & Instagram)",
-      "Landing page or funnel built to convert",
-      "Tracking with Meta Pixel and Conversions API",
-      "Offer and audience planning",
-      "Full end-to-end testing before launch",
+      "Capture: funnels, forms, chat widget and missed-call text-back",
+      "Nurture: pipelines, SMS and email sequences, reminders",
+      "Close: calendars, no-show recovery, payment links, review requests",
+      "Contacts and pipelines moved from your old CRM",
+      "Every path tested end to end before launch",
     ],
     timing: `Live in ${LAUNCH_DAYS} days`,
     recommended: true,
   },
   {
-    name: "Growth Management",
+    name: "Single-Stage Build",
+    tagline: "Fix the stage that's leaking most.",
+    who: "For businesses already on GoHighLevel with one weak spot.",
+    includes: [
+      "Audit of your current GoHighLevel setup",
+      "Rebuild of one stage: Capture, Nurture or Close",
+      "Repair of broken workflows and triggers in that stage",
+      "Every path in that stage tested before launch",
+    ],
+    timing: `Live in ${LAUNCH_DAYS} days`,
+  },
+  {
+    name: "GoHighLevel Management",
     tagline: "Keep it running and keep it improving.",
     who: "Ongoing support after your system is live.",
     includes: [
-      "Ad management and weekly optimization",
-      "Creative testing",
-      "Follow-up and booking flow tuning",
+      "Workflow and automation upkeep",
+      "New funnels, forms and campaigns as needed",
+      "Pipeline and reporting tune-ups",
       "Plain-English monthly report",
     ],
     timing: "Month-to-month",

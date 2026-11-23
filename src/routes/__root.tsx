@@ -23,9 +23,9 @@ import appCss from "~/styles.css?url";
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
     const base = seo({
-      title: "LeadBoosterX — Practical Lead Generation & AI Automation for Growing Businesses",
+      title: "LeadBoosterX — GoHighLevel Systems That Capture, Nurture and Close",
       description:
-        "Done-for-you Meta Ads, funnels and follow-up for coaches, online programs and home service businesses. Live in 14 days, no long-term contract.",
+        "Certified GoHighLevel specialist (HighLevel Certified Admin). Funnels, follow-up automation, calendars and payments built in your GHL account. Live in 14 days, no long-term contract.",
       path: "/",
     });
     return {

@@ -1,6 +1,6 @@
-import { Bot, CreditCard, Funnel, Megaphone, Workflow, type LucideIcon } from "lucide-react";
+import { Bot, CreditCard, Funnel, Workflow, type LucideIcon } from "lucide-react";
 
-export type ProjectFilter = "automation" | "meta-ads" | "funnels";
+export type ProjectFilter = "automation" | "funnels";
 export type ProjectLabel = "Real build — client details redacted" | "Concept Project" | "Demo Build" | "Sample System";
 
 export type Project = {
@@ -19,7 +19,6 @@ export type Project = {
 export const FILTERS: { id: "all" | ProjectFilter; label: string }[] = [
   { id: "all", label: "All" },
   { id: "automation", label: "Automation" },
-  { id: "meta-ads", label: "Meta Ads" },
   { id: "funnels", label: "Funnels" },
 ];
 
@@ -79,18 +78,6 @@ export const PROJECTS: Project[] = [
       "A focused landing page and booking flow for a home service business: clear offer, short qualifying form, instant booking, and automatic follow-up for anyone who doesn't book.",
     workflow: ["Ad / Traffic", "Landing Page", "Lead Capture", "Qualification", "Booking", "Follow-Up"],
     tools: ["GoHighLevel", "Landing Pages", "Copywriting", "CRM", "Automation"],
-  },
-  {
-    slug: "meta-ads-system",
-    title: "Meta Ads Customer Acquisition System",
-    label: "Sample System",
-    category: "Paid Media",
-    filter: "meta-ads",
-    icon: Megaphone,
-    description:
-      "A Facebook and Instagram campaign structure tied to a clear offer and proper tracking, so every lead can be followed from ad click to booked appointment and sale.",
-    workflow: ["Audience", "Creative", "Offer", "Landing Page", "Lead", "Qualification", "Appointment", "Sale"],
-    tools: ["Meta Ads", "Meta Pixel", "GA4", "GTM", "GoHighLevel"],
   },
   {
     slug: "sales-pipeline",

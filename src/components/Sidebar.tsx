@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, FolderGit2, HelpCircle, Home, Package, UserRound, type LucideIcon } from "lucide-react";
-import { CTA_LABEL } from "~/lib/offer";
+import { ArrowUpRight, BadgeCheck, FolderGit2, HelpCircle, Home, Package, UserRound, type LucideIcon } from "lucide-react";
+import { CREDENTIAL, CTA_LABEL } from "~/lib/offer";
 import { BrandLogo } from "./BrandLogo";
 import { quarterLabel } from "~/lib/seo";
 import { btnPrimary, cx, focusRing } from "~/lib/ui";
@@ -86,6 +86,10 @@ function ProfileCard() {
               <span className="relative inline-flex size-2.5 rounded-full bg-success" />
             </span>
             Available for projects
+          </p>
+          <p className="inline-flex items-center gap-1.5 rounded-md border border-success/30 bg-success/10 px-1.5 py-0.5 text-[0.7rem] font-semibold text-success">
+            <BadgeCheck className="size-3.5" aria-hidden="true" />
+            {CREDENTIAL}
           </p>
           <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
             <span className="rounded-md border border-soft-border bg-soft px-1.5 py-0.5 font-mono text-[0.65rem] font-medium text-primary">

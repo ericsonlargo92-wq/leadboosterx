@@ -10,13 +10,14 @@ export const Route = createFileRoute("/_site/about")({
     seo({
       title: "About Ericson Largo — Founder of LeadBoosterX",
       description:
-        "10+ years in sales, customer support, operations and revenue roles. Ericson Largo builds lead generation, CRM and follow-up systems for service businesses.",
+        "HighLevel Certified Admin with 10+ years in sales, support and revenue roles. Ericson Largo builds GoHighLevel systems that capture, nurture and close.",
       path: "/about",
     }),
   component: AboutPage,
 });
 
 const BRING = [
+  "HighLevel Certified Admin",
   "10+ years in sales, support & revenue roles",
   "Sales and high-ticket closing",
   "Lead generation strategy",
@@ -100,8 +101,8 @@ function AboutPage() {
               whether anyone followed up.
             </p>
             <p>
-              Today I build the systems that close those gaps for coaches, online programs, and home service businesses: ads that bring in the right people, a CRM that keeps every
-              lead moving, and automation that follows up while you focus on the work. I also handle revenue recovery and
+              Today I close those gaps inside GoHighLevel, as a HighLevel Certified Admin: every lead captured in one place,
+              nurtured automatically, and moved to a booked call or a closed sale while you focus on the work. I also handle revenue recovery and
               financial operations, so I understand what happens after the sale too.
             </p>
           </div>

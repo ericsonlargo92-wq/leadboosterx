@@ -11,9 +11,9 @@ import { card, cx, focusRing } from "~/lib/ui";
 export const Route = createFileRoute("/_site/projects")({
   head: () =>
     seo({
-      title: "Projects — Lead Generation & Automation Systems | LeadBoosterX",
+      title: "Projects — GoHighLevel Builds | LeadBoosterX",
       description:
-        "Live work and sample systems for lead generation, booking and follow-up: a GoHighLevel payment recovery pipeline, AI receptionist, funnels and Meta Ads.",
+        "Live work and sample systems built in GoHighLevel: a payment recovery pipeline, an AI receptionist, a lead funnel and a sales pipeline.",
       path: "/projects",
     }),
   component: ProjectsPage,

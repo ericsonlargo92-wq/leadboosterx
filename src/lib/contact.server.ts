@@ -25,7 +25,7 @@ export async function sendContactEmail(data: ContactData): Promise<ContactResult
     ["Business", data.business || "—"],
     ["Website / Facebook", data.website || "—"],
     ["Needs help with", data.help.length ? data.help.join(", ") : "—"],
-    ["Monthly ad budget", data.budget || "—"],
+    ["GoHighLevel status", data.ghlStatus || "—"],
     ["Message", data.message],
   ];
 

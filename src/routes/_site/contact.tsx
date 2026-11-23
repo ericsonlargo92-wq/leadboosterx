@@ -12,7 +12,7 @@ export const Route = createFileRoute("/_site/contact")({
     ...seo({
       title: "FAQs & Contact — LeadBoosterX",
       description:
-        "Answers to common questions about lead generation, Meta Ads, GoHighLevel CRM and AI receptionists — and a form to tell Ericson where your leads get stuck.",
+        "Answers to common questions about GoHighLevel builds, migrations, fixes and management — and a form to tell Ericson where your leads get stuck.",
       path: "/contact",
     }),
     scripts: [jsonLdScript(faqJsonLd(FAQS))],
@@ -23,11 +23,27 @@ export const Route = createFileRoute("/_site/contact")({
 const FAQS = [
   {
     q: "What kinds of businesses do you work with?",
-    a: "Mainly coaches and online programs, and home service businesses. If you sell through discovery calls, consultations, or estimates, the systems I build fit well. Other appointment-based businesses are welcome to book a call too.",
+    a: "Any business that runs on GoHighLevel — or is moving to it: service businesses, coaches and online programs, home services, and agencies that need a builder for client accounts. If you sell through calls, consultations or estimates, the system fits well.",
   },
   {
     q: "What do you actually do?",
-    a: "I build and run Meta Ads, a funnel, and automatic follow-up as one system, so leads get a fast reply, book a call, and get reminded until they show up. There are three packages: a Follow-Up System, a Full Growth System (ads + funnel + follow-up), and monthly Growth Management.",
+    a: "I build and run GoHighLevel as one connected system. Capture: funnels, forms, chat and missed-call text-back. Nurture: pipelines, SMS and email follow-up, and reminders. Close: calendars, no-show recovery, payment links and review requests. There are three packages: the Complete Capture → Nurture → Close System, a Single-Stage Build, and monthly GoHighLevel Management.",
+  },
+  {
+    q: "Do I need my own GoHighLevel account?",
+    a: "Yes. Everything is built in your own account, so you own it and keep it. If you don't have one yet, we'll set it up together at the start.",
+  },
+  {
+    q: "Can you move my contacts from another CRM?",
+    a: "Yes. Contacts, tags and pipeline stages can be imported from your current CRM or a spreadsheet as part of the build.",
+  },
+  {
+    q: "Can you fix my existing GoHighLevel account?",
+    a: "Yes. That's what the Single-Stage Build is for: I audit your setup, then rebuild the stage that's leaking most — Capture, Nurture or Close.",
+  },
+  {
+    q: "Do you work with agencies?",
+    a: "Yes. I build inside agency client accounts — workflows, funnels, pipelines and snapshots — and hand them back documented.",
   },
   {
     q: "What does it cost?",
@@ -59,7 +75,7 @@ const FAQS = [
   },
   {
     q: "Do you take one-off projects?",
-    a: "Yes. I take one-time builds — like a funnel, a CRM setup, or a follow-up automation — as well as ongoing monthly support for ads and system management.",
+    a: "Yes. I take one-time builds — like a funnel, a pipeline, or a follow-up automation — as well as ongoing monthly GoHighLevel management.",
   },
   {
     q: "How do we get started?",

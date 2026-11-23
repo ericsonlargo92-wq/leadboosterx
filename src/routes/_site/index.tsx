@@ -2,16 +2,19 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   ArrowDown,
   ArrowRight,
+  ArrowRightLeft,
   BellRing,
+  Building2,
   Check,
-  Clock,
-  PlayCircle,
-  GraduationCap,
-  Hammer,
+  ClipboardList,
+  Handshake,
+  Inbox,
+  Magnet,
   MessageSquareOff,
+  PlayCircle,
+  RefreshCw,
   Rocket,
   ShieldCheck,
-  Target,
   TrendingUp,
   UserX,
   Wrench,
@@ -20,89 +23,88 @@ import {
 import { LazyExplainer } from "~/components/LazyExplainer";
 import { Reveal, STAGGER } from "~/components/motion";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
-import { CTA_MICROCOPY, GUARANTEE, LAUNCH_DAYS, RESULTS, TRUST } from "~/lib/offer";
+import { CREDENTIAL, CTA_MICROCOPY, GUARANTEE, LAUNCH_DAYS, RESULTS, STAGES, TRUST } from "~/lib/offer";
 import { seo } from "~/lib/seo";
 import { btnSecondary, card, cx, focusRing, gradientText } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/")({
   head: () =>
     seo({
-      title: "LeadBoosterX — Practical Lead Generation & AI Automation for Growing Businesses",
+      title: "LeadBoosterX — GoHighLevel Systems That Capture, Nurture and Close",
       description:
-        "Done-for-you Meta Ads, funnels and follow-up for coaches, online programs and home service businesses. Every lead gets a fast reply, a reason to book, and reminders. Live in 14 days.",
+        "Certified GoHighLevel specialist (HighLevel Certified Admin). Funnels, follow-up automation, calendars and payments built in your GHL account. Live in 14 days, no long-term contract.",
       path: "/",
     }),
   component: HomePage,
 });
 
-const LEAKS: { title: string; text: string; icon: LucideIcon }[] = [
+const STAGE_ICONS: Record<(typeof STAGES)[number]["id"], LucideIcon> = { capture: Magnet, nurture: RefreshCw, close: Handshake };
+
+const LEAKS: { stage: string; title: string; text: string; icon: LucideIcon }[] = [
   {
-    title: "Slow replies",
-    text: "A lead fills out your form at 9 pm. Nobody answers until tomorrow. By then they've booked someone else.",
-    icon: Clock,
+    stage: "Capture",
+    title: "Leads scattered everywhere",
+    text: "Leads come in from forms, calls, messages and ads — and land in different inboxes. Some are never seen.",
+    icon: Inbox,
   },
   {
-    title: "One try, then silence",
-    text: "Most leads don't book on the first message. Without follow-up, they're gone.",
+    stage: "Nurture",
+    title: "Follow-up that never happens",
+    text: "Most leads don't book on the first message. Without automatic follow-up, warm leads go cold.",
     icon: MessageSquareOff,
   },
   {
-    title: "No-shows",
-    text: "They booked, then forgot. No reminder, no reschedule, no second chance.",
+    stage: "Close",
+    title: "Booked, then forgotten",
+    text: "They booked, then forgot. No reminder, no follow-up, no payment link — no sale.",
     icon: UserX,
   },
 ];
 
-const PATHS = [
+const PATHS: { id: string; audience: string; icon: LucideIcon; text: string }[] = [
   {
-    id: "coaches",
-    audience: "Coaches & Online Programs",
-    icon: GraduationCap,
-    headline: "Fill your calendar with discovery calls from people who are ready to buy.",
-    points: [
-      "Opt-in or application funnel that screens out tire-kickers",
-      "Instant reply and booking link the moment someone opts in",
-      "Call reminders and no-show follow-up",
-      "Failed-payment recovery for members",
-    ],
+    id: "switching",
+    audience: "Switching to GoHighLevel",
+    icon: ArrowRightLeft,
+    text: "Move your contacts, pipelines and calendars over, and start from a clean, documented build.",
   },
   {
-    id: "home-services",
-    audience: "Home Service Businesses",
-    icon: Hammer,
-    headline: "Turn ad clicks into booked estimates before your competitor calls back.",
-    points: [
-      "Quote-request page built for phones",
-      "Instant text-back and booking for every new lead",
-      "Estimate reminders and follow-up on unsold quotes",
-      "Review requests after the job is done",
-    ],
+    id: "on-ghl",
+    audience: "Already on GoHighLevel",
+    icon: Wrench,
+    text: "Audit and fix it: tidy pipelines, repair workflows, and connect your forms, calendars and phone.",
+  },
+  {
+    id: "agencies",
+    audience: "Agencies & consultants",
+    icon: Building2,
+    text: "A certified builder for your client accounts: workflows, funnels, pipelines and snapshots.",
   },
 ];
 
 const STEPS: { days: string; title: string; text: string; icon: LucideIcon }[] = [
   {
     days: "Days 1–3",
-    title: "Strategy & offer",
-    text: "We agree on who you're targeting, the offer, and what a qualified lead looks like.",
-    icon: Target,
+    title: "Audit & plan",
+    text: "We map how leads come in, how they're followed up and how deals close today — and what to build first.",
+    icon: ClipboardList,
   },
   {
     days: "Days 4–10",
     title: "Build",
-    text: "Funnel, CRM, booking calendar, and follow-up sequences — all set up in your own account.",
+    text: "Capture, Nurture and Close set up in your own GoHighLevel account.",
     icon: Wrench,
   },
   {
     days: "Days 11–14",
-    title: "Test & launch",
-    text: "Every path is tested end to end, then the ads go live.",
+    title: "Test & go live",
+    text: "Every form, workflow, calendar and reminder is tested end to end, then switched on.",
     icon: Rocket,
   },
   {
     days: "After launch",
-    title: "Optimize",
-    text: "Weekly optimization and a plain-English monthly report.",
+    title: "Manage (optional)",
+    text: "Monthly management keeps it running, with a plain-English report.",
     icon: TrendingUp,
   },
 ];
@@ -115,13 +117,13 @@ function HomePage() {
         <AmbientGlow grid />
         <Container className="pb-14 pt-12 sm:pt-20 lg:pb-20">
           <div>
-          <Pill dot>Digital Marketing &amp; AI Automation</Pill>
+          <Pill dot>GoHighLevel Specialist · {CREDENTIAL}</Pill>
           <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Practical Lead Generation &amp; AI Automation <span className={gradientText}>for Growing Businesses.</span>
+            GoHighLevel Systems That <span className={gradientText}>Capture, Nurture and Close.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg">
-            Meta Ads, funnels, and AI-powered follow-up that turn your leads into booked calls — built for coaches, online
-            programs, and home service businesses.{" "}
+            I set up, fix and run GoHighLevel so every lead is captured, followed up automatically, and moved to a booked
+            call or a closed sale.{" "}
             <strong className="font-semibold text-foreground">
               Live in {LAUNCH_DAYS} days. No long-term contract.
             </strong>
@@ -144,7 +146,7 @@ function HomePage() {
           </Link>
           </div>
 
-          <ul className="mt-10 grid gap-3 border-t border-border pt-6 sm:grid-cols-2" aria-label="Background">
+          <ul className="mt-10 grid gap-3 border-t border-border pt-6 sm:grid-cols-3" aria-label="Background">
             {TRUST.map((t, i) => (
               <Reveal as="li" delay={0.2 + i * STAGGER} key={t} className="flex items-start gap-2 text-sm text-foreground">
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
@@ -163,11 +165,58 @@ function HomePage() {
             <h2 id="explainer-title" className="mt-5 text-3xl font-bold sm:text-4xl">
               How It Works, Start to Finish
             </h2>
-            <p className="mt-3 max-w-2xl">Where leads slip through, the system that catches them, and what you can expect in the first 14 days.</p>
+            <p className="mt-3 max-w-2xl">Where GoHighLevel setups leak, the system that fixes it, and what you can expect in the first 14 days.</p>
           </Reveal>
           <Reveal delay={0.1} className="mt-8">
             <LazyExplainer />
           </Reveal>
+        </Container>
+      </section>
+
+      {/* The system */}
+      <section id="system" className="scroll-mt-20 border-t border-border" aria-labelledby="system-title">
+        <Container className="py-16 lg:py-20">
+          <Pill>The system</Pill>
+          <h2 id="system-title" className="mt-5 text-3xl font-bold sm:text-4xl">
+            One System: <span className={gradientText}>Capture → Nurture → Close</span>
+          </h2>
+          <p className="mt-4 max-w-2xl text-lg">Three stages, built and connected inside GoHighLevel. Each one hands the lead to the next.</p>
+          <ol className="mt-8 grid gap-4 lg:grid-cols-3">
+            {STAGES.map((st, i) => {
+              const Icon = STAGE_ICONS[st.id];
+              return (
+                <Reveal as="li" delay={i * STAGGER} key={st.id} className="relative flex">
+                  <article id={st.id} className={cx(card, "flex flex-1 flex-col p-6 sm:p-7")}>
+                    <div className="flex items-center justify-between">
+                      <span className="inline-flex size-11 items-center justify-center rounded-xl bg-soft text-primary">
+                        <Icon className="size-5" aria-hidden="true" />
+                      </span>
+                      <span className="font-mono text-xs text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+                    </div>
+                    <h3 className="mt-5 text-2xl font-bold">{st.name}</h3>
+                    <p className="mt-1 font-medium text-foreground">{st.promise}</p>
+                    <p className="mt-5 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">What I build in GoHighLevel</p>
+                    <ul className="mt-3 space-y-2">
+                      {st.builds.map((b) => (
+                        <li key={b} className="flex items-start gap-2 text-sm text-foreground">
+                          <Check className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                  {i < STAGES.length - 1 && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute -right-[0.95rem] top-1/2 z-10 hidden size-7 -translate-y-1/2 items-center justify-center rounded-full border border-soft-border bg-background text-primary lg:inline-flex"
+                    >
+                      <ArrowRight className="size-3.5" />
+                    </span>
+                  )}
+                </Reveal>
+              );
+            })}
+          </ol>
         </Container>
       </section>
 
@@ -178,7 +227,7 @@ function HomePage() {
           <h2 id="leaks-title" className="mt-5 text-3xl font-bold sm:text-4xl">
             Get More Booked Calls{" "}— <span className={gradientText}>Not Just More Leads.</span>
           </h2>
-          <p className="mt-4 max-w-2xl text-lg">Most leads aren't lost to bad ads. Here's where they leak:</p>
+          <p className="mt-4 max-w-2xl text-lg">Most leads aren't lost to bad marketing. They leak at one of three stages:</p>
           <ol className="mt-8 grid gap-4 md:grid-cols-3">
             {LEAKS.map((l, i) => (
               <Reveal as="li" delay={i * STAGGER} key={l.title} className={cx(card, "p-6")}>
@@ -186,7 +235,7 @@ function HomePage() {
                   <span className="inline-flex size-10 items-center justify-center rounded-xl bg-destructive/10 text-destructive">
                     <l.icon className="size-5" aria-hidden="true" />
                   </span>
-                  <span className="font-mono text-xs text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">{l.stage}</span>
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">{l.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed">{l.text}</p>
@@ -194,19 +243,19 @@ function HomePage() {
             ))}
           </ol>
           <blockquote className="mt-10 max-w-3xl border-l-[3px] border-primary pl-5 font-display text-xl font-semibold text-foreground sm:text-2xl">
-            Ads get attention. The system behind them decides whether you get paid.
+            Getting leads is only half the job. The system behind them decides whether you get paid.
           </blockquote>
         </Container>
       </section>
 
-      {/* Two paths */}
+      {/* Who it is for */}
       <section aria-labelledby="paths-title">
         <Container className="py-16 lg:py-20">
           <Pill>Who it's for</Pill>
           <h2 id="paths-title" className="mt-5 text-3xl font-bold sm:text-4xl">
-            Built for How Your Business Actually Sells
+            Wherever You Are With GoHighLevel
           </h2>
-          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
             {PATHS.map((p, i) => (
               <Reveal key={p.id} delay={i * STAGGER} className="flex">
               <article id={p.id} className={cx(card, "flex flex-1 flex-col p-6 sm:p-8")}>
@@ -214,17 +263,9 @@ function HomePage() {
                   <span className="inline-flex size-11 items-center justify-center rounded-xl bg-soft text-primary">
                     <p.icon className="size-5" aria-hidden="true" />
                   </span>
-                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">{p.audience}</p>
+                  <h3 className="font-display text-lg font-bold text-foreground">{p.audience}</h3>
                 </div>
-                <h3 className="mt-5 text-2xl font-bold leading-snug">{p.headline}</h3>
-                <ul className="mt-5 space-y-2.5">
-                  {p.points.map((pt) => (
-                    <li key={pt} className="flex items-start gap-2.5 text-sm text-foreground">
-                      <Check className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
+                <p className="mt-5 text-base leading-relaxed text-foreground">{p.text}</p>
                 <div className="mt-auto pt-6">
                   <Link
                     to="/book-a-call"
@@ -310,8 +351,8 @@ function HomePage() {
                   Find Out Where Your Leads Are Leaking.
                 </h2>
                 <p className="mt-2">
-                  On a free 30-minute call we'll look at how leads come in today, where they slip through, and what to
-                  fix first. {" "}
+                  On a free 30-minute call we'll look at your GoHighLevel setup — or the one you need — find where leads
+                  slip through, and decide what to fix first.{" "}
                   <Link to="/packages" className={cx("rounded font-semibold text-primary hover:underline", focusRing)}>
                     See the packages
                   </Link>

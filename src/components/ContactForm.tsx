@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { AlertCircle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { CONTACT } from "~/lib/config";
 import { submitContact } from "~/lib/contact";
-import { BUDGET_OPTIONS, HELP_OPTIONS, contactSchema, type ContactInput } from "~/lib/contact-schema";
+import { GHL_STATUS_OPTIONS, HELP_OPTIONS, contactSchema, type ContactInput } from "~/lib/contact-schema";
 import { btnPrimary, cx, focusRing } from "~/lib/ui";
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -17,7 +17,7 @@ const EMPTY: Required<ContactInput> = {
   business: "",
   website: "",
   help: [],
-  budget: "",
+  ghlStatus: "",
   message: "",
   company_website: "",
 };
@@ -136,11 +136,11 @@ export function ContactForm() {
       </fieldset>
 
       <div className="mt-5">
-        <Field id="budget" label="Monthly ad budget" error={errors.budget}>
+        <Field id="ghlStatus" label="Where are you with GoHighLevel?" error={errors.ghlStatus}>
           {(p) => (
-            <select {...p} value={values.budget} onChange={(e) => set("budget", e.target.value as Required<ContactInput>["budget"])}>
+            <select {...p} value={values.ghlStatus} onChange={(e) => set("ghlStatus", e.target.value as Required<ContactInput>["ghlStatus"])}>
               <option value="">Select one…</option>
-              {BUDGET_OPTIONS.map((b) => (
+              {GHL_STATUS_OPTIONS.map((b) => (
                 <option key={b} value={b}>
                   {b}
                 </option>

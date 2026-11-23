@@ -1,89 +1,77 @@
 {
-  "total": 55.35,
-  "cues": [
-    {
-      "id": "hook",
-      "text": "You paid for that lead. So why didn't it turn into a booked call?",
-      "start": 0,
-      "end": 3.74
-    },
-    {
-      "id": "gaps",
-      "text": "Most leads aren't lost to bad ads. They're lost in the gaps.",
-      "start": 4.02,
-      "end": 8.12
-    },
-    {
-      "id": "slow",
-      "text": "A form comes in at 9 pm. Nobody replies until tomorrow, and they've already booked someone else.",
-      "start": 8.29,
-      "end": 14.07
-    },
-    {
-      "id": "silence",
-      "text": "Others never hear back after one message.",
-      "start": 14.88,
-      "end": 16.93
-    },
-    {
-      "id": "noshow",
-      "text": "Some book, forget, and never show up.",
-      "start": 17.37,
-      "end": 19.76
-    },
-    {
-      "id": "system",
-      "text": "LeadBoosterX fixes that with one connected system.",
-      "start": 20.36,
-      "end": 23.3
-    },
-    {
-      "id": "ads",
-      "text": "Meta Ads bring in the right people.",
-      "start": 23.91,
-      "end": 25.59
-    },
-    {
-      "id": "funnel",
-      "text": "A focused funnel turns clicks into leads.",
-      "start": 26.4,
-      "end": 28.71
-    },
-    {
-      "id": "followup",
-      "text": "And automatic follow-up replies right away, books the call, and sends reminders until they show.",
-      "start": 28.92,
-      "end": 33.89
-    },
-    {
-      "id": "coaches",
-      "text": "Coaches and online programs get more discovery calls.",
-      "start": 34.49,
-      "end": 37.23
-    },
-    {
-      "id": "home",
-      "text": "Home service businesses get more booked estimates.",
-      "start": 37.56,
-      "end": 40.42
-    },
-    {
-      "id": "promise",
-      "text": "Everything is built in your own accounts, tested end to end, and live in 14 days, or I keep working for free until it is.",
-      "start": 40.94,
-      "end": 48.09
-    },
-    {
-      "id": "contract",
-      "text": "No long-term contract.",
-      "start": 48.53,
-      "end": 49.89
-    },
-    {
-      "id": "cta",
-      "text": "Book a free growth call. In 30 minutes, you'll know exactly where your leads are leaking.",
-      "start": 50,
-      "end": 55.35
-    }
-  ]
+ "total": 55.93,
+ "cues": [
+  {
+   "id": "hook",
+   "text": "You've got GoHighLevel. So why are leads still slipping through?",
+   "start": 0.14,
+   "end": 4.28
+  },
+  {
+   "id": "three",
+   "text": "Most setups break in one of three places.",
+   "start": 4.82,
+   "end": 6.82
+  },
+  {
+   "id": "capture",
+   "text": "Capture: leads come in from ads, forms, calls and messages, and land in five different places.",
+   "start": 7.58,
+   "end": 13.92
+  },
+  {
+   "id": "nurture",
+   "text": "Nurture: nobody follows up fast enough, so warm leads go cold.",
+   "start": 14.7,
+   "end": 18.44
+  },
+  {
+   "id": "close",
+   "text": "Close: calls get booked, then forgotten. No reminder, no follow-up, no payment link.",
+   "start": 19.5,
+   "end": 24.56
+  },
+  {
+   "id": "system",
+   "text": "LeadBoosterX builds one connected system inside GoHighLevel.",
+   "start": 25.38,
+   "end": 28.9
+  },
+  {
+   "id": "cap2",
+   "text": "Every lead is captured in one place.",
+   "start": 29.6,
+   "end": 31.48
+  },
+  {
+   "id": "nur2",
+   "text": "Every lead is nurtured automatically, with texts, emails and reminders that go out on time.",
+   "start": 32.32,
+   "end": 37.16
+  },
+  {
+   "id": "clo2",
+   "text": "And every booked call has a clear path to close.",
+   "start": 38.16,
+   "end": 40.46
+  },
+  {
+   "id": "promise",
+   "text": "Built in your own account, tested end to end, and live in 14 days, or I keep working for free until it is.",
+   "start": 40.86,
+   "end": 46.74
+  },
+  {
+   "id": "contract",
+   "text": "No long-term contract.",
+   "start": 47.48,
+   "end": 48.74
+  },
+  {
+   "id": "cta",
+   "text": "LeadBoosterX is run by a HighLevel Certified Admin. Book a free call, and we'll find where your system is leaking.",
+   "start": 49.44,
+   "end": 55.88
+  }
+ ]
 }
