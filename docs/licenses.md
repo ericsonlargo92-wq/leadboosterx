@@ -24,7 +24,7 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 | `public/broll/g14-handshake.mp4` | [Pixabay video 358512](https://pixabay.com/videos/id-358512/) | Pixabay Content License |
 | `public/broll/g15-calm.mp4` | [Pixabay video 203260](https://pixabay.com/videos/id-203260/) | Pixabay Content License |
 
-## Explainer soundtrack (`public/audio/explainer-ghl.mp3`)
+## Explainer soundtrack (`public/audio/explainer-ghl-v2.mp3`)
 
 | Part | Source | License |
 | --- | --- | --- |
@@ -34,9 +34,16 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 
 ## Rebuilding the explainer
 
-Scripts are in `tools/explainer/` (run from that folder; API keys are read from Windows user environment variables, never stored in files):
+Use the Claude skill `website-explainer-video` (copy in the handover package, `tools/website-explainer-video-skill/`).
+API keys are read from Windows user environment variables (`ELEVENLABS_API_KEY`, `PIXABAY_API_KEY`), never stored in files.
 
-1. Edit `lines.json` (spoken text, display text).
-2. `node tts.mjs <out.mp3> <cues.json>`: voice + line timings → copy cues to `src/data/explainer-cues.json`.
-3. `node align.mjs <voice.mp3> <words.json>`: word timings for captions → regroup into `src/data/explainer-words.json`.
-4. `node mix.mjs <voice.mp3> <music.mp3> <sfx-folder> public/audio/explainer-mix.mp3`: music ducked under the voice + sound effects.
+1. Script: `tools/explainer/lines.json` (id, spoken text, display text). Voice: ElevenLabs premade "Eric" (`cjVigY5qzO86Huf0OWal`),
+   eleven_multilingual_v2, stability 0.5, style 0.25, speed 1.0 (skill `tts.mjs`).
+2. Word timings: skill `align.mjs`, then `timeline.py` writes `src/data/explainer-cues.json` and `src/data/explainer-words.json`.
+3. Sound effects on visual beats: `tools/explainer/events.json` (names from the LBX `sfx.json`).
+4. Mix: skill `mix.mjs --music pixabay-hopeful-614905.mp3 --music-gain 0.12 --total 55.66` → music about 14 dB under the voice.
+5. **Save the mix under a new file name** (e.g. `explainer-ghl-v3.mp3`) and update `src` in `src/components/Explainer.tsx`:
+   `/audio/*` is cached for a week, so reusing a name can pair an old soundtrack with new timings for returning visitors.
+
+The 2026-11-24 edit (no 14-day promise) regenerated only the `promise` line and spliced it into the existing voiceover
+(ffmpeg: keep 0–40.66 s, insert the new 4.2 s line at −1.5 dB, keep 47.2 s → end), then re-aligned and re-mixed.
