@@ -7,7 +7,7 @@ export const SITE_URL = "https://www.leadboosterx.com";
 export const SITE_NAME = "LeadBoosterX";
 
 export const CONTACT = {
-  email: "ericson@leadboosterx.com",
+  email: "ericsonlargo92@gmail.com",
   facebook: "https://www.facebook.com/ericsonlargo.metamediabuyer/",
 };
 
