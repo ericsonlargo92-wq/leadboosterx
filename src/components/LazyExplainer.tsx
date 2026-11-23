@@ -13,7 +13,7 @@ function Placeholder() {
         <div className="glass relative aspect-[4/5] overflow-hidden rounded-3xl text-[3.5cqw] @xl:aspect-video @xl:text-[1.5cqw]">
           <img src={`/broll/${shotData.poster}`} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" />
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-[0.8em] bg-background/70">
-            <span className="glow inline-flex size-[4.5em] items-center justify-center rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground">
+            <span className="glow inline-flex size-[4.5em] items-center justify-center rounded-full bg-cta text-cta-foreground">
               <Play className="ml-[0.2em] size-[1.8em]" />
             </span>
             <span className="text-[1.25em] font-semibold text-foreground">Watch the 1-minute explainer</span>

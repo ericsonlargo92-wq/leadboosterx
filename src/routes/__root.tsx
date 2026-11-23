@@ -29,7 +29,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       path: "/",
     });
     return {
-      meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, { name: "theme-color", content: "#0B1120" }, ...base.meta],
+      meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, { name: "theme-color", content: "#050F22" }, ...base.meta],
       links: [
         { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
         { rel: "stylesheet", href: appCss },

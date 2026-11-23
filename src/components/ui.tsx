@@ -30,9 +30,16 @@ export function Pill({ children, dot, className }: { children: ReactNode; dot?: 
 }
 
 /** Soft blue/cyan blurred glows behind a hero or block. Decorative. */
-export function AmbientGlow({ grid = false }: { grid?: boolean }) {
+export function AmbientGlow({ grid = false, horizon = false }: { grid?: boolean; horizon?: boolean }) {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      {horizon && (
+        <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_72%,transparent)]">
+          {/* GoHighLevel-style hero: navy at the top, bright blue rising toward the bottom, then easing back into the page. */}
+          <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-b from-transparent via-[color-mix(in_oklch,var(--glow-indigo)_45%,transparent)] to-[color-mix(in_oklch,var(--glow-blue)_70%,transparent)]" />
+          <div className="absolute -bottom-1/3 left-1/2 h-2/3 w-[140%] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklch,var(--glow-cyan)_55%,transparent)_0%,transparent_65%)]" />
+        </div>
+      )}
       {grid && <div className="bg-dot-grid absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />}
       <div className="absolute -left-40 -top-40 size-[40rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--primary)_16%,transparent)_0%,transparent_65%)]" />
       <div className="absolute -right-40 -top-6 size-[36rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--accent)_16%,transparent)_0%,transparent_65%)]" />

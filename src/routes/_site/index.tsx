@@ -114,7 +114,7 @@ function HomePage() {
     <>
       {/* Hero */}
       <section className="relative isolate overflow-hidden">
-        <AmbientGlow grid />
+        <AmbientGlow grid horizon />
         <Container className="pb-14 pt-12 sm:pt-20 lg:pb-20">
           <div>
           <Pill dot>GoHighLevel Specialist · {CREDENTIAL}</Pill>
