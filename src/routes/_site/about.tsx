@@ -59,7 +59,7 @@ function AboutPage() {
         <div className="space-y-6 lg:sticky lg:top-8 lg:self-start">
           <figure className="relative overflow-hidden rounded-3xl border border-border">
             <img
-              src="/images/ericson.jpg"
+              src="/images/ericson.webp"
               alt="Portrait of Ericson Largo"
               width={800}
               height={1000}

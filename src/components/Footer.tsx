@@ -12,7 +12,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-10">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm space-y-3">
-            <Link to="/" className={cx("inline-block rounded-lg", focusRing)} aria-label="LeadBoosterX home">
+            <Link to="/" className={cx("inline-block rounded-lg", focusRing)} aria-label="LeadBoosterX Revenue Systems, home">
               <BrandLogo size="md" />
             </Link>
             <p className="text-sm font-medium text-foreground">Ericson Largo · Lead Generation &amp; Automation</p>

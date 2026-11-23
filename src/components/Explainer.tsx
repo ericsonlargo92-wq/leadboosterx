@@ -15,7 +15,7 @@
  *  TanStack Link (use the site's router link or <a>), design tokens used in classes
  *  (glass, glow, sheen, bg-background, text-primary, from-primary to-accent, bg-glow-blue,
  *  bg-glow-cyan, bg-soft, bg-soft-cyan, text-accent-foreground, bg-success, text-destructive, bg-dot-grid),
- *  motion/react (useReducedMotion), lucide-react icons. Add the `caption-in` keyframes to the CSS:
+ *  useReducedMotion (from ./motion), lucide-react icons. Add the `caption-in` keyframes to the CSS:
  *    @keyframes caption-in { from { opacity: 0; transform: translateY(0.4em) scale(0.97); } to { opacity: 1; transform: none; } }
  *  tsconfig lib needs ES2023 (findLastIndex).
  *
@@ -26,7 +26,7 @@
  */
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion } from "./motion";
 import {
   ArrowUpRight,
   CalendarCheck,
@@ -735,7 +735,7 @@ export function Explainer() {
       <audio
         ref={audioRef}
         src="/audio/explainer-mix.mp3"
-        preload="metadata"
+        preload="none"
         onEnded={() => {
           setPlaying(false);
           setEnded(true);

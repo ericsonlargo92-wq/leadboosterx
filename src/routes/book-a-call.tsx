@@ -35,7 +35,7 @@ function BookACallPage() {
     <div className="min-h-dvh">
       <header className="sticky top-0 z-40 border-b border-border bg-background/70 backdrop-blur-xl">
         <Container className="flex h-16 items-center justify-between gap-3">
-          <Link to="/" className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX home">
+          <Link to="/" className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX Revenue Systems, home">
             <BrandLogo size="sm" />
           </Link>
           <div className="flex items-center gap-2 sm:gap-4">
@@ -83,7 +83,8 @@ function BookACallPage() {
               </div>
               <div className={cx(card, "flex items-center gap-4 p-4")}>
                 <img
-                  src="/images/ericson.jpg"
+                  src="/images/ericson.webp"
+                  loading="lazy"
                   alt="Ericson Largo"
                   width={800}
                   height={1000}

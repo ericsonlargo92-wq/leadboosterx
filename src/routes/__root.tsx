@@ -12,10 +12,10 @@ import {
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
 import { AlertTriangle, ArrowLeft, Compass, RotateCcw } from "lucide-react";
-import { MotionConfig } from "motion/react";
 import { GlowBackdrop } from "~/components/GlowBackdrop";
 import { SiteLayout } from "~/components/SiteLayout";
 import { Container } from "~/components/ui";
+import { jsonLdScript, organizationJsonLd } from "~/lib/schema";
 import { seo } from "~/lib/seo";
 import { btnPrimary, btnSecondary } from "~/lib/ui";
 import appCss from "~/styles.css?url";
@@ -32,13 +32,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, { name: "theme-color", content: "#0B1120" }, ...base.meta],
       links: [
         { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
-        { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap",
-        },
         { rel: "stylesheet", href: appCss },
+      ],
+      scripts: [
+        // Marks the page as JS-capable before first paint: scroll reveals only hide content when this is set.
+        { children: "document.documentElement.classList.add('js')" },
+        jsonLdScript(organizationJsonLd),
       ],
     };
   },
@@ -52,10 +51,8 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <MotionConfig reducedMotion="user">
-        <GlowBackdrop />
-        <Outlet />
-      </MotionConfig>
+      <GlowBackdrop />
+      <Outlet />
     </QueryClientProvider>
   );
 }

@@ -3,17 +3,20 @@ import { ChevronDown, Facebook, Mail, PhoneCall } from "lucide-react";
 import { ContactForm } from "~/components/ContactForm";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
 import { CONTACT } from "~/lib/config";
+import { faqJsonLd, jsonLdScript } from "~/lib/schema";
 import { seo } from "~/lib/seo";
 import { cx, focusRing, gradientText } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/contact")({
-  head: () =>
-    seo({
+  head: () => ({
+    ...seo({
       title: "FAQs & Contact — LeadBoosterX",
       description:
         "Answers to common questions about lead generation, Meta Ads, GoHighLevel CRM and AI receptionists — and a form to tell Ericson where your leads get stuck.",
       path: "/contact",
     }),
+    scripts: [jsonLdScript(faqJsonLd(FAQS))],
+  }),
   component: ContactPage,
 });
 

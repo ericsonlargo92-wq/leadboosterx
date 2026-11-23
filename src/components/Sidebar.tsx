@@ -19,7 +19,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="flex h-full flex-col gap-4 p-5">
       <div className="flex items-center justify-between gap-2">
-        <Link to="/" onClick={onNavigate} className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX home">
+        <Link to="/" onClick={onNavigate} className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX Revenue Systems, home">
           <BrandLogo size="md" />
         </Link>
       </div>
@@ -71,7 +71,9 @@ function ProfileCard() {
     <div className="rounded-2xl border border-border bg-card p-2.5">
       <div className="flex gap-3 lg:block">
         <img
-          src="/images/ericson.jpg"
+          src="/images/ericson.webp"
+          loading="lazy"
+          decoding="async"
           alt="Ericson Largo, founder of LeadBoosterX"
           width={800}
           height={1000}

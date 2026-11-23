@@ -34,8 +34,8 @@ export function AmbientGlow({ grid = false }: { grid?: boolean }) {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       {grid && <div className="bg-dot-grid absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />}
-      <div className="absolute -left-24 -top-24 size-[28rem] rounded-full bg-primary/15 blur-3xl" />
-      <div className="absolute -right-24 top-10 size-[24rem] rounded-full bg-accent/15 blur-3xl" />
+      <div className="absolute -left-40 -top-40 size-[40rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--primary)_16%,transparent)_0%,transparent_65%)]" />
+      <div className="absolute -right-40 -top-6 size-[36rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--accent)_16%,transparent)_0%,transparent_65%)]" />
     </div>
   );
 }

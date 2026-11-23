@@ -32,7 +32,7 @@ export function MobileBar() {
   return (
     <>
       <header className="sticky top-0 z-40 flex h-16 items-center justify-between gap-3 border-b border-border bg-background/70 px-4 backdrop-blur-xl lg:hidden">
-        <Link to="/" className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX home">
+        <Link to="/" className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX Revenue Systems, home">
           <BrandLogo size="sm" />
         </Link>
         <div className="flex items-center gap-2">

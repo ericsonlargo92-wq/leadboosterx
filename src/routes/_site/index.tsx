@@ -17,7 +17,7 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import { Explainer } from "~/components/Explainer";
+import { LazyExplainer } from "~/components/LazyExplainer";
 import { Reveal, STAGGER } from "~/components/motion";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
 import { CTA_MICROCOPY, GUARANTEE, LAUNCH_DAYS, RESULTS, TRUST } from "~/lib/offer";
@@ -114,7 +114,7 @@ function HomePage() {
       <section className="relative isolate overflow-hidden">
         <AmbientGlow grid />
         <Container className="pb-14 pt-12 sm:pt-20 lg:pb-20">
-          <Reveal>
+          <div>
           <Pill dot>Digital Marketing &amp; AI Automation</Pill>
           <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
             Practical Lead Generation &amp; AI Automation <span className={gradientText}>for Growing Businesses.</span>
@@ -142,7 +142,7 @@ function HomePage() {
             <PlayCircle className="size-5" aria-hidden="true" />
             Watch the 1-minute explainer
           </Link>
-          </Reveal>
+          </div>
 
           <ul className="mt-10 grid gap-3 border-t border-border pt-6 sm:grid-cols-2" aria-label="Background">
             {TRUST.map((t, i) => (
@@ -166,7 +166,7 @@ function HomePage() {
             <p className="mt-3 max-w-2xl">Where leads slip through, the system that catches them, and what you can expect in the first 14 days.</p>
           </Reveal>
           <Reveal delay={0.1} className="mt-8">
-            <Explainer />
+            <LazyExplainer />
           </Reveal>
         </Container>
       </section>
