@@ -33,7 +33,7 @@ Copy `.env.example` to `.env` and add a Resend key to test the contact form loca
 | Name | Value |
 | --- | --- |
 | `RESEND_API_KEY` | API key from resend.com |
-| `CONTACT_TO_EMAIL` | `ericsonlargo92@gmail.com` |
+| `CONTACT_TO_EMAIL` | `ericson@leadboosterx.com` |
 | `CONTACT_FROM_EMAIL` | `LeadBoosterX <onboarding@resend.dev>` until a domain is verified in Resend |
 
 ## When you connect a custom domain
