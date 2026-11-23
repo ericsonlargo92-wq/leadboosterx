@@ -34,8 +34,8 @@ export function AmbientGlow({ grid = false, horizon = false }: { grid?: boolean;
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       {horizon && (
-        <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_72%,transparent)]">
-          {/* GoHighLevel-style hero: navy at the top, bright blue rising toward the bottom, then easing back into the page. */}
+        <div className="absolute inset-0">
+          {/* GoHighLevel-style hero: navy at the top, bright blue rising to the bottom edge. */}
           <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-b from-transparent via-[color-mix(in_oklch,var(--glow-indigo)_45%,transparent)] to-[color-mix(in_oklch,var(--glow-blue)_70%,transparent)]" />
           <div className="absolute -bottom-1/3 left-1/2 h-2/3 w-[140%] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklch,var(--glow-cyan)_55%,transparent)_0%,transparent_65%)]" />
         </div>
@@ -59,7 +59,7 @@ export function BookCallButton({ className, label = CTA_LABEL }: { className?: s
 /** Rounded CTA band used at the bottom of most pages. */
 export function CtaBlock({ title, text }: { title: ReactNode; text?: ReactNode }) {
   return (
-    <div className="relative isolate overflow-hidden rounded-3xl border border-soft-border bg-surface px-6 py-12 text-center sm:px-12">
+    <div className="theme-dark relative isolate overflow-hidden rounded-3xl bg-background px-6 py-12 text-center sm:px-12">
       <AmbientGlow />
       <h2 className="mx-auto max-w-2xl text-2xl font-bold sm:text-3xl">{title}</h2>
       {text && <p className="mx-auto mt-3 max-w-xl text-body">{text}</p>}

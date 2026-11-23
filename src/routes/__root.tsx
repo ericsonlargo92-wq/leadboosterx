@@ -12,7 +12,6 @@ import {
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
 import { AlertTriangle, ArrowLeft, Compass, RotateCcw } from "lucide-react";
-import { GlowBackdrop } from "~/components/GlowBackdrop";
 import { SiteLayout } from "~/components/SiteLayout";
 import { Container } from "~/components/ui";
 import { jsonLdScript, organizationJsonLd } from "~/lib/schema";
@@ -25,7 +24,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     const base = seo({
       title: "LeadBoosterX — GoHighLevel Systems That Capture, Nurture and Close",
       description:
-        "Certified GoHighLevel specialist (HighLevel Certified Admin). Funnels, follow-up automation, calendars and payments built in your GHL account. Live in 14 days, no long-term contract.",
+        "Certified GoHighLevel specialist (HighLevel Certified Admin). Funnels, follow-up automation, calendars and payments built in your GHL account. No long-term contract.",
       path: "/",
     });
     return {
@@ -51,7 +50,6 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <GlowBackdrop />
       <Outlet />
     </QueryClientProvider>
   );
@@ -59,7 +57,7 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <HeadContent />
       </head>

@@ -89,7 +89,7 @@ const SCENES: { id: string; start: number; Comp: (p: SceneProps) => ReactNode }[
   { id: "intro", start: 0, Comp: Intro },
   { id: "leaks", start: C.three.start - 0.15, Comp: Leaks },
   { id: "system", start: C.system.start - 0.15, Comp: System },
-  { id: "promise", start: C.promise.start - 0.15, Comp: Promise14 },
+  { id: "promise", start: C.promise.start - 0.15, Comp: PromiseScene },
   { id: "cta", start: C.cta.start - 0.15, Comp: Cta },
 ];
 /** Absolute time (s) the voice starts saying `word` (first match at/after `after` seconds). Pin reveals to words. */
@@ -346,33 +346,42 @@ function System({ t }: SceneProps) {
   );
 }
 
-function Promise14({ t }: SceneProps) {
+function PromiseScene({ t }: SceneProps) {
   const contract = rel("contract", "promise");
-  const live = relWord("14", "promise", "promise");
-  const free = relWord("free", "promise", "promise");
-  const fill = p(t, 0.6, Math.max(1, live - 0.2));
-  const day = Math.max(1, Math.round(fill * 14));
+  const tested = relWord("tested", "promise", "promise");
+  const single = relWord("single", "promise", "promise");
+  const fill = p(t, tested, Math.max(0.5, single - tested));
+  const tests = ["Forms", "Workflows", "Calendars", "Reminders"];
   const checks = [
     { label: "Built in your own account", at: 0.4 },
-    { label: "Tested end to end", at: relWord("tested", "promise", "promise") },
-    { label: "Free until it's live", at: free },
+    { label: "Tested end to end", at: tested },
     { label: "No long-term contract", at: contract },
   ];
   return (
     <div className="flex h-full flex-col justify-center">
       <Eyebrow t={t}>The promise</Eyebrow>
       <h3 style={fadeUp(t, 0.25, 0.7)} className="mt-[0.3em] text-[2.4em] font-bold leading-[1.05] @xl:text-[3em]">
-        Live in <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">14 days.</span>
+        Tested <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">before launch.</span>
       </h3>
       <Panel style={fadeUp(t, 0.5, 0.5)} className="mt-[1em]">
         <div className="flex items-center justify-between text-[0.85em]">
-          <span className="font-mono text-muted-foreground">Day {day} of 14</span>
-          <span style={pop(t, live + 0.2)}>
-            <Tag tone="good">Live</Tag>
+          <span className="font-mono text-muted-foreground">Launch check</span>
+          <span style={pop(t, single + 0.2)}>
+            <Tag tone="good">Ready</Tag>
           </span>
         </div>
-        <div className="mt-[0.5em] h-[0.55em] overflow-hidden rounded-full bg-hover">
-          <div className="h-full rounded-full bg-gradient-to-r from-primary to-accent" style={{ width: `${fill * 100}%` }} />
+        <div className="mt-[0.5em] grid grid-cols-2 gap-[0.35em] text-[0.85em] @xl:grid-cols-4">
+          {tests.map((x, i) => (
+            <span key={x} className="flex items-center gap-[0.35em] text-foreground">
+              <span
+                className="inline-flex size-[1.2em] items-center justify-center rounded-full bg-success/15 text-success"
+                style={{ opacity: fill >= (i + 1) / tests.length ? 1 : 0.25 }}
+              >
+                <Check className="size-[0.75em]" aria-hidden="true" />
+              </span>
+              {x}
+            </span>
+          ))}
         </div>
       </Panel>
       <div className="mt-[1em] grid gap-[0.45em] @xl:grid-cols-2">
@@ -478,7 +487,7 @@ type Word = { w: string; s: number; e: number };
 const WORD_GROUPS = wordGroups as Word[][];
 const ALL_WORDS = WORD_GROUPS.flat();
 /** Key words that get a camera snap (first occurrence; punctuation and case ignored). Pick ~8–12 per minute. */
-const SNAP_WORDS = ["slipping", "three", "five", "cold", "forgotten", "connected", "automatically", "path", "14", "free", "contract", "leaking"];
+const SNAP_WORDS = ["slipping", "three", "five", "cold", "forgotten", "connected", "automatically", "path", "tested", "single", "contract", "leaking"];
 const bare = (x: string) => x.toLowerCase().replace(/[^a-z0-9']/g, "");
 const SNAPS = SNAP_WORDS.map((sw) => ALL_WORDS.find((w) => bare(w.w) === bare(sw))?.s).filter((v): v is number => v != null);
 
@@ -610,9 +619,9 @@ export function Explainer() {
 
   return (
     <div>
-      <div className="@container">
+      <div className="theme-dark @container">
         <div
-          className="glass relative aspect-[4/5] overflow-hidden rounded-3xl text-[3.5cqw] @xl:aspect-video @xl:text-[1.5cqw]"
+          className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-background shadow-xl shadow-[oklch(0.2_0.05_260/0.3)] text-[3.5cqw] @xl:aspect-video @xl:text-[1.5cqw]"
           role="img"
           aria-label="Animated explainer: how LeadBoosterX turns leads into booked calls. A transcript is available below."
         >
@@ -688,7 +697,7 @@ export function Explainer() {
           type="button"
           onClick={ended ? play : playing ? pause : play}
           aria-label={ended ? "Replay" : playing ? "Pause" : "Play"}
-          className={cx("inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground", focusRing)}
+          className={cx("inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground hover:bg-primary-hover", focusRing)}
         >
           {ended ? <RotateCcw className="size-4" aria-hidden="true" /> : playing ? <Pause className="size-4" aria-hidden="true" /> : <Play className="ml-0.5 size-4" aria-hidden="true" />}
         </button>

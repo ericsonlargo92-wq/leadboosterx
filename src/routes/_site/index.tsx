@@ -23,7 +23,7 @@ import {
 import { LazyExplainer } from "~/components/LazyExplainer";
 import { Reveal, STAGGER } from "~/components/motion";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
-import { CREDENTIAL, CTA_MICROCOPY, GUARANTEE, LAUNCH_DAYS, RESULTS, STAGES, TRUST } from "~/lib/offer";
+import { CREDENTIAL, CTA_MICROCOPY, GUARANTEE, RESULTS, STAGES, TRUST } from "~/lib/offer";
 import { seo } from "~/lib/seo";
 import { btnSecondary, card, cx, focusRing, gradientText } from "~/lib/ui";
 
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/_site/")({
     seo({
       title: "LeadBoosterX — GoHighLevel Systems That Capture, Nurture and Close",
       description:
-        "Certified GoHighLevel specialist (HighLevel Certified Admin). Funnels, follow-up automation, calendars and payments built in your GHL account. Live in 14 days, no long-term contract.",
+        "Certified GoHighLevel specialist (HighLevel Certified Admin). Funnels, follow-up automation, calendars and payments built in your GHL account. No long-term contract.",
       path: "/",
     }),
   component: HomePage,
@@ -84,19 +84,19 @@ const PATHS: { id: string; audience: string; icon: LucideIcon; text: string }[] 
 
 const STEPS: { days: string; title: string; text: string; icon: LucideIcon }[] = [
   {
-    days: "Days 1–3",
+    days: "Step 1",
     title: "Audit & plan",
     text: "We map how leads come in, how they're followed up and how deals close today — and what to build first.",
     icon: ClipboardList,
   },
   {
-    days: "Days 4–10",
+    days: "Step 2",
     title: "Build",
     text: "Capture, Nurture and Close set up in your own GoHighLevel account.",
     icon: Wrench,
   },
   {
-    days: "Days 11–14",
+    days: "Step 3",
     title: "Test & go live",
     text: "Every form, workflow, calendar and reminder is tested end to end, then switched on.",
     icon: Rocket,
@@ -113,7 +113,7 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate overflow-hidden">
+      <section className="theme-dark relative isolate overflow-hidden bg-background">
         <AmbientGlow grid horizon />
         <Container className="pb-14 pt-12 sm:pt-20 lg:pb-20">
           <div>
@@ -124,9 +124,7 @@ function HomePage() {
           <p className="mt-6 max-w-2xl text-lg">
             I set up, fix and run GoHighLevel so every lead is captured, followed up automatically, and moved to a booked
             call or a closed sale.{" "}
-            <strong className="font-semibold text-foreground">
-              Live in {LAUNCH_DAYS} days. No long-term contract.
-            </strong>
+            <strong className="font-semibold text-foreground">No long-term contract.</strong>
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <BookCallButton />
@@ -159,13 +157,13 @@ function HomePage() {
 
       {/* Explainer */}
       <section id="explainer" className="scroll-mt-20" aria-labelledby="explainer-title">
-        <Container className="pb-16 lg:pb-20">
+        <Container className="py-16 lg:py-20">
           <Reveal>
             <Pill>In one minute</Pill>
             <h2 id="explainer-title" className="mt-5 text-3xl font-bold sm:text-4xl">
               How It Works, Start to Finish
             </h2>
-            <p className="mt-3 max-w-2xl">Where GoHighLevel setups leak, the system that fixes it, and what you can expect in the first 14 days.</p>
+            <p className="mt-3 max-w-2xl">Where GoHighLevel setups leak, the system that fixes it, and how it gets built.</p>
           </Reveal>
           <Reveal delay={0.1} className="mt-8">
             <LazyExplainer />
@@ -308,7 +306,7 @@ function HomePage() {
         <Container className="py-16 lg:py-20">
           <Pill>How it works</Pill>
           <h2 id="how-title" className="mt-5 text-3xl font-bold sm:text-4xl">
-            Live in {LAUNCH_DAYS} Days
+            From Audit to Launch
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {STEPS.map((s, i) => (
@@ -343,7 +341,7 @@ function HomePage() {
       {/* Final CTA */}
       <section aria-labelledby="final-cta-title">
         <Container className="py-16 lg:py-20">
-          <div className="relative isolate overflow-hidden rounded-3xl border border-soft-border bg-surface p-8 sm:p-12">
+          <div className="theme-dark relative isolate overflow-hidden rounded-3xl bg-background p-8 sm:p-12">
             <AmbientGlow />
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="max-w-2xl">

@@ -1,5 +1,5 @@
 {
- "total": 58,
+ "total": 55.66,
  "poster": "g01-hook.webp",
  "shots": [
   {
@@ -60,22 +60,22 @@
   {
    "src": "g12-plan",
    "start": 40.8,
-   "end": 44.1
+   "end": 42.7
   },
   {
    "src": "g13-build",
-   "start": 44.1,
-   "end": 47.43
+   "start": 42.7,
+   "end": 45.09
   },
   {
    "src": "g14-handshake",
-   "start": 47.43,
-   "end": 49.39
+   "start": 45.09,
+   "end": 47.05
   },
   {
    "src": "g15-calm",
-   "start": 49.39,
-   "end": 59
+   "start": 47.05,
+   "end": 55.66
   }
  ]
 }

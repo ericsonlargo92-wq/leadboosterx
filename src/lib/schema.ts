@@ -15,7 +15,7 @@ export const organizationJsonLd = {
       logo: `${SITE_URL}/favicon.svg`,
       image: `${SITE_URL}/images/og.jpg`,
       description:
-        "GoHighLevel systems that capture, nurture and close: funnels, follow-up automation, calendars and payments, built by a HighLevel Certified Admin. Live in 14 days, no long-term contract.",
+        "GoHighLevel systems that capture, nurture and close: funnels, follow-up automation, calendars and payments, built by a HighLevel Certified Admin. No long-term contract.",
       email: CONTACT.email,
       founder: { "@id": `${SITE_URL}/#ericson` },
       areaServed: "Worldwide",

@@ -9,8 +9,8 @@ const Explainer = lazy(() => import("./Explainer").then((m) => ({ default: m.Exp
 function Placeholder() {
   return (
     <div aria-hidden="true">
-      <div className="@container">
-        <div className="glass relative aspect-[4/5] overflow-hidden rounded-3xl text-[3.5cqw] @xl:aspect-video @xl:text-[1.5cqw]">
+      <div className="theme-dark @container">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-background shadow-xl shadow-[oklch(0.2_0.05_260/0.3)] text-[3.5cqw] @xl:aspect-video @xl:text-[1.5cqw]">
           <img src={`/broll/${shotData.poster}`} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" />
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-[0.8em] bg-background/70">
             <span className="glow inline-flex size-[4.5em] items-center justify-center rounded-full bg-cta text-cta-foreground">

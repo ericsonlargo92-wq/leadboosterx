@@ -108,7 +108,7 @@ function ProfileCard() {
 
 export function Sidebar() {
   return (
-    <aside className="glass fixed inset-y-3 left-3 z-30 hidden w-[16.5rem] overflow-y-auto rounded-3xl lg:block">
+    <aside className="theme-dark fixed border border-border bg-background shadow-2xl shadow-[oklch(0.2_0.05_260/0.35)] inset-y-3 left-3 z-30 hidden w-[16.5rem] overflow-y-auto rounded-3xl lg:block">
       <SidebarContent />
     </aside>
   );

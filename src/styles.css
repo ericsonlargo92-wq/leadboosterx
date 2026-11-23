@@ -10,12 +10,59 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Dark theme in a GoHighLevel-style palette: deep navy, bright "HighLevel" blue, sky-blue highlights and
- * yellow call-to-action buttons. Frosted panels float over slow blue light.
- * The site is dark-only. Components use these tokens, never raw colors.
+ * GoHighLevel-style theme: white and light-gray sections with navy text, bright blue accents and yellow
+ * call-to-action buttons. Navy areas (hero, sidebar, explainer frame, CTA band, footer) add `.theme-dark`,
+ * which swaps the same tokens for their dark values. Components use these tokens, never raw colors.
  */
 :root {
+  color-scheme: light;
+
+  --background: oklch(1 0 0);
+  --surface: oklch(0.975 0.005 255);
+  --card: oklch(1 0 0);
+  --foreground: oklch(0.22 0.045 262);
+  --body: oklch(0.42 0.03 258);
+  --muted-foreground: oklch(0.52 0.025 258);
+  --border: oklch(0.91 0.012 255);
+  --border-strong: oklch(0.83 0.02 255);
+
+  /* HighLevel blue, deep enough to read as text on white. White text sits on it. */
+  --primary: oklch(0.55 0.2 256);
+  --primary-hover: oklch(0.5 0.2 258);
+  --primary-foreground: oklch(1 0 0);
+  --accent: oklch(0.62 0.17 240);
+  --accent-foreground: oklch(0.5 0.15 245);
+
+  /* Yellow call-to-action buttons with navy text, as on gohighlevel.com. */
+  --cta: oklch(0.84 0.17 82);
+  --cta-hover: oklch(0.8 0.17 78);
+  --cta-foreground: oklch(0.2 0.05 260);
+
+  --soft: oklch(0.55 0.2 256 / 0.08);
+  --soft-border: oklch(0.55 0.2 256 / 0.25);
+  --soft-cyan: oklch(0.62 0.17 240 / 0.1);
+  --hover: oklch(0.22 0.045 262 / 0.05);
+  --destructive: oklch(0.55 0.21 25);
+  --success: oklch(0.55 0.14 155);
+  --ring: var(--primary);
+  --input: oklch(0.83 0.02 255);
+  --radius: 0.75rem;
+
+  --glow-blue: oklch(0.6 0.2 254);
+  --glow-cyan: oklch(0.74 0.15 228);
+  --glow-indigo: oklch(0.42 0.18 262);
+
+  --glass-bg: oklch(1 0 0);
+  --glass-border: oklch(0.91 0.012 255);
+  --glass-shadow: 0 1px 2px oklch(0.22 0.045 262 / 0.05), 0 18px 40px -24px oklch(0.25 0.06 260 / 0.25);
+  --glass-blur: none;
+  --dot: oklch(0.55 0.2 256 / 0.12);
+}
+
+/* Navy areas: same tokens, dark values. */
+.theme-dark {
   color-scheme: dark;
+  color: var(--body);
 
   --background: oklch(0.15 0.04 258);
   --surface: oklch(0.6 0.12 252 / 0.07);
@@ -26,17 +73,11 @@
   --border: oklch(1 0 0 / 0.12);
   --border-strong: oklch(1 0 0 / 0.24);
 
-  /* HighLevel-style bright blue, with sky blue for highlights. Dark text sits on both. */
   --primary: oklch(0.66 0.18 252);
   --primary-hover: oklch(0.72 0.16 250);
   --primary-foreground: oklch(0.17 0.05 260);
   --accent: oklch(0.8 0.14 225);
   --accent-foreground: oklch(0.84 0.12 225);
-
-  /* Yellow call-to-action buttons with navy text, as on gohighlevel.com. */
-  --cta: oklch(0.84 0.17 82);
-  --cta-hover: oklch(0.88 0.16 90);
-  --cta-foreground: oklch(0.2 0.05 260);
 
   --soft: oklch(0.66 0.18 252 / 0.16);
   --soft-border: oklch(0.66 0.18 252 / 0.36);
@@ -44,13 +85,13 @@
   --hover: oklch(1 0 0 / 0.08);
   --destructive: oklch(0.72 0.18 25);
   --success: oklch(0.8 0.15 160);
-  --ring: var(--primary);
   --input: oklch(1 0 0 / 0.16);
-  --radius: 0.75rem;
 
-  --glow-blue: oklch(0.6 0.2 254);
-  --glow-cyan: oklch(0.74 0.15 228);
-  --glow-indigo: oklch(0.42 0.18 262);
+  --glass-bg: linear-gradient(150deg, oklch(0.7 0.12 250 / 0.13), oklch(0.6 0.12 252 / 0.04));
+  --glass-border: oklch(0.75 0.1 250 / 0.16);
+  --glass-shadow: inset 0 1px 0 oklch(1 0 0 / 0.14), 0 24px 60px -28px oklch(0 0 0 / 0.75);
+  --glass-blur: blur(14px) saturate(140%);
+  --dot: oklch(0.8 0.1 250 / 0.09);
 }
 
 @theme inline {
@@ -94,15 +135,13 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-/* Frosted glass panel: translucent fill, top-edge highlight, soft depth, blurred backdrop. */
+/* Panel: a white card with a soft shadow on light sections, frosted glass inside .theme-dark. */
 @utility glass {
-  background: linear-gradient(150deg, oklch(0.7 0.12 250 / 0.13), oklch(0.6 0.12 252 / 0.04));
-  border: 1px solid oklch(0.75 0.1 250 / 0.16);
-  box-shadow:
-    inset 0 1px 0 oklch(1 0 0 / 0.14),
-    0 24px 60px -28px oklch(0 0 0 / 0.75);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  backdrop-filter: blur(14px) saturate(140%);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 }
 
 /* Gentle hover lift for cards. */
@@ -113,7 +152,7 @@
     background-color 0.25s ease;
   &:hover {
     transform: translateY(-3px);
-    border-color: oklch(1 0 0 / 0.24);
+    border-color: var(--border-strong);
   }
   @media (prefers-reduced-motion: reduce) {
     &:hover {
@@ -168,7 +207,7 @@
     display: none;
   }
   ::selection {
-    background: oklch(0.66 0.18 252 / 0.4);
+    background: oklch(0.62 0.17 240 / 0.3);
   }
   select option {
     background: var(--background);
@@ -233,7 +272,7 @@
 }
 
 .bg-dot-grid {
-  background-image: radial-gradient(oklch(0.8 0.1 250 / 0.09) 1px, transparent 1px);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 

@@ -31,7 +31,7 @@ export function MobileBar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 flex h-16 items-center justify-between gap-3 border-b border-border bg-background/70 px-4 backdrop-blur-xl lg:hidden">
+      <header className="theme-dark sticky top-0 z-40 flex h-16 items-center justify-between gap-3 border-b border-border bg-background/70 px-4 backdrop-blur-xl lg:hidden">
         <Link to="/" className={cx("rounded-lg", focusRing)} aria-label="LeadBoosterX Revenue Systems, home">
           <BrandLogo size="sm" />
         </Link>
@@ -68,7 +68,7 @@ export function MobileBar() {
           aria-label="Menu"
           inert={!open}
           className={cx(
-            "absolute inset-y-0 left-0 w-72 max-w-[85vw] overflow-y-auto border-r border-border bg-background/90 backdrop-blur-2xl shadow-xl transition-transform duration-200 ease-out motion-reduce:transition-none",
+            "theme-dark absolute inset-y-0 left-0 w-72 max-w-[85vw] overflow-y-auto border-r border-border bg-background/90 backdrop-blur-2xl shadow-xl transition-transform duration-200 ease-out motion-reduce:transition-none",
             open ? "translate-x-0" : "-translate-x-full",
           )}
         >

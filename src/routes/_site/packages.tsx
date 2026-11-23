@@ -12,7 +12,7 @@ export const Route = createFileRoute("/_site/packages")({
     seo({
       title: "Packages — GoHighLevel Capture, Nurture & Close Systems | LeadBoosterX",
       description:
-        "Three ways to work together: the Complete Capture → Nurture → Close System, a Single-Stage Build, and monthly GoHighLevel Management. Live in 14 days, no long-term contract.",
+        "Three ways to work together: the Complete Capture → Nurture → Close System, a Single-Stage Build, and monthly GoHighLevel Management. No long-term contract.",
       path: "/packages",
     }),
   component: PackagesPage,
@@ -32,7 +32,7 @@ function PackagesPage() {
       <h1 className="mt-5 max-w-3xl text-4xl font-bold sm:text-5xl">Pick Where You Want to Start.</h1>
       <p className="mt-4 max-w-2xl text-lg">
         Every package is built in your own GoHighLevel account, tested end to end before launch, and comes with the same promise:
-        live in 14 days, no long-term contract.
+        no long-term contract.
       </p>
 
       <ul className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -42,7 +42,7 @@ function PackagesPage() {
             className={cx(
               card,
               "relative flex flex-col p-6",
-              p.recommended && "border-primary ring-1 ring-primary lg:-my-2 lg:py-8",
+              p.recommended && "!border-primary outline-2 outline-solid -outline-offset-1 outline-primary lg:-my-2 lg:py-8",
             )}
           >
             {p.recommended && (
@@ -55,10 +55,12 @@ function PackagesPage() {
             <h2 className="mt-2 text-2xl font-bold">{p.name}</h2>
             <p className="mt-2 font-medium text-foreground">{p.tagline}</p>
             <p className="mt-2 text-sm">{p.who}</p>
-            <p className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-soft-border bg-soft px-2.5 py-1 text-xs font-semibold text-primary">
-              <Clock className="size-3.5" aria-hidden="true" />
-              {p.timing}
-            </p>
+            {p.timing && (
+              <p className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-soft-border bg-soft px-2.5 py-1 text-xs font-semibold text-primary">
+                <Clock className="size-3.5" aria-hidden="true" />
+                {p.timing}
+              </p>
+            )}
             <p className="mt-6 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">What's included</p>
             <ul className="mt-3 space-y-2">
               {p.includes.map((inc) => (

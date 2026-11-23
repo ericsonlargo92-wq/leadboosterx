@@ -6,12 +6,10 @@ export const CTA_MICROCOPY = "30 minutes. You'll leave with a clear plan — whe
 
 export const CREDENTIAL = "HighLevel Certified Admin";
 
-export const LAUNCH_DAYS = 14;
-
 export const GUARANTEE = {
-  headline: `Live in ${LAUNCH_DAYS} days — or I keep working for free until it is.`,
+  headline: "Tested end to end before a single lead goes through it.",
   contract: "No long-term contracts. Monthly management is month-to-month.",
-  fineprint: `${LAUNCH_DAYS} days counts from when I have access to your accounts and the assets we agree on.`,
+  fineprint: "Everything is built in your own GoHighLevel account, so you keep every funnel, workflow and contact.",
 };
 
 /** Only real, checkable claims. */
@@ -66,11 +64,24 @@ export type Package = {
   tagline: string;
   who: string;
   includes: string[];
-  timing: string;
+  /** Shown as a small badge; only Management has one (month-to-month). */
+  timing?: string;
   recommended?: boolean;
 };
 
+/** Order matters: the recommended package sits in the middle column. */
 export const PACKAGES: Package[] = [
+  {
+    name: "Single-Stage Build",
+    tagline: "Fix the stage that's leaking most.",
+    who: "For businesses already on GoHighLevel with one weak spot.",
+    includes: [
+      "Audit of your current GoHighLevel setup",
+      "Rebuild of one stage: Capture, Nurture or Close",
+      "Repair of broken workflows and triggers in that stage",
+      "Every path in that stage tested before launch",
+    ],
+  },
   {
     name: "Complete Capture → Nurture → Close System",
     tagline: "All three stages, built and connected.",
@@ -82,20 +93,7 @@ export const PACKAGES: Package[] = [
       "Contacts and pipelines moved from your old CRM",
       "Every path tested end to end before launch",
     ],
-    timing: `Live in ${LAUNCH_DAYS} days`,
     recommended: true,
-  },
-  {
-    name: "Single-Stage Build",
-    tagline: "Fix the stage that's leaking most.",
-    who: "For businesses already on GoHighLevel with one weak spot.",
-    includes: [
-      "Audit of your current GoHighLevel setup",
-      "Rebuild of one stage: Capture, Nurture or Close",
-      "Repair of broken workflows and triggers in that stage",
-      "Every path in that stage tested before launch",
-    ],
-    timing: `Live in ${LAUNCH_DAYS} days`,
   },
   {
     name: "GoHighLevel Management",

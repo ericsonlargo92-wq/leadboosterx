@@ -54,10 +54,6 @@ const FAQS = [
     a: "Access to your ad account, CRM and calendar, the details of your offer, and any photos, videos or testimonials you want to use. I'll send a short checklist once we agree to work together.",
   },
   {
-    q: "What happens if it's not live in 14 days?",
-    a: "I keep working for free until it is. The 14 days start once I have access to your accounts and the assets we agree on.",
-  },
-  {
     q: "Do I need to sign a long-term contract?",
     a: "No. The build is a one-time project, and monthly management is month-to-month. You can stop anytime.",
   },
