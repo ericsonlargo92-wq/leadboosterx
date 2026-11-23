@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 
 // Brand blue, passed to Cal.com's own UI (outside our token system).
-const BRAND_COLOR = "#2563EB";
+const BRAND_COLOR = "#1570EF"; // HighLevel-style blue, close to --primary
 
 export default function CalInline({ calLink, theme }: { calLink: string; theme: "light" | "dark" }) {
   useEffect(() => {

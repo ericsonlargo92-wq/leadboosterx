@@ -7,7 +7,7 @@ const CalInline = lazy(() => import("./CalInline"));
 
 export function CalEmbed() {
   const [mounted, setMounted] = useState(false);
-  const theme = "dark" as const; // the site is dark-only
+  const theme = "light" as const; // matches the light page (navy areas are only the hero, sidebar and footer)
   useEffect(() => setMounted(true), []);
 
   return (
