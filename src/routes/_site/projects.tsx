@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_site/projects")({
     seo({
       title: "Projects — GoHighLevel Builds | LeadBoosterX",
       description:
-        "Live work and sample systems built in GoHighLevel: a payment recovery pipeline, freight, upholstery and tree service capture websites, an AI receptionist, a lead funnel and a sales pipeline.",
+        "Live work and sample systems built in GoHighLevel: a payment recovery pipeline, freight, upholstery and tree service quote systems (capture, nurture and close), an AI receptionist, a lead funnel and a sales pipeline.",
       path: "/projects",
     }),
   component: ProjectsPage,
