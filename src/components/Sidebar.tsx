@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Award, BadgeCheck, FolderGit2, HelpCircle, Home, Package, UserRound, type LucideIcon } from "lucide-react";
 import { CREDENTIAL, CTA_LABEL } from "~/lib/offer";
 import { BrandLogo } from "./BrandLogo";
-import { quarterLabel } from "~/lib/seo";
 import { btnPrimary, cx, focusRing } from "~/lib/ui";
 
 type NavItem = { to: "/" | "/projects" | "/certification" | "/packages" | "/about" | "/contact"; label: string; icon: LucideIcon };
@@ -104,11 +103,7 @@ function ProfileCard({ onNavigate }: { onNavigate?: () => void }) {
             <span className="rounded-md border border-soft-border bg-soft px-1.5 py-0.5 font-mono text-[0.65rem] font-medium text-primary">
               Remote
             </span>
-            <span>Philippines ⇄ Global clients</span>
           </div>
-          <p className="font-mono text-[0.65rem] tracking-wide text-muted-foreground" suppressHydrationWarning>
-            {quarterLabel()} — Booking new projects
-          </p>
         </div>
       </div>
     </div>
