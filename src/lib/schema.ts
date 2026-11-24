@@ -36,7 +36,6 @@ export const organizationJsonLd = {
       founder: { "@id": PERSON },
       employee: { "@id": PERSON },
       areaServed: { "@type": "Place", name: "Worldwide" },
-      serviceType: SERVICE_TYPES,
       sameAs: [CONTACT.facebook],
       potentialAction: { "@type": "ReserveAction", target: bookingUrl, name: "Book a Free Growth Call" },
       knowsAbout: [
@@ -58,7 +57,13 @@ export const organizationJsonLd = {
         name: "GoHighLevel packages",
         itemListElement: PACKAGES.map((p) => ({
           "@type": "Offer",
-          itemOffered: { "@type": "Service", name: p.name, description: `${p.tagline} ${p.who}`, provider: { "@id": BUSINESS } },
+          itemOffered: {
+            "@type": "Service",
+            name: p.name,
+            serviceType: SERVICE_TYPES,
+            description: `${p.tagline} ${p.who}`,
+            provider: { "@id": BUSINESS },
+          },
         })),
       },
     },
