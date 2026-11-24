@@ -135,7 +135,7 @@ export const PROJECTS: Project[] = [
     tools: ["GoHighLevel", "AI Studio", "Landing Page", "Workflows", "Pipelines", "Email & SMS"],
     video: {
       loop: "/projects/ridgeway-upholstery-loop.mp4",
-      voiceover: "/projects/ridgeway-upholstery-voiceover-v2.mp4",
+      voiceover: "/projects/ridgeway-upholstery-voiceover-v3.mp4",
       cta: "See how this site brings in quote requests",
       duration: "0:26",
       poster: "/projects/ridgeway-upholstery-poster.webp",
@@ -195,7 +195,7 @@ export const PROJECTS: Project[] = [
     tools: ["GoHighLevel", "AI Studio", "Landing Page", "Workflows", "Pipelines", "Email & SMS"],
     video: {
       loop: "/projects/timberline-tree-care-loop.mp4",
-      voiceover: "/projects/timberline-tree-care-voiceover-v2.mp4",
+      voiceover: "/projects/timberline-tree-care-voiceover-v3.mp4",
       cta: "See how this site brings in estimate requests",
       duration: "0:23",
       poster: "/projects/timberline-tree-care-poster.webp",

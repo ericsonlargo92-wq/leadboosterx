@@ -47,8 +47,8 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
   walkthroughs of the six workflows (camera follows the narration, pointer taps each step, step label, simple captions). Voice: the owner's own cloned ElevenLabs voice ("Ericson"). Music: custom track generated with
   ElevenLabs Music (2026-11-24), about 14 dB under the voice.
 - `public/projects/{northline-freight,ridgeway-upholstery,timberline-tree-care}-voiceover-v2.mp4`: the website recordings
-  re-voiced in the owner's "Ericson" voice with the same ElevenLabs Music track (replaces the earlier `-voiceover.mp4` files). The freight one is now `northline-freight-voiceover-v3.mp4`: its last line "Built by LeadBoosterX." was replaced with
-  the call to action "Want one like this? Book a free call."
+  re-voiced in the owner's "Ericson" voice with the same ElevenLabs Music track (replaces the earlier `-voiceover.mp4` files). All three are now `-voiceover-v3.mp4`: the last line "Built by LeadBoosterX." was replaced with the call to action
+  "If you want one like this, book your free call." (Ericson voice, steadier settings, pitch lowered about 4.5%).
 
 ## Explainer soundtrack (`public/audio/explainer-ghl-v3.mp3`, 57.34 s)
 
