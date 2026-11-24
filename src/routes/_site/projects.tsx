@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown, Maximize2 } from "lucide-react";
 import { Lightbox, type LightboxImage } from "~/components/Lightbox";
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_site/projects")({
     seo({
       title: "Projects — GoHighLevel Builds | LeadBoosterX",
       description:
-        "Live work and sample systems built in GoHighLevel: a payment recovery pipeline, an AI receptionist, a lead funnel and a sales pipeline.",
+        "Live work and sample systems built in GoHighLevel: a payment recovery pipeline, a freight quote capture website, an AI receptionist, a lead funnel and a sales pipeline.",
       path: "/projects",
     }),
   component: ProjectsPage,
@@ -112,12 +112,13 @@ function ProjectCard({
   onOpenImage: (img: LightboxImage) => void;
 }) {
   const isLive = p.label.startsWith("Real build");
+  const wide = p.wide ?? isLive;
   const nodes = open ? p.workflow : p.workflow.slice(0, PREVIEW_NODES);
   const hidden = p.workflow.length - PREVIEW_NODES;
   const flowId = `flow-${p.slug}`;
 
   return (
-    <Reveal as="li" className={cx(card, "flex flex-col p-6", isLive && "lg:col-span-2")}>
+    <Reveal as="li" className={cx(card, "flex flex-col p-6", wide && "lg:col-span-2")}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span
           className={cx(
@@ -132,7 +133,7 @@ function ProjectCard({
         </span>
       </div>
 
-      <div className={cx("mt-5 gap-6", isLive && "lg:grid lg:grid-cols-[1fr_1.1fr]")}>
+      <div className={cx("mt-5 gap-6", wide && "lg:grid lg:grid-cols-[1fr_1.1fr]")}>
         <div>
           <div className="flex items-start gap-4">
             <span
@@ -205,6 +206,8 @@ function ProjectCard({
           </div>
         </div>
 
+        {p.video && <ProjectVideo video={p.video} />}
+
         {p.images && (
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:mt-0 lg:grid-cols-1 xl:grid-cols-2">
             {p.images.map((img) => (
@@ -241,5 +244,54 @@ function ProjectCard({
         </Link>
       </div>
     </Reveal>
+  );
+}
+
+/**
+ * Screen recording of a build. Loads nothing until it is near the screen, then plays muted on a loop while visible
+ * and pauses when scrolled away. Reduced-motion visitors get the poster and the controls, no autoplay.
+ */
+function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) el.play().catch(() => {});
+        else el.pause();
+      },
+      { threshold: 0.35 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <figure className="mt-6 lg:mt-0">
+      <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-lg shadow-[oklch(0.2_0.05_260/0.15)]">
+        <div className="flex items-center gap-1.5 border-b border-border bg-surface px-3 py-2" aria-hidden="true">
+          <span className="size-2.5 rounded-full bg-destructive/60" />
+          <span className="size-2.5 rounded-full bg-cta/80" />
+          <span className="size-2.5 rounded-full bg-success/70" />
+        </div>
+        <video
+          ref={ref}
+          src={video.src}
+          poster={video.poster}
+          aria-label={video.label}
+          width={1280}
+          height={800}
+          muted
+          loop
+          playsInline
+          controls
+          preload="none"
+          className="block aspect-[16/10] w-full bg-background object-cover"
+        />
+      </div>
+      <figcaption className="mt-2 text-xs text-muted-foreground">{video.caption}</figcaption>
+    </figure>
   );
 }

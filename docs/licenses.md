@@ -24,6 +24,12 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 | `public/broll/g14-handshake.mp4` | [Pixabay video 358512](https://pixabay.com/videos/id-358512/) | Pixabay Content License |
 | `public/broll/g15-calm.mp4` | [Pixabay video 203260](https://pixabay.com/videos/id-203260/) | Pixabay Content License |
 
+## Project media: freight quote capture demo (2026-11-24)
+
+| File | Source | License |
+| --- | --- | --- |
+| `public/projects/northline-freight-walkthrough.mp4`, `public/projects/northline-freight-poster.webp` | Screen recording of the Northline Freight demo site (fictional brand) built by Ericson in GoHighLevel AI Studio. Its hero clip is [Pixabay video 384064](https://pixabay.com/videos/id-384064/) (AI-generated, no logos) | Own work; hero clip under the Pixabay Content License |
+
 ## Explainer soundtrack (`public/audio/explainer-ghl-v2.mp3`)
 
 | Part | Source | License |

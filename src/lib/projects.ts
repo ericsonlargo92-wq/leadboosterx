@@ -1,4 +1,4 @@
-import { Bot, CreditCard, Funnel, Workflow, type LucideIcon } from "lucide-react";
+import { Bot, CreditCard, Funnel, Truck, Workflow, type LucideIcon } from "lucide-react";
 import { STAGES, type StageId } from "./offer";
 export type ProjectLabel = "Real build — client details redacted" | "Concept Project" | "Demo Build" | "Sample System";
 
@@ -14,6 +14,10 @@ export type Project = {
   workflow: string[];
   tools: string[];
   images?: { src: string; alt: string; caption: string }[];
+  /** Screen recording shown instead of screenshots (muted, loops while on screen). */
+  video?: { src: string; poster: string; caption: string; label: string };
+  /** Spans both columns on desktop (used for builds with media). */
+  wide?: boolean;
 };
 
 export type ProjectFilter = "all" | StageId;
@@ -43,6 +47,7 @@ export const PROJECTS: Project[] = [
       "Recovered / Cancelled",
     ],
     tools: ["GoHighLevel", "Stripe", "Workflows", "Pipelines", "SMS/Email"],
+    wide: true,
     images: [
       {
         src: "/projects/payment-recovery-live.webp",
@@ -55,6 +60,32 @@ export const PROJECTS: Project[] = [
         caption: "Workflow diagram of the recovery sequence",
       },
     ],
+  },
+  {
+    slug: "freight-quote-capture",
+    title: "Freight Quote Capture System",
+    label: "Demo Build",
+    category: "Website + Capture",
+    stages: ["capture"],
+    icon: Truck,
+    description:
+      "A demo build for a fictional freight broker, Northline Freight: a landing page made in GoHighLevel AI Studio with a video hero, and a quote form that asks for pickup, delivery and freight type. Every request becomes a tagged contact and a new deal in a Freight Quotes pipeline, ready for the follow-up stage.",
+    workflow: [
+      "Landing Page",
+      "Quote Form",
+      "Contact + Freight Details",
+      "Tag: freight-quote-request",
+      "Pipeline: New Quote Request",
+      "Hand-off to Nurture",
+    ],
+    tools: ["GoHighLevel", "AI Studio", "Forms", "Custom Fields", "Workflows", "Pipelines"],
+    video: {
+      src: "/projects/northline-freight-walkthrough.mp4",
+      poster: "/projects/northline-freight-poster.webp",
+      label: "Screen recording of the Northline Freight demo website: video hero, services, how it works, and the quote form being filled in",
+      caption: "Screen recording of the demo site · fictional brand, built in GoHighLevel AI Studio",
+    },
+    wide: true,
   },
   {
     slug: "ai-receptionist",
