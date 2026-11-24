@@ -1,4 +1,4 @@
-import { Bot, CreditCard, Funnel, Truck, Workflow, type LucideIcon } from "lucide-react";
+import { Armchair, Bot, CreditCard, Funnel, Trees, Truck, Workflow, type LucideIcon } from "lucide-react";
 import { STAGES, type StageId } from "./offer";
 export type ProjectLabel = "Real build — client details redacted" | "Concept Project" | "Demo Build" | "Sample System";
 
@@ -91,6 +91,46 @@ export const PROJECTS: Project[] = [
       caption: "Screen recording of the demo site · fictional brand, built in GoHighLevel AI Studio",
     },
     wide: true,
+  },
+  {
+    slug: "upholstery-quote-site",
+    title: "Upholstery Shop Quote Website",
+    label: "Demo Build",
+    category: "Website + Capture",
+    stages: ["capture"],
+    icon: Armchair,
+    description:
+      "A demo site for a fictional custom upholstery shop, Ridgeway Upholstery, built in GoHighLevel AI Studio. The quote form sits in the hero and asks for the vehicle and the service needed, so a visitor can request a price without scrolling. Photo service cards, a project gallery and an FAQ build trust further down.",
+    workflow: ["Hero + Quote Form", "Vehicle & Service Details", "Service Cards", "Project Gallery", "FAQ", "Contact Form"],
+    tools: ["GoHighLevel", "AI Studio", "Landing Page", "Quote Form", "Copywriting"],
+    video: {
+      loop: "/projects/ridgeway-upholstery-loop.mp4",
+      voiceover: "/projects/ridgeway-upholstery-voiceover.mp4",
+      duration: "0:26",
+      poster: "/projects/ridgeway-upholstery-poster.webp",
+      label: "Screen recording of the Ridgeway Upholstery demo website: hero quote form being filled in, service cards, project gallery and FAQ",
+      caption: "Screen recording of the demo site · fictional brand, built in GoHighLevel AI Studio",
+    },
+  },
+  {
+    slug: "tree-service-estimate-site",
+    title: "Tree Service Estimate Website",
+    label: "Demo Build",
+    category: "Website + Capture",
+    stages: ["capture"],
+    icon: Trees,
+    description:
+      "A demo site for a fictional tree service, Timberline Tree Care, built in GoHighLevel AI Studio. A short estimate form follows the hero and asks only what's needed to quote the job, with clear service cards and an emergency storm call to action for urgent jobs.",
+    workflow: ["Hero", "Estimate Form", "Service Cards", "Emergency Storm CTA", "Why Us", "Contact"],
+    tools: ["GoHighLevel", "AI Studio", "Landing Page", "Estimate Form", "Copywriting"],
+    video: {
+      loop: "/projects/timberline-tree-care-loop.mp4",
+      voiceover: "/projects/timberline-tree-care-voiceover.mp4",
+      duration: "0:23",
+      poster: "/projects/timberline-tree-care-poster.webp",
+      label: "Screen recording of the Timberline Tree Care demo website: hero, estimate form being filled in, service cards and the emergency storm section",
+      caption: "Screen recording of the demo site · fictional brand, built in GoHighLevel AI Studio",
+    },
   },
   {
     slug: "ai-receptionist",

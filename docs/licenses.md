@@ -30,6 +30,14 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 | --- | --- | --- |
 | `public/projects/northline-freight-loop.mp4` (silent), `northline-freight-voiceover.mp4`, `northline-freight-poster.webp` | Screen recording of the Northline Freight demo site (fictional brand) built by Ericson in GoHighLevel AI Studio. Hero clip: [Pixabay video 384064](https://pixabay.com/videos/id-384064/) (AI-generated, no logos). Voiceover: ElevenLabs premade "Eric". Music: ["Hopeful"](https://pixabay.com/music/beats-hopeful-614905/) (Pixabay track 614905), about 14 dB under the voice | Own work; Pixabay Content License; ElevenLabs terms for the account's plan |
 
+## Project media: upholstery and tree service demos (2026-11-24)
+
+| File | Source | License |
+| --- | --- | --- |
+| `public/projects/ridgeway-upholstery-{loop,voiceover}.mp4`, `-poster.webp` | Screen recording of the Ridgeway Upholstery demo (fictional brand) built in GoHighLevel AI Studio; images generated or royalty-free from AI Studio | Own work |
+| `public/projects/timberline-tree-care-{loop,voiceover}.mp4`, `-poster.webp` | Screen recording of the Timberline Tree Care demo (fictional brand). Photos: Pixabay 5831756, 4567686, 843732 | Own work; Pixabay Content License |
+| Voiceovers on both | ElevenLabs premade "Eric"; music "Hopeful" (Pixabay 614905) about 14 dB under the voice | ElevenLabs terms; Pixabay Content License |
+
 ## Explainer soundtrack (`public/audio/explainer-ghl-v2.mp3`)
 
 | Part | Source | License |
