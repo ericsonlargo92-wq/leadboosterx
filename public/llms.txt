@@ -1,0 +1,28 @@
+# LeadBoosterX
+
+> LeadBoosterX sets up, fixes and runs GoHighLevel (HighLevel CRM) systems that capture every lead, follow up automatically, and move leads to a booked call or a closed sale. It is run by Ericson Largo, a HighLevel Certified Admin based in the Philippines who works remotely with clients worldwide (mostly in the US). Everything is built in the client's own GoHighLevel account, tested end to end before launch, with no long-term contract.
+
+Key facts:
+
+- Specialty: GoHighLevel (also called HighLevel or GHL) — funnels, forms, chat, missed-call text-back, pipelines, SMS and email follow-up, reminders, calendars, no-show recovery, payment links and review requests.
+- Approach: one connected system in three stages — Capture (every lead lands in one place), Nurture (every lead is followed up automatically), Close (every booked call has a clear path to the sale).
+- Who it is for: businesses switching to GoHighLevel, businesses already on GoHighLevel whose setup leaks leads, and agencies that need a builder for client accounts. Best fit: businesses that sell through calls, consultations or estimates.
+- Credential: HighLevel Certified Admin (HighLevel Admin Certification from HighLevel University, issued November 24, 2026, valid until November 24, 2027). Verify: https://my-certificates.com/certificates/6b049e3a2158ad74e4984482
+- Background: 10+ years in sales, support and revenue roles, including 5 years at Intuit, from customer support to closing deals.
+- Pricing: scoped on a free 30-minute call; no public prices. Builds are one-time projects; monthly management is month-to-month.
+- Contact: book a free call at https://www.leadboosterx.com/book-a-call or email ericsonlargo92@gmail.com.
+
+## Pages
+
+- [Home](https://www.leadboosterx.com/): the Capture → Nurture → Close system, where GoHighLevel setups leak, who it is for, and how a build runs (audit, build, test, manage).
+- [Packages](https://www.leadboosterx.com/packages): Single-Stage Build, Complete Capture → Nurture → Close System (recommended), and GoHighLevel Management.
+- [Projects](https://www.leadboosterx.com/projects): demo systems for a freight broker, an upholstery shop and a tree service (websites plus the real Nurture and Close workflows built in GoHighLevel), and a live payment recovery pipeline (client details redacted).
+- [Certification](https://www.leadboosterx.com/certification): the HighLevel Admin Certification and a link to verify it.
+- [About](https://www.leadboosterx.com/about): Ericson Largo's background and approach.
+- [FAQs & Contact](https://www.leadboosterx.com/contact): 14 answers about GoHighLevel builds, migrations, fixes, management and pricing, plus a contact form.
+- [Book a Free Growth Call](https://www.leadboosterx.com/book-a-call): a free 30-minute call to find where leads are slipping through and what to build first.
+
+## Optional
+
+- [Full text for AI assistants](https://www.leadboosterx.com/llms-full.txt): packages, projects and every FAQ answer in plain text.
+- [Privacy Policy](https://www.leadboosterx.com/privacy)

@@ -3,6 +3,7 @@ import { BarChart3, Check, Globe2, Headphones, PhoneCall, Sparkles, Trophy, type
 import { Container, CtaBlock, Pill } from "~/components/ui";
 import { Reveal, STAGGER } from "~/components/motion";
 import { seo } from "~/lib/seo";
+import { PERSON, webPageJsonLd } from "~/lib/schema";
 import { card, cx, gradientText } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/about")({
@@ -12,6 +13,12 @@ export const Route = createFileRoute("/_site/about")({
       description:
         "HighLevel Certified Admin with 10+ years in sales, support and revenue roles. Ericson Largo builds GoHighLevel systems that capture, nurture and close.",
       path: "/about",
+      crumb: "About",
+      jsonLd: [
+        webPageJsonLd("ProfilePage", "/about", "About Ericson Largo", "Founder of LeadBoosterX and HighLevel Certified Admin.", {
+          mainEntity: { "@id": PERSON },
+        }),
+      ],
     }),
   component: AboutPage,
 });

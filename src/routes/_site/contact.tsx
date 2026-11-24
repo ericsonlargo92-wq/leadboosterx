@@ -3,19 +3,23 @@ import { ChevronDown, Facebook, Mail, PhoneCall } from "lucide-react";
 import { ContactForm } from "~/components/ContactForm";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
 import { CONTACT } from "~/lib/config";
-import { faqJsonLd, jsonLdScript } from "~/lib/schema";
+import { faqJsonLd, webPageJsonLd } from "~/lib/schema";
 import { seo } from "~/lib/seo";
 import { cx, focusRing, gradientText } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/contact")({
   head: () => ({
     ...seo({
-      title: "FAQs & Contact — LeadBoosterX",
+      title: "GoHighLevel FAQs & Contact | LeadBoosterX",
       description:
         "Answers to common questions about GoHighLevel builds, migrations, fixes and management — and a form to tell Ericson where your leads get stuck.",
       path: "/contact",
+      crumb: "FAQs & Contact",
+      jsonLd: [
+        webPageJsonLd("ContactPage", "/contact", "FAQs & Contact — LeadBoosterX", "Answers about GoHighLevel builds and a form to get in touch."),
+        faqJsonLd(FAQS),
+      ],
     }),
-    scripts: [jsonLdScript(faqJsonLd(FAQS))],
   }),
   component: ContactPage,
 });

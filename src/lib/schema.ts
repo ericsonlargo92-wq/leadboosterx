@@ -1,53 +1,130 @@
 import { CONTACT, SITE_NAME, SITE_URL, bookingUrl } from "./config";
+import { CERTIFICATE, CREDENTIAL, PACKAGES } from "./offer";
 
 /**
- * Structured data (schema.org JSON-LD) so search engines understand who the site is for.
+ * Structured data (schema.org JSON-LD) so search engines and AI answer engines understand who the site is for.
  * Only facts already on the site — no ratings, reviews, prices or addresses.
  */
+export const BUSINESS = `${SITE_URL}/#business`;
+export const PERSON = `${SITE_URL}/#ericson`;
+const WEBSITE = `${SITE_URL}/#website`;
+
+const SERVICE_TYPES = [
+  "GoHighLevel setup",
+  "GoHighLevel account fixes",
+  "GoHighLevel management",
+  "CRM migration to GoHighLevel",
+  "Marketing automation",
+  "Sales funnel build",
+];
+
 export const organizationJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "ProfessionalService",
-      "@id": `${SITE_URL}/#business`,
+      "@id": BUSINESS,
       name: SITE_NAME,
+      alternateName: "LeadBoosterX Revenue Systems",
       url: SITE_URL,
-      logo: `${SITE_URL}/favicon.svg`,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/images/logo-512.png`, width: 512, height: 512 },
       image: `${SITE_URL}/images/og.jpg`,
+      slogan: "GoHighLevel Systems That Capture, Nurture and Close.",
       description:
-        "GoHighLevel systems that capture, nurture and close: funnels, follow-up automation, calendars and payments, built by a HighLevel Certified Admin. No long-term contract.",
+        "LeadBoosterX sets up, fixes and runs GoHighLevel (HighLevel CRM) systems that capture every lead, follow up automatically and move leads to a booked call or a closed sale. Built by a HighLevel Certified Admin, in the client's own account, with no long-term contract.",
       email: CONTACT.email,
-      founder: { "@id": `${SITE_URL}/#ericson` },
-      areaServed: "Worldwide",
+      founder: { "@id": PERSON },
+      employee: { "@id": PERSON },
+      areaServed: { "@type": "Place", name: "Worldwide" },
+      serviceType: SERVICE_TYPES,
       sameAs: [CONTACT.facebook],
       potentialAction: { "@type": "ReserveAction", target: bookingUrl, name: "Book a Free Growth Call" },
-      knowsAbout: ["GoHighLevel", "HighLevel CRM administration", "Sales funnels", "Marketing automation", "Pipelines and workflows", "AI automation"],
+      knowsAbout: [
+        "GoHighLevel",
+        "HighLevel CRM administration",
+        "Lead capture",
+        "Lead nurturing",
+        "Sales funnels",
+        "Marketing automation",
+        "SMS and email follow-up",
+        "Pipelines and workflows",
+        "Appointment booking and calendars",
+        "Payment links and failed-payment recovery",
+        "CRM migration",
+        "AI automation",
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "GoHighLevel packages",
+        itemListElement: PACKAGES.map((p) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: p.name, description: `${p.tagline} ${p.who}`, provider: { "@id": BUSINESS } },
+        })),
+      },
     },
     {
       "@type": "Person",
-      "@id": `${SITE_URL}/#ericson`,
+      "@id": PERSON,
       name: "Ericson Largo",
       jobTitle: "Founder, LeadBoosterX — GoHighLevel Specialist",
+      description:
+        "HighLevel Certified Admin and founder of LeadBoosterX. Builds GoHighLevel systems that capture, nurture and close, after 10+ years in sales, support and revenue roles, including 5 years at Intuit.",
       hasCredential: {
         "@type": "EducationalOccupationalCredential",
-        name: "HighLevel Certified Admin",
+        name: CERTIFICATE.name,
+        alternateName: CREDENTIAL,
         credentialCategory: "certification",
-        recognizedBy: { "@type": "Organization", name: "HighLevel" },
+        identifier: CERTIFICATE.id,
+        url: CERTIFICATE.verifyUrl,
+        image: `${SITE_URL}${CERTIFICATE.image}`,
+        dateCreated: "2026-11-24",
+        expires: "2027-11-24",
+        recognizedBy: { "@type": "Organization", name: "HighLevel", url: "https://www.gohighlevel.com" },
       },
+      knowsAbout: ["GoHighLevel", "HighLevel CRM", "Marketing automation", "Sales funnels", "CRM migration"],
       url: `${SITE_URL}/about`,
       image: `${SITE_URL}/images/ericson.webp`,
-      sameAs: [CONTACT.facebook],
-      worksFor: { "@id": `${SITE_URL}/#business` },
+      sameAs: [CONTACT.facebook, CERTIFICATE.verifyUrl],
+      worksFor: { "@id": BUSINESS },
     },
     {
       "@type": "WebSite",
-      "@id": `${SITE_URL}/#website`,
+      "@id": WEBSITE,
       url: SITE_URL,
       name: SITE_NAME,
-      publisher: { "@id": `${SITE_URL}/#business` },
+      inLanguage: "en",
+      publisher: { "@id": BUSINESS },
     },
   ],
 };
+
+/** Breadcrumb trail Home → page, shown by Google under the result URL. */
+export function breadcrumbJsonLd(name: string, path: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name, item: `${SITE_URL}${path}` },
+    ],
+  };
+}
+
+/** WebPage of a specific kind (AboutPage, ContactPage, ProfilePage, CollectionPage …) tied to the site graph. */
+export function webPageJsonLd(type: string, path: string, name: string, description: string, extra: Record<string, unknown> = {}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": `${SITE_URL}${path}#webpage`,
+    url: `${SITE_URL}${path}`,
+    name,
+    description,
+    inLanguage: "en",
+    isPartOf: { "@id": WEBSITE },
+    about: { "@id": BUSINESS },
+    ...extra,
+  };
+}
 
 /** FAQPage structured data from the same Q&A shown on /contact. */
 export function faqJsonLd(faqs: { q: string; a: string }[]) {

@@ -8,15 +8,18 @@ import { STAGES } from "~/lib/offer";
 import { STAGE_ICONS } from "~/lib/stage-icons";
 import { Reveal } from "~/components/motion";
 import { seo } from "~/lib/seo";
+import { projectsJsonLd } from "~/lib/schema-pages";
 import { card, cx, focusRing } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/projects")({
   head: () =>
     seo({
-      title: "Projects — GoHighLevel Builds | LeadBoosterX",
+      title: "GoHighLevel Projects & Demo Builds | LeadBoosterX",
       description:
-        "Freight, upholstery and tree service demo systems built in GoHighLevel, with screenshots of the real Nurture and Close workflows behind them, plus a live payment recovery pipeline.",
+        "GoHighLevel demo builds for freight, upholstery and tree service: websites plus the real Nurture and Close workflows, and a live payment recovery build.",
       path: "/projects",
+      crumb: "Projects",
+      jsonLd: [projectsJsonLd()],
     }),
   component: ProjectsPage,
 });

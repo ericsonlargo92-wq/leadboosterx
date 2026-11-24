@@ -13,6 +13,7 @@ export const Route = createFileRoute("/book-a-call")({
       description:
         "Book a free 30-minute growth call with Ericson Largo to look at your lead sources, follow-up and the first system worth building.",
       path: "/book-a-call",
+      crumb: "Book a Free Growth Call",
     }),
   component: BookACallPage,
 });

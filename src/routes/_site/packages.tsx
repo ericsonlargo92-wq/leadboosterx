@@ -5,6 +5,7 @@ import { BookCallButton, Container, CtaBlock, Pill } from "~/components/ui";
 import { GUARANTEE, PACKAGES, PRICING_NOTE } from "~/lib/offer";
 import { Reveal, STAGGER } from "~/components/motion";
 import { seo } from "~/lib/seo";
+import { packagesJsonLd } from "~/lib/schema-pages";
 import { card, cx } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/packages")({
@@ -14,6 +15,8 @@ export const Route = createFileRoute("/_site/packages")({
       description:
         "Three ways to work together: the Complete Capture → Nurture → Close System, a Single-Stage Build, and monthly GoHighLevel Management. No long-term contract.",
       path: "/packages",
+      crumb: "Packages",
+      jsonLd: [packagesJsonLd()],
     }),
   component: PackagesPage,
 });

@@ -6,6 +6,8 @@ import { Reveal } from "~/components/motion";
 import { Container, CtaBlock, Pill } from "~/components/ui";
 import { CERTIFICATE, CREDENTIAL } from "~/lib/offer";
 import { seo } from "~/lib/seo";
+import { PERSON, webPageJsonLd } from "~/lib/schema";
+import { SITE_URL } from "~/lib/config";
 import { card, cx, focusRing } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/certification")({
@@ -15,6 +17,15 @@ export const Route = createFileRoute("/_site/certification")({
       description:
         "Ericson Largo's HighLevel Admin Certification from HighLevel University, with a link to verify the credential on HighLevel's certificate site.",
       path: "/certification",
+      crumb: "Certification",
+      image: `${SITE_URL}${CERTIFICATE.image}`,
+      imageAlt: "HighLevel Admin Certification awarded to Ericson Largo",
+      jsonLd: [
+        webPageJsonLd("WebPage", "/certification", "HighLevel Certified Admin — Ericson Largo", "The HighLevel Admin Certification and how to verify it.", {
+          mainEntity: { "@id": PERSON },
+          primaryImageOfPage: `${SITE_URL}${CERTIFICATE.image}`,
+        }),
+      ],
     }),
   component: CertificationPage,
 });

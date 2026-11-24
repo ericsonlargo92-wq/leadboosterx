@@ -30,7 +30,7 @@ export const Route = createFileRoute("/_site/")({
     seo({
       title: "LeadBoosterX — GoHighLevel Systems That Capture, Nurture and Close",
       description:
-        "Certified GoHighLevel specialist (HighLevel Certified Admin). Funnels, follow-up automation, calendars and payments built in your GHL account. No long-term contract.",
+        "HighLevel Certified Admin who sets up, fixes and runs GoHighLevel: funnels, follow-up automation, calendars and payments. No long-term contract.",
       path: "/",
     }),
   component: HomePage,

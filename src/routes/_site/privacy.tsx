@@ -9,6 +9,7 @@ export const Route = createFileRoute("/_site/privacy")({
       title: "Privacy Policy — LeadBoosterX",
       description: "How LeadBoosterX handles the information you share through the contact form and booking page.",
       path: "/privacy",
+      crumb: "Privacy Policy",
     }),
   component: PrivacyPage,
 });

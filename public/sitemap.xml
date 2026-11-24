@@ -1,11 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.leadboosterx.com/</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://www.leadboosterx.com/projects</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://www.leadboosterx.com/certification</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://www.leadboosterx.com/packages</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://www.leadboosterx.com/about</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://www.leadboosterx.com/contact</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://www.leadboosterx.com/book-a-call</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://www.leadboosterx.com/privacy</loc><lastmod>2026-11-11</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://www.leadboosterx.com/</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://www.leadboosterx.com/images/og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://www.leadboosterx.com/projects</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.9</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.leadboosterx.com/projects/northline-freight-poster.webp</video:thumbnail_loc>
+      <video:title>Northline Freight: GoHighLevel website demo for a freight broker</video:title>
+      <video:description>Narrated walkthrough of a freight broker website built in GoHighLevel AI Studio, with a quote form that feeds the CRM.</video:description>
+      <video:content_loc>https://www.leadboosterx.com/projects/northline-freight-voiceover-v3.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-11-24</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.leadboosterx.com/projects/ridgeway-upholstery-poster.webp</video:thumbnail_loc>
+      <video:title>Ridgeway Upholstery: GoHighLevel website demo for a upholstery shop</video:title>
+      <video:description>Narrated walkthrough of a upholstery shop website built in GoHighLevel AI Studio, with a quote form that feeds the CRM.</video:description>
+      <video:content_loc>https://www.leadboosterx.com/projects/ridgeway-upholstery-voiceover-v3.mp4</video:content_loc>
+      <video:duration>26</video:duration>
+      <video:publication_date>2026-11-24</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.leadboosterx.com/projects/timberline-tree-care-poster.webp</video:thumbnail_loc>
+      <video:title>Timberline Tree Care: GoHighLevel website demo for a tree service</video:title>
+      <video:description>Narrated walkthrough of a tree service website built in GoHighLevel AI Studio, with a estimate form that feeds the CRM.</video:description>
+      <video:content_loc>https://www.leadboosterx.com/projects/timberline-tree-care-voiceover-v3.mp4</video:content_loc>
+      <video:duration>23</video:duration>
+      <video:publication_date>2026-11-24</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.leadboosterx.com/projects/freight-nurture-workflow-poster.webp</video:thumbnail_loc>
+      <video:title>GoHighLevel Nurture workflow for a freight broker</video:title>
+      <video:description>Animated walkthrough of a real GoHighLevel Nurture workflow for a freight broker: instant email and text, timed follow-ups, and a booked-call check.</video:description>
+      <video:content_loc>https://www.leadboosterx.com/projects/freight-nurture-workflow-voiceover-v2.mp4</video:content_loc>
+      <video:duration>38</video:duration>
+      <video:publication_date>2026-11-24</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.leadboosterx.com/projects/freight-close-workflow-poster.webp</video:thumbnail_loc>
+      <video:title>GoHighLevel Close workflow for a freight broker</video:title>
+      <video:description>Animated walkthrough of a real GoHighLevel Close workflow for a freight broker: confirmation, won or lost paths, thank-you and follow-up.</video:description>
+      <video:content_loc>https://www.leadboosterx.com/projects/freight-close-workflow-voiceover-v2.mp4</video:content_loc>
+      <video:duration>38</video:duration>
+      <video:publication_date>2026-11-24</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.leadboosterx.com/projects/upholstery-nurture-workflow-poster.webp</video:thumbnail_loc>
+      <video:title>GoHighLevel Nurture workflow for a upholstery shop</video:title>
+      <video:description>Animated walkthrough of a real GoHighLevel Nurture workflow for a upholstery shop: instant email and text, timed follow-ups, and a booked-call check.</video:description>
+      <video:content_loc>https://www.leadboosterx.com/projects/upholstery-nurture-workflow-voiceover-v2.mp4</video:content_loc>
+      <video:duration>43</video:duration>
+      <video:publication_date>2026-11-24</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.leadboosterx.com/projects/upholstery-close-workflow-poster.webp</video:thumbnail_loc>
+      <video:title>GoHighLevel Close workflow for a upholstery shop</video:title>
+      <video:description>Animated walkthrough of a real GoHighLevel Close workflow for a upholstery shop: confirmation, won or lost paths, thank-you and follow-up.</video:description>
+      <video:content_loc>https://www.leadboosterx.com/projects/upholstery-close-workflow-voiceover-v2.mp4</video:content_loc>
+      <video:duration>39</video:duration>
+      <video:publication_date>2026-11-24</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.leadboosterx.com/projects/tree-nurture-workflow-poster.webp</video:thumbnail_loc>
+      <video:title>GoHighLevel Nurture workflow for a tree service</video:title>
+      <video:description>Animated walkthrough of a real GoHighLevel Nurture workflow for a tree service: instant email and text, timed follow-ups, and a booked-call check.</video:description>
+      <video:content_loc>https://www.leadboosterx.com/projects/tree-nurture-workflow-voiceover-v2.mp4</video:content_loc>
+      <video:duration>42</video:duration>
+      <video:publication_date>2026-11-24</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://www.leadboosterx.com/projects/tree-close-workflow-poster.webp</video:thumbnail_loc>
+      <video:title>GoHighLevel Close workflow for a tree service</video:title>
+      <video:description>Animated walkthrough of a real GoHighLevel Close workflow for a tree service: confirmation, won or lost paths, thank-you and follow-up.</video:description>
+      <video:content_loc>https://www.leadboosterx.com/projects/tree-close-workflow-voiceover-v2.mp4</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-11-24</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.leadboosterx.com/packages</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.leadboosterx.com/certification</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://www.leadboosterx.com/images/highlevel-admin-certificate.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://www.leadboosterx.com/about</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.leadboosterx.com/contact</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.leadboosterx.com/book-a-call</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.leadboosterx.com/privacy</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.2</priority>
+  </url>
 </urlset>
