@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_site/projects")({
     seo({
       title: "Projects — GoHighLevel Builds | LeadBoosterX",
       description:
-        "Freight, upholstery and tree service demo systems built in GoHighLevel: the capture websites and forms, plus screenshots of the real Nurture and Close workflows behind them.",
+        "Freight, upholstery and tree service demo systems built in GoHighLevel, with screenshots of the real Nurture and Close workflows behind them, plus a live payment recovery pipeline.",
       path: "/projects",
     }),
   component: ProjectsPage,
@@ -37,9 +37,9 @@ function ProjectsPage() {
       <Pill>Systems &amp; Builds</Pill>
       <h1 className="mt-5 text-4xl font-bold sm:text-5xl">Selected Projects.</h1>
       <p className="mt-4 max-w-2xl text-lg">
-        Three demo systems built in GoHighLevel, each covering Capture, Nurture and Close. Pick a stage to see that part
-        of the build: the website and form for Capture, and the real workflows from the GoHighLevel builder for Nurture
-        and Close.
+        Three demo systems built in GoHighLevel, each covering Capture, Nurture and Close, plus a live payment recovery
+        build (client details redacted). Pick a stage to see that part of the build: the website and form for Capture,
+        and the real workflows from the GoHighLevel builder for Nurture and Close.
       </p>
 
       <div role="group" aria-label="Filter projects" className="mt-8 flex flex-wrap gap-2">

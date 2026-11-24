@@ -174,19 +174,12 @@ export const PROJECTS: Project[] = [
       },
     },
   },
-];
-
-/**
- * Earlier portfolio cards, hidden for now so the page shows only the three Capture → Nurture → Close demo systems.
- * Move an entry back into PROJECTS to show it again (its images are still in /public/projects).
- */
-export const ARCHIVED_PROJECTS: Project[] = [
   {
     slug: "payment-recovery",
     title: "Payment Recovery Pipeline",
     label: "Real build — client details redacted",
     category: "CRM / Automation",
-    stages: ["nurture", "close"],
+    stages: ["close"],
     icon: CreditCard,
     description:
       "A GoHighLevel system for a membership business: a failed Stripe payment opens a pipeline opportunity, alerts the team, and moves through stages — contacted, no answer, voicemail, callback, payment link sent, recovered or cancelled — as call outcomes are logged.",
@@ -214,6 +207,13 @@ export const ARCHIVED_PROJECTS: Project[] = [
       },
     ],
   },
+];
+
+/**
+ * Earlier portfolio cards, hidden for now so the page shows only the three Capture → Nurture → Close demo systems.
+ * Move an entry back into PROJECTS to show it again (its images are still in /public/projects).
+ */
+export const ARCHIVED_PROJECTS: Project[] = [
   {
     slug: "ai-receptionist",
     title: "AI Receptionist + Lead Booking System",
