@@ -40,9 +40,16 @@ export type WorkflowShot = {
 
 export type ProjectFilter = "all" | StageId;
 
+/** Filter button labels on the Projects page (owner's wording; the stages keep their short names elsewhere). */
+const FILTER_LABELS: Record<StageId, string> = {
+  capture: "Website & Funnels",
+  nurture: "Nurture Automation Workflow",
+  close: "Conversion Workflow",
+};
+
 export const FILTERS: { id: ProjectFilter; label: string }[] = [
   { id: "all", label: "All" },
-  ...STAGES.map((s) => ({ id: s.id, label: s.name })),
+  ...STAGES.map((s) => ({ id: s.id, label: FILTER_LABELS[s.id] })),
 ];
 
 export const PROJECTS: Project[] = [
