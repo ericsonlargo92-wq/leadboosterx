@@ -28,7 +28,15 @@ export type Project = {
   workflowShots?: { nurture: WorkflowShot; close: WorkflowShot };
 };
 
-export type WorkflowShot = { src: string; alt: string; caption: string; width: number; height: number };
+export type WorkflowShot = {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+  /** Optional narrated walkthrough: a camera pan down the same workflow with a voice explaining each step. */
+  voiceover?: { src: string; poster: string; duration: string; label: string };
+};
 
 export type ProjectFilter = "all" | StageId;
 
@@ -38,39 +46,6 @@ export const FILTERS: { id: ProjectFilter; label: string }[] = [
 ];
 
 export const PROJECTS: Project[] = [
-  {
-    slug: "payment-recovery",
-    title: "Payment Recovery Pipeline",
-    label: "Real build — client details redacted",
-    category: "CRM / Automation",
-    stages: ["close"],
-    icon: CreditCard,
-    description:
-      "A GoHighLevel system for a membership business: a failed Stripe payment opens a pipeline opportunity, alerts the team, and moves through stages — contacted, no answer, voicemail, callback, payment link sent, recovered or cancelled — as call outcomes are logged.",
-    workflow: [
-      "Payment Failed",
-      "Opportunity Created",
-      "Team Alert",
-      "Outreach (Call · SMS · Email)",
-      "Call Outcome",
-      "Stage Update",
-      "Recovered / Cancelled",
-    ],
-    tools: ["GoHighLevel", "Stripe", "Workflows", "Pipelines", "SMS/Email"],
-    wide: true,
-    images: [
-      {
-        src: "/projects/payment-recovery-live.webp",
-        alt: "Screenshots of the GoHighLevel payment recovery workflows, with client and product names redacted",
-        caption: "Real GoHighLevel screenshots · client and product names redacted",
-      },
-      {
-        src: "/projects/payment-recovery-flow.webp",
-        alt: "Diagram of the failed-payment recovery sequence from trigger to final notice",
-        caption: "Workflow diagram of the recovery sequence",
-      },
-    ],
-  },
   {
     slug: "freight-quote-capture",
     title: "Freight Quote System",
@@ -107,6 +82,12 @@ export const PROJECTS: Project[] = [
         caption: "Nurture workflow · built in GoHighLevel (demo sub-account, draft)",
         width: 760,
         height: 1918,
+        voiceover: {
+          src: "/projects/freight-nurture-workflow-voiceover.mp4",
+          poster: "/projects/freight-nurture-workflow-poster.webp",
+          duration: "0:38",
+          label: "Narrated walkthrough of the freight Nurture workflow in GoHighLevel, panning from the trigger to the end",
+        },
       },
       close: {
         src: "/projects/freight-close-workflow.webp",
@@ -114,6 +95,12 @@ export const PROJECTS: Project[] = [
         caption: "Close workflow · built in GoHighLevel (demo sub-account, draft)",
         width: 760,
         height: 2310,
+        voiceover: {
+          src: "/projects/freight-close-workflow-voiceover.mp4",
+          poster: "/projects/freight-close-workflow-poster.webp",
+          duration: "0:37",
+          label: "Narrated walkthrough of the freight Close workflow in GoHighLevel, panning from the trigger to the won and lost paths",
+        },
       },
     },
   },
@@ -206,6 +193,39 @@ export const PROJECTS: Project[] = [
         height: 2310,
       },
     },
+  },
+  {
+    slug: "payment-recovery",
+    title: "Payment Recovery Pipeline",
+    label: "Real build — client details redacted",
+    category: "CRM / Automation",
+    stages: ["close"],
+    icon: CreditCard,
+    description:
+      "A GoHighLevel system for a membership business: a failed Stripe payment opens a pipeline opportunity, alerts the team, and moves through stages — contacted, no answer, voicemail, callback, payment link sent, recovered or cancelled — as call outcomes are logged.",
+    workflow: [
+      "Payment Failed",
+      "Opportunity Created",
+      "Team Alert",
+      "Outreach (Call · SMS · Email)",
+      "Call Outcome",
+      "Stage Update",
+      "Recovered / Cancelled",
+    ],
+    tools: ["GoHighLevel", "Stripe", "Workflows", "Pipelines", "SMS/Email"],
+    wide: true,
+    images: [
+      {
+        src: "/projects/payment-recovery-live.webp",
+        alt: "Screenshots of the GoHighLevel payment recovery workflows, with client and product names redacted",
+        caption: "Real GoHighLevel screenshots · client and product names redacted",
+      },
+      {
+        src: "/projects/payment-recovery-flow.webp",
+        alt: "Diagram of the failed-payment recovery sequence from trigger to final notice",
+        caption: "Workflow diagram of the recovery sequence",
+      },
+    ],
   },
 ];
 

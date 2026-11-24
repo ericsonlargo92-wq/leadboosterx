@@ -397,6 +397,38 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
  * (trigger and first steps) and "View full workflow" opens the whole thing at reading size.
  */
 function WorkflowShotPanel({ shot, stage, onOpen }: { shot: WorkflowShot; stage: string; onOpen: () => void }) {
+  const [playing, setPlaying] = useState(false);
+  const vo = shot.voiceover;
+  if (vo && playing) {
+    return (
+      <figure className="mt-6 lg:mt-0">
+        <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-lg shadow-[oklch(0.2_0.05_260/0.15)]">
+          <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2 text-xs">
+            <span className="font-semibold text-foreground">{stage} workflow · walkthrough</span>
+            <button
+              type="button"
+              onClick={() => setPlaying(false)}
+              className={cx("rounded font-semibold text-primary hover:underline", focusRing)}
+            >
+              Back to screenshot
+            </button>
+          </div>
+          <video
+            src={vo.src}
+            poster={vo.poster}
+            aria-label={vo.label}
+            width={1280}
+            height={800}
+            controls
+            autoPlay
+            playsInline
+            className="block aspect-[16/10] w-full bg-[#f6f7f9] object-contain [&:fullscreen]:bg-black"
+          />
+        </div>
+        <figcaption className="mt-2 text-xs text-muted-foreground">{shot.caption}</figcaption>
+      </figure>
+    );
+  }
   return (
     <figure className="mt-6 lg:mt-0">
       <button
@@ -428,6 +460,19 @@ function WorkflowShotPanel({ shot, stage, onOpen }: { shot: WorkflowShot; stage:
           </span>
         </span>
       </button>
+      {vo && (
+        <button
+          type="button"
+          onClick={() => setPlaying(true)}
+          className={cx(
+            "mt-3 inline-flex items-center gap-2 rounded-full bg-cta px-3.5 py-2 text-xs font-bold text-cta-foreground shadow hover:bg-cta-hover",
+            focusRing,
+          )}
+        >
+          <Volume2 className="size-4" aria-hidden="true" />
+          Watch with voiceover ({vo.duration})
+        </button>
+      )}
       <figcaption className="mt-2 text-xs text-muted-foreground">{shot.caption}</figcaption>
     </figure>
   );

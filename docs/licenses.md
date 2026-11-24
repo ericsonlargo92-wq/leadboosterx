@@ -43,6 +43,8 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 - `public/projects/{freight,upholstery,tree}-{nurture,close}-workflow.webp`: own screenshots of the six demo workflows in the
   GoHighLevel workflow builder (demo sub-account, drafts), captured at 100% zoom in overlapping strips and stitched. Canvas
   area only (no account name, avatar or ids). No third-party content.
+- `public/projects/freight-{nurture,close}-workflow-voiceover.mp4` (+ `-poster.webp`): narrated pans down the freight
+  workflows. Voice: ElevenLabs ("Eric"). Music: Pixabay "Hopeful" (614905, Pixabay Content License), about 14 dB under the voice.
 
 ## Explainer soundtrack (`public/audio/explainer-ghl-v2.mp3`)
 
