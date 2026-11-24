@@ -338,7 +338,7 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
             preload="none"
             onPlay={() => setPaused(false)}
             onPause={() => setPaused(true)}
-            className="block aspect-[16/10] w-full bg-background object-cover"
+            className="block aspect-[16/10] w-full bg-background object-contain [&:fullscreen]:bg-black"
           />
           {!narrated && (
             <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-gradient-to-t from-[oklch(0.15_0.04_258/0.75)] to-transparent p-3">
