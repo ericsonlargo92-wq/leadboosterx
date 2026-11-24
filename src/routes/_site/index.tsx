@@ -4,6 +4,7 @@ import {
   ArrowRight,
   ArrowRightLeft,
   BellRing,
+  ChevronDown,
   Building2,
   Check,
   ClipboardList,
@@ -21,6 +22,7 @@ import { LazyExplainer } from "~/components/LazyExplainer";
 import { Reveal, STAGGER } from "~/components/motion";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
 import { CREDENTIAL, CTA_MICROCOPY, GUARANTEE, RESULTS, STAGES, TRUST } from "~/lib/offer";
+import { FAQS, HOME_FAQ_QUESTIONS } from "~/lib/faqs";
 import { seo } from "~/lib/seo";
 import { STAGE_ICONS } from "~/lib/stage-icons";
 import { btnSecondary, card, cx, focusRing, gradientText } from "~/lib/ui";
@@ -36,6 +38,8 @@ export const Route = createFileRoute("/_site/")({
   component: HomePage,
 });
 
+
+const HOME_FAQS = HOME_FAQ_QUESTIONS.map((q) => FAQS.find((f) => f.q === q)!);
 
 const LEAKS: { stage: string; title: string; text: string; icon: LucideIcon }[] = [
   {
@@ -331,6 +335,42 @@ function HomePage() {
               <p className="mt-1">{GUARANTEE.contract}</p>
               <p className="mt-2 text-xs text-muted-foreground">{GUARANTEE.fineprint}</p>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Quick answers (a few of the FAQs, so the main questions are answered on the homepage too) */}
+      <section id="faq" className="scroll-mt-20" aria-labelledby="faq-title">
+        <Container className="py-16 lg:py-20">
+          <div className="mx-auto max-w-3xl">
+            <Pill>Quick answers</Pill>
+            <h2 id="faq-title" className="mt-5 text-3xl font-bold sm:text-4xl">
+              GoHighLevel Questions, Answered
+            </h2>
+            <div className="mt-8 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface">
+              {HOME_FAQS.map((f, i) => (
+                <details key={f.q} open={i === 0} className="group">
+                  <summary
+                    className={cx(
+                      "flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-display font-semibold text-foreground hover:bg-hover sm:px-6",
+                      focusRing,
+                      "focus-visible:ring-inset focus-visible:ring-offset-0",
+                    )}
+                  >
+                    <h3 className="text-base font-semibold">{f.q}</h3>
+                    <ChevronDown className="size-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden="true" />
+                  </summary>
+                  <p className="px-5 pb-5 text-sm leading-relaxed sm:px-6">{f.a}</p>
+                </details>
+              ))}
+            </div>
+            <Link
+              to="/contact"
+              className={cx("mt-5 inline-flex items-center gap-1.5 rounded text-sm font-semibold text-primary hover:underline", focusRing)}
+            >
+              See all {FAQS.length} questions
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
           </div>
         </Container>
       </section>

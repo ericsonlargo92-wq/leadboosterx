@@ -38,7 +38,7 @@ function ProjectsPage() {
   return (
     <Container className="py-12 sm:py-16">
       <Pill>Systems &amp; Builds</Pill>
-      <h1 className="mt-5 text-4xl font-bold sm:text-5xl">Selected Projects.</h1>
+      <h1 className="mt-5 text-4xl font-bold sm:text-5xl">GoHighLevel Projects and Demo Builds.</h1>
       <p className="mt-4 max-w-2xl text-lg">
         Three demo systems built in GoHighLevel, each covering Capture, Nurture and Close, plus a live payment recovery
         build (client details redacted). Pick a stage to see that part of the build: the website and form for Capture,

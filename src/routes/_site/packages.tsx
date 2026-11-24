@@ -32,7 +32,7 @@ function PackagesPage() {
   return (
     <Container className="py-12 sm:py-16">
       <Pill>Packages</Pill>
-      <h1 className="mt-5 max-w-3xl text-4xl font-bold sm:text-5xl">Pick Where You Want to Start.</h1>
+      <h1 className="mt-5 max-w-3xl text-4xl font-bold sm:text-5xl">GoHighLevel Packages: Pick Where You Want to Start.</h1>
       <p className="mt-4 max-w-2xl text-lg">
         Every package is built in your own GoHighLevel account, tested end to end before launch, and comes with the same promise:
         no long-term contract.
