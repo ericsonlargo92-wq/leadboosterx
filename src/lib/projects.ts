@@ -39,6 +39,39 @@ export const FILTERS: { id: ProjectFilter; label: string }[] = [
 
 export const PROJECTS: Project[] = [
   {
+    slug: "payment-recovery",
+    title: "Payment Recovery Pipeline",
+    label: "Real build — client details redacted",
+    category: "CRM / Automation",
+    stages: ["close"],
+    icon: CreditCard,
+    description:
+      "A GoHighLevel system for a membership business: a failed Stripe payment opens a pipeline opportunity, alerts the team, and moves through stages — contacted, no answer, voicemail, callback, payment link sent, recovered or cancelled — as call outcomes are logged.",
+    workflow: [
+      "Payment Failed",
+      "Opportunity Created",
+      "Team Alert",
+      "Outreach (Call · SMS · Email)",
+      "Call Outcome",
+      "Stage Update",
+      "Recovered / Cancelled",
+    ],
+    tools: ["GoHighLevel", "Stripe", "Workflows", "Pipelines", "SMS/Email"],
+    wide: true,
+    images: [
+      {
+        src: "/projects/payment-recovery-live.webp",
+        alt: "Screenshots of the GoHighLevel payment recovery workflows, with client and product names redacted",
+        caption: "Real GoHighLevel screenshots · client and product names redacted",
+      },
+      {
+        src: "/projects/payment-recovery-flow.webp",
+        alt: "Diagram of the failed-payment recovery sequence from trigger to final notice",
+        caption: "Workflow diagram of the recovery sequence",
+      },
+    ],
+  },
+  {
     slug: "freight-quote-capture",
     title: "Freight Quote System",
     label: "Demo Build",
@@ -173,39 +206,6 @@ export const PROJECTS: Project[] = [
         height: 2310,
       },
     },
-  },
-  {
-    slug: "payment-recovery",
-    title: "Payment Recovery Pipeline",
-    label: "Real build — client details redacted",
-    category: "CRM / Automation",
-    stages: ["close"],
-    icon: CreditCard,
-    description:
-      "A GoHighLevel system for a membership business: a failed Stripe payment opens a pipeline opportunity, alerts the team, and moves through stages — contacted, no answer, voicemail, callback, payment link sent, recovered or cancelled — as call outcomes are logged.",
-    workflow: [
-      "Payment Failed",
-      "Opportunity Created",
-      "Team Alert",
-      "Outreach (Call · SMS · Email)",
-      "Call Outcome",
-      "Stage Update",
-      "Recovered / Cancelled",
-    ],
-    tools: ["GoHighLevel", "Stripe", "Workflows", "Pipelines", "SMS/Email"],
-    wide: true,
-    images: [
-      {
-        src: "/projects/payment-recovery-live.webp",
-        alt: "Screenshots of the GoHighLevel payment recovery workflows, with client and product names redacted",
-        caption: "Real GoHighLevel screenshots · client and product names redacted",
-      },
-      {
-        src: "/projects/payment-recovery-flow.webp",
-        alt: "Diagram of the failed-payment recovery sequence from trigger to final notice",
-        caption: "Workflow diagram of the recovery sequence",
-      },
-    ],
   },
 ];
 
