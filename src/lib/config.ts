@@ -16,9 +16,9 @@ export const CONTACT = {
  * connect them to this site. Leave a url empty to hide it.
  */
 export const PROFILES: { name: string; url: string }[] = [
-  { name: "Upwork", url: "" },
-  { name: "OnlineJobs.ph", url: "" },
-  { name: "LinkedIn", url: "" },
+  { name: "Upwork", url: "https://www.upwork.com/freelancers/~0145fc27a242ae2a93" },
+  { name: "OnlineJobs.ph", url: "https://v2.onlinejobs.ph/jobseekers/info/3507197" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/ericsonlargo" },
 ];
 export const profileUrls = () => PROFILES.map((p) => p.url).filter(Boolean);
 
