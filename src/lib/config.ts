@@ -11,6 +11,17 @@ export const CONTACT = {
   facebook: "https://www.facebook.com/ericsonlargo.metamediabuyer/",
 };
 
+/**
+ * Freelance / job-site profiles. Shown on the Hire page and listed in structured data (sameAs) so search engines
+ * connect them to this site. Leave a url empty to hide it.
+ */
+export const PROFILES: { name: string; url: string }[] = [
+  { name: "Upwork", url: "" },
+  { name: "OnlineJobs.ph", url: "" },
+  { name: "LinkedIn", url: "" },
+];
+export const profileUrls = () => PROFILES.map((p) => p.url).filter(Boolean);
+
 // Cal.com booking page: https://cal.com/<username>/<event-slug>
 export const BOOKING = {
   calLink: "ericson-largo-zbq89g/30min",

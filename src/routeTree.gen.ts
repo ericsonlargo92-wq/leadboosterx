@@ -15,6 +15,7 @@ import { Route as SiteIndexRouteImport } from './routes/_site/index'
 import { Route as SiteAboutRouteImport } from './routes/_site/about'
 import { Route as SiteCertificationRouteImport } from './routes/_site/certification'
 import { Route as SiteContactRouteImport } from './routes/_site/contact'
+import { Route as SiteHireGohighlevelFreelancerRouteImport } from './routes/_site/hire-gohighlevel-freelancer'
 import { Route as SitePackagesRouteImport } from './routes/_site/packages'
 import { Route as SitePrivacyRouteImport } from './routes/_site/privacy'
 import { Route as SiteProjectsRouteImport } from './routes/_site/projects'
@@ -49,6 +50,12 @@ const SiteContactRoute = SiteContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteHireGohighlevelFreelancerRoute =
+  SiteHireGohighlevelFreelancerRouteImport.update({
+    id: '/hire-gohighlevel-freelancer',
+    path: '/hire-gohighlevel-freelancer',
+    getParentRoute: () => SiteRoute,
+  } as any)
 const SitePackagesRoute = SitePackagesRouteImport.update({
   id: '/packages',
   path: '/packages',
@@ -76,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof SiteAboutRoute
   '/certification': typeof SiteCertificationRoute
   '/contact': typeof SiteContactRoute
+  '/hire-gohighlevel-freelancer': typeof SiteHireGohighlevelFreelancerRoute
   '/packages': typeof SitePackagesRoute
   '/privacy': typeof SitePrivacyRoute
   '/projects': typeof SiteProjectsRoute
@@ -86,6 +94,7 @@ export interface FileRoutesByTo {
   '/about': typeof SiteAboutRoute
   '/certification': typeof SiteCertificationRoute
   '/contact': typeof SiteContactRoute
+  '/hire-gohighlevel-freelancer': typeof SiteHireGohighlevelFreelancerRoute
   '/packages': typeof SitePackagesRoute
   '/privacy': typeof SitePrivacyRoute
   '/projects': typeof SiteProjectsRoute
@@ -99,6 +108,7 @@ export interface FileRoutesById {
   '/_site/about': typeof SiteAboutRoute
   '/_site/certification': typeof SiteCertificationRoute
   '/_site/contact': typeof SiteContactRoute
+  '/_site/hire-gohighlevel-freelancer': typeof SiteHireGohighlevelFreelancerRoute
   '/_site/packages': typeof SitePackagesRoute
   '/_site/privacy': typeof SitePrivacyRoute
   '/_site/projects': typeof SiteProjectsRoute
@@ -113,6 +123,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/certification'
     | '/contact'
+    | '/hire-gohighlevel-freelancer'
     | '/packages'
     | '/privacy'
     | '/projects'
@@ -123,6 +134,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/certification'
     | '/contact'
+    | '/hire-gohighlevel-freelancer'
     | '/packages'
     | '/privacy'
     | '/projects'
@@ -135,6 +147,7 @@ export interface FileRouteTypes {
     | '/_site/about'
     | '/_site/certification'
     | '/_site/contact'
+    | '/_site/hire-gohighlevel-freelancer'
     | '/_site/packages'
     | '/_site/privacy'
     | '/_site/projects'
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteContactRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/hire-gohighlevel-freelancer': {
+      id: '/_site/hire-gohighlevel-freelancer'
+      path: '/hire-gohighlevel-freelancer'
+      fullPath: '/hire-gohighlevel-freelancer'
+      preLoaderRoute: typeof SiteHireGohighlevelFreelancerRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/packages': {
       id: '/_site/packages'
       path: '/packages'
@@ -226,6 +246,7 @@ interface SiteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
   SiteCertificationRoute: typeof SiteCertificationRoute
   SiteContactRoute: typeof SiteContactRoute
+  SiteHireGohighlevelFreelancerRoute: typeof SiteHireGohighlevelFreelancerRoute
   SitePackagesRoute: typeof SitePackagesRoute
   SitePrivacyRoute: typeof SitePrivacyRoute
   SiteProjectsRoute: typeof SiteProjectsRoute
@@ -237,6 +258,7 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
   SiteCertificationRoute: SiteCertificationRoute,
   SiteContactRoute: SiteContactRoute,
+  SiteHireGohighlevelFreelancerRoute: SiteHireGohighlevelFreelancerRoute,
   SitePackagesRoute: SitePackagesRoute,
   SitePrivacyRoute: SitePrivacyRoute,
   SiteProjectsRoute: SiteProjectsRoute,

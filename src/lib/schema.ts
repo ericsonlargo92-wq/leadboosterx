@@ -1,4 +1,4 @@
-import { CONTACT, SITE_NAME, SITE_URL, bookingUrl } from "./config";
+import { CONTACT, SITE_NAME, SITE_URL, bookingUrl, profileUrls } from "./config";
 import { CERTIFICATE, CREDENTIAL, PACKAGES } from "./offer";
 
 /**
@@ -36,7 +36,7 @@ export const organizationJsonLd = {
       founder: { "@id": PERSON },
       employee: { "@id": PERSON },
       areaServed: { "@type": "Place", name: "Worldwide" },
-      sameAs: [CONTACT.facebook],
+      sameAs: [CONTACT.facebook, ...profileUrls()],
       potentialAction: { "@type": "ReserveAction", target: bookingUrl, name: "Book a Free Growth Call" },
       knowsAbout: [
         "GoHighLevel",
@@ -51,6 +51,8 @@ export const organizationJsonLd = {
         "Payment links and failed-payment recovery",
         "CRM migration",
         "AI automation",
+        "GoHighLevel virtual assistant services",
+        "GoHighLevel freelancing",
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -71,7 +73,13 @@ export const organizationJsonLd = {
       "@type": "Person",
       "@id": PERSON,
       name: "Ericson Largo",
-      jobTitle: "Founder, LeadBoosterX — GoHighLevel Specialist",
+      jobTitle: "Founder, LeadBoosterX — GoHighLevel Specialist, Freelancer & Virtual Assistant",
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "GoHighLevel Specialist",
+        alternateName: ["GoHighLevel Freelancer", "GoHighLevel Virtual Assistant", "GHL VA", "HighLevel CRM Administrator"],
+        skills: "GoHighLevel workflows, funnels, pipelines, SMS and email automation, calendars, payments, CRM migration, agency snapshots",
+      },
       description:
         "HighLevel Certified Admin and founder of LeadBoosterX. Builds GoHighLevel systems that capture, nurture and close, after 10+ years in sales, support and revenue roles, including 5 years at Intuit.",
       hasCredential: {
@@ -89,7 +97,7 @@ export const organizationJsonLd = {
       knowsAbout: ["GoHighLevel", "HighLevel CRM", "Marketing automation", "Sales funnels", "CRM migration"],
       url: `${SITE_URL}/about`,
       image: `${SITE_URL}/images/ericson.webp`,
-      sameAs: [CONTACT.facebook, CERTIFICATE.verifyUrl],
+      sameAs: [CONTACT.facebook, CERTIFICATE.verifyUrl, ...profileUrls()],
       worksFor: { "@id": BUSINESS },
     },
     {

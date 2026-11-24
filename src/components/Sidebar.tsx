@@ -1,16 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Award, BadgeCheck, FolderGit2, HelpCircle, Home, Package, UserRound, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Award, BadgeCheck, Briefcase, FolderGit2, HelpCircle, Home, Package, UserRound, type LucideIcon } from "lucide-react";
 import { CREDENTIAL, CTA_LABEL } from "~/lib/offer";
 import { BrandLogo } from "./BrandLogo";
 import { btnPrimary, cx, focusRing } from "~/lib/ui";
 
-type NavItem = { to: "/" | "/projects" | "/certification" | "/packages" | "/about" | "/contact"; label: string; icon: LucideIcon };
+type NavItem = { to: "/" | "/projects" | "/certification" | "/packages" | "/hire-gohighlevel-freelancer" | "/about" | "/contact"; label: string; icon: LucideIcon };
 
 export const NAV: NavItem[] = [
   { to: "/", label: "Home", icon: Home },
   { to: "/projects", label: "Projects", icon: FolderGit2 },
   { to: "/certification", label: "Certification", icon: Award },
   { to: "/packages", label: "Packages", icon: Package },
+  { to: "/hire-gohighlevel-freelancer", label: "Hire Me", icon: Briefcase },
   { to: "/about", label: "About", icon: UserRound },
   { to: "/contact", label: "FAQs & Contact", icon: HelpCircle },
 ];

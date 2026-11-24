@@ -2,6 +2,7 @@ import { SITE_URL } from "./config";
 import { PACKAGES, STAGES } from "./offer";
 import { PROJECTS } from "./projects";
 import { BUSINESS, PERSON } from "./schema";
+import { HIRE_PATH, WORK_TYPES } from "./hire";
 
 /** Page-specific structured data (kept out of schema.ts so the root bundle doesn't load project data). */
 
@@ -79,3 +80,25 @@ export function projectsJsonLd() {
   };
 }
 
+
+/** The ways to hire (freelancer / VA) as Services, for the Hire page. */
+export function hireServicesJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Hire a GoHighLevel freelancer or virtual assistant",
+    itemListElement: WORK_TYPES.map((w, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Service",
+        name: w.name,
+        serviceType: ["GoHighLevel virtual assistant", "GoHighLevel freelancer", "HighLevel CRM administration"],
+        description: `${w.tagline} ${w.who} Includes: ${w.items.join("; ")}.`,
+        provider: { "@id": PERSON },
+        areaServed: { "@type": "Place", name: "Worldwide" },
+        url: `${SITE_URL}${HIRE_PATH}`,
+      },
+    })),
+  };
+}
