@@ -14,8 +14,11 @@ export type Project = {
   workflow: string[];
   tools: string[];
   images?: { src: string; alt: string; caption: string }[];
-  /** Screen recording shown instead of screenshots (muted, loops while on screen). */
-  video?: { src: string; poster: string; caption: string; label: string };
+  /**
+   * Screen recording shown instead of screenshots: a light silent `loop` that plays while on screen, and an optional
+   * narrated `voiceover` version (with sound and controls) that loads only when the visitor asks for it.
+   */
+  video?: { loop: string; voiceover?: string; duration?: string; poster: string; caption: string; label: string };
   /** Spans both columns on desktop (used for builds with media). */
   wide?: boolean;
 };
@@ -80,7 +83,9 @@ export const PROJECTS: Project[] = [
     ],
     tools: ["GoHighLevel", "AI Studio", "Forms", "Custom Fields", "Workflows", "Pipelines"],
     video: {
-      src: "/projects/northline-freight-walkthrough.mp4",
+      loop: "/projects/northline-freight-loop.mp4",
+      voiceover: "/projects/northline-freight-voiceover.mp4",
+      duration: "0:34",
       poster: "/projects/northline-freight-poster.webp",
       label: "Screen recording of the Northline Freight demo website: video hero, services, how it works, and the quote form being filled in",
       caption: "Screen recording of the demo site · fictional brand, built in GoHighLevel AI Studio",

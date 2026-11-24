@@ -28,7 +28,7 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 
 | File | Source | License |
 | --- | --- | --- |
-| `public/projects/northline-freight-walkthrough.mp4`, `public/projects/northline-freight-poster.webp` | Screen recording of the Northline Freight demo site (fictional brand) built by Ericson in GoHighLevel AI Studio. Its hero clip is [Pixabay video 384064](https://pixabay.com/videos/id-384064/) (AI-generated, no logos) | Own work; hero clip under the Pixabay Content License |
+| `public/projects/northline-freight-loop.mp4` (silent), `northline-freight-voiceover.mp4`, `northline-freight-poster.webp` | Screen recording of the Northline Freight demo site (fictional brand) built by Ericson in GoHighLevel AI Studio. Hero clip: [Pixabay video 384064](https://pixabay.com/videos/id-384064/) (AI-generated, no logos). Voiceover: ElevenLabs premade "Eric". Music: ["Hopeful"](https://pixabay.com/music/beats-hopeful-614905/) (Pixabay track 614905), about 14 dB under the voice | Own work; Pixabay Content License; ElevenLabs terms for the account's plan |
 
 ## Explainer soundtrack (`public/audio/explainer-ghl-v2.mp3`)
 

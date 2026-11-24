@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, ChevronDown, Maximize2 } from "lucide-react";
+import { ArrowRight, ChevronDown, Maximize2, Pause, Play, Volume2 } from "lucide-react";
 import { Lightbox, type LightboxImage } from "~/components/Lightbox";
 import { Container, CtaBlock, Pill } from "~/components/ui";
 import { FILTERS, PROJECTS, type Project, type ProjectFilter } from "~/lib/projects";
@@ -248,26 +248,74 @@ function ProjectCard({
 }
 
 /**
- * Screen recording of a build. Loads nothing until it is near the screen, then plays muted on a loop while visible
- * and pauses when scrolled away. Reduced-motion visitors get the poster and the controls, no autoplay.
+ * Screen recording of a build. The light silent loop starts buffering well before it reaches the screen (so it plays
+ * without a delay), plays while visible and pauses when scrolled away. "Watch with voiceover" swaps in the narrated
+ * version with sound and controls. Reduced-motion visitors get the poster and the buttons, no autoplay.
  */
 function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [narrated, setNarrated] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const userPaused = useRef(false);
+
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || narrated) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) el.play().catch(() => {});
+    // Start downloading about a screen early.
+    const near = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          el.preload = "auto";
+          el.load();
+          near.disconnect();
+        }
+      },
+      { rootMargin: "900px 0px" },
+    );
+    near.observe(el);
+    if (reduce) {
+      setPaused(true);
+      return () => near.disconnect();
+    }
+    const vis = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting && !userPaused.current) el.play().catch(() => {});
         else el.pause();
       },
       { threshold: 0.35 },
     );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+    vis.observe(el);
+    return () => {
+      near.disconnect();
+      vis.disconnect();
+    };
+  }, [narrated]);
+
+  const startNarrated = () => {
+    const el = ref.current;
+    if (!el || !video.voiceover) return;
+    setNarrated(true);
+    el.src = video.voiceover;
+    el.muted = false;
+    el.loop = false;
+    el.controls = true;
+    el.currentTime = 0;
+    el.play().catch(() => {});
+  };
+
+  const togglePause = () => {
+    const el = ref.current;
+    if (!el) return;
+    if (el.paused) {
+      userPaused.current = false;
+      el.play().catch(() => {});
+    } else {
+      userPaused.current = true;
+      el.pause();
+    }
+  };
+
   return (
     <figure className="mt-6 lg:mt-0">
       <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-lg shadow-[oklch(0.2_0.05_260/0.15)]">
@@ -276,20 +324,45 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
           <span className="size-2.5 rounded-full bg-cta/80" />
           <span className="size-2.5 rounded-full bg-success/70" />
         </div>
-        <video
-          ref={ref}
-          src={video.src}
-          poster={video.poster}
-          aria-label={video.label}
-          width={1280}
-          height={800}
-          muted
-          loop
-          playsInline
-          controls
-          preload="none"
-          className="block aspect-[16/10] w-full bg-background object-cover"
-        />
+        <div className="relative">
+          <video
+            ref={ref}
+            src={video.loop}
+            poster={video.poster}
+            aria-label={video.label}
+            width={1280}
+            height={800}
+            muted
+            loop
+            playsInline
+            preload="none"
+            onPlay={() => setPaused(false)}
+            onPause={() => setPaused(true)}
+            className="block aspect-[16/10] w-full bg-background object-cover"
+          />
+          {!narrated && (
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-gradient-to-t from-[oklch(0.15_0.04_258/0.75)] to-transparent p-3">
+              {video.voiceover && (
+                <button
+                  type="button"
+                  onClick={startNarrated}
+                  className={cx("inline-flex items-center gap-2 rounded-full bg-cta px-3.5 py-2 text-xs font-bold text-cta-foreground shadow hover:bg-cta-hover", focusRing)}
+                >
+                  <Volume2 className="size-4" aria-hidden="true" />
+                  Watch with voiceover{video.duration ? ` (${video.duration})` : ""}
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={togglePause}
+                aria-label={paused ? "Play preview" : "Pause preview"}
+                className={cx("inline-flex size-8 items-center justify-center rounded-full bg-[oklch(0.15_0.04_258/0.7)] text-white hover:bg-[oklch(0.15_0.04_258/0.9)]", focusRing)}
+              >
+                {paused ? <Play className="size-4" aria-hidden="true" /> : <Pause className="size-4" aria-hidden="true" />}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       <figcaption className="mt-2 text-xs text-muted-foreground">{video.caption}</figcaption>
     </figure>
