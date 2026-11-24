@@ -54,7 +54,7 @@ export const PROJECTS: Project[] = [
     stages: ["capture", "nurture", "close"],
     icon: Truck,
     description:
-      "A demo build for a fictional freight broker, Northline Freight, with all three stages built in GoHighLevel. Capture: a landing page made in AI Studio with a video hero, and a quote form that asks for pickup, delivery and freight type; every request becomes a tagged contact and a new deal. Nurture: an instant email and text, then timed follow-ups until a quote call is booked. Close: the booked call moves the deal forward and stops the follow-ups, then ends in a thank-you and review request, or a final offer before the deal is marked lost.",
+      "A demo build for a freight broker, Northline Freight, with all three stages built in GoHighLevel. Capture: a landing page made in AI Studio with a video hero, and a quote form that asks for pickup, delivery and freight type; every request becomes a tagged contact and a new deal. Nurture: an instant email and text, then timed follow-ups until a quote call is booked. Close: the booked call moves the deal forward and stops the follow-ups, then ends in a thank-you and review request, or a final offer before the deal is marked lost.",
     workflow: [
       "Landing Page",
       "Quote Form",
@@ -73,7 +73,7 @@ export const PROJECTS: Project[] = [
       duration: "0:34",
       poster: "/projects/northline-freight-poster.webp",
       label: "Screen recording of the Northline Freight demo website: video hero, services, how it works, and the quote form being filled in",
-      caption: "Screen recording of the demo site · fictional brand, built in GoHighLevel AI Studio",
+      caption: "Screen recording of the demo site, built in GoHighLevel AI Studio",
     },
     wide: true,
     workflowShots: {
@@ -115,7 +115,7 @@ export const PROJECTS: Project[] = [
     stages: ["capture", "nurture", "close"],
     icon: Armchair,
     description:
-      "A demo site for a fictional custom upholstery shop, Ridgeway Upholstery, built in GoHighLevel AI Studio, with the quote form in the hero so a visitor can ask for a price without scrolling. Behind it, Nurture and Close workflows in GoHighLevel follow up on each request with an email, a text and a consultation invite, then move the deal to won or lost. In this demo the form is display-only, so the workflows start from a tag.",
+      "A demo site for a custom upholstery shop, Ridgeway Upholstery, built in GoHighLevel AI Studio, with the quote form in the hero so a visitor can ask for a price without scrolling. Behind it, Nurture and Close workflows in GoHighLevel follow up on each request with an email, a text and a consultation invite, then move the deal to won or lost. In this demo the form is display-only, so the workflows start from a tag.",
     workflow: [
       "Hero + Quote Form",
       "Vehicle & Service Details",
@@ -133,7 +133,7 @@ export const PROJECTS: Project[] = [
       duration: "0:26",
       poster: "/projects/ridgeway-upholstery-poster.webp",
       label: "Screen recording of the Ridgeway Upholstery demo website: hero quote form being filled in, service cards, project gallery and FAQ",
-      caption: "Screen recording of the demo site · fictional brand, built in GoHighLevel AI Studio",
+      caption: "Screen recording of the demo site, built in GoHighLevel AI Studio",
     },
     wide: true,
     workflowShots: {
@@ -175,7 +175,7 @@ export const PROJECTS: Project[] = [
     stages: ["capture", "nurture", "close"],
     icon: Trees,
     description:
-      "A demo site for a fictional tree service, Timberline Tree Care, built in GoHighLevel AI Studio: a short estimate form after the hero, clear service cards and an emergency storm call to action. Behind it, Nurture and Close workflows in GoHighLevel follow up with an email, a text and a site-visit invite, then move the deal to won or lost. In this demo the form is display-only, so the workflows start from a tag.",
+      "A demo site for a tree service, Timberline Tree Care, built in GoHighLevel AI Studio: a short estimate form after the hero, clear service cards and an emergency storm call to action. Behind it, Nurture and Close workflows in GoHighLevel follow up with an email, a text and a site-visit invite, then move the deal to won or lost. In this demo the form is display-only, so the workflows start from a tag.",
     workflow: [
       "Hero",
       "Estimate Form",
@@ -193,7 +193,7 @@ export const PROJECTS: Project[] = [
       duration: "0:23",
       poster: "/projects/timberline-tree-care-poster.webp",
       label: "Screen recording of the Timberline Tree Care demo website: hero, estimate form being filled in, service cards and the emergency storm section",
-      caption: "Screen recording of the demo site · fictional brand, built in GoHighLevel AI Studio",
+      caption: "Screen recording of the demo site, built in GoHighLevel AI Studio",
     },
     wide: true,
     workflowShots: {

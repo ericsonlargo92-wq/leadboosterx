@@ -6,6 +6,18 @@ export const CTA_MICROCOPY = "30 minutes. You'll leave with a clear plan — whe
 
 export const CREDENTIAL = "HighLevel Certified Admin";
 
+/** The certificate itself, as issued and hosted by HighLevel. Dates and ID from the credential page. */
+export const CERTIFICATE = {
+  name: "HighLevel Admin Certification",
+  awardedTo: "Ericson Largo",
+  issuer: "HighLevel University",
+  issued: "November 24, 2026",
+  validUntil: "November 24, 2027",
+  id: "6b049e3a2158ad74e4984482",
+  verifyUrl: "https://my-certificates.com/certificates/6b049e3a2158ad74e4984482",
+  image: "/images/highlevel-admin-certificate.webp",
+} as const;
+
 export const GUARANTEE = {
   headline: "Tested end to end before a single lead goes through it.",
   contract: "No long-term contracts. Monthly management is month-to-month.",

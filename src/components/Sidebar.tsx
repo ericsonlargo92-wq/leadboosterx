@@ -1,15 +1,16 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, BadgeCheck, FolderGit2, HelpCircle, Home, Package, UserRound, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Award, BadgeCheck, FolderGit2, HelpCircle, Home, Package, UserRound, type LucideIcon } from "lucide-react";
 import { CREDENTIAL, CTA_LABEL } from "~/lib/offer";
 import { BrandLogo } from "./BrandLogo";
 import { quarterLabel } from "~/lib/seo";
 import { btnPrimary, cx, focusRing } from "~/lib/ui";
 
-type NavItem = { to: "/" | "/projects" | "/packages" | "/about" | "/contact"; label: string; icon: LucideIcon };
+type NavItem = { to: "/" | "/projects" | "/certification" | "/packages" | "/about" | "/contact"; label: string; icon: LucideIcon };
 
 export const NAV: NavItem[] = [
   { to: "/", label: "Home", icon: Home },
   { to: "/projects", label: "Projects", icon: FolderGit2 },
+  { to: "/certification", label: "Certification", icon: Award },
   { to: "/packages", label: "Packages", icon: Package },
   { to: "/about", label: "About", icon: UserRound },
   { to: "/contact", label: "FAQs & Contact", icon: HelpCircle },
@@ -24,7 +25,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         </Link>
       </div>
 
-      <ProfileCard />
+      <ProfileCard onNavigate={onNavigate} />
 
       <nav aria-label="Main">
         <ul className="flex flex-col gap-0.5">
@@ -66,7 +67,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   );
 }
 
-function ProfileCard() {
+function ProfileCard({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-2.5">
       <div className="flex gap-3 lg:block">
@@ -87,10 +88,18 @@ function ProfileCard() {
             </span>
             Available for projects
           </p>
-          <p className="inline-flex items-center gap-1.5 rounded-md border border-success/30 bg-success/10 px-1.5 py-0.5 text-[0.7rem] font-semibold text-success">
+          <Link
+            to="/certification"
+            onClick={onNavigate}
+            title="See the certificate"
+            className={cx(
+              "inline-flex items-center gap-1.5 rounded-md border border-success/30 bg-success/10 px-1.5 py-0.5 text-[0.7rem] font-semibold text-success hover:bg-success/20",
+              focusRing,
+            )}
+          >
             <BadgeCheck className="size-3.5" aria-hidden="true" />
             {CREDENTIAL}
-          </p>
+          </Link>
           <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
             <span className="rounded-md border border-soft-border bg-soft px-1.5 py-0.5 font-mono text-[0.65rem] font-medium text-primary">
               Remote
