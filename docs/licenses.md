@@ -38,6 +38,12 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 | `public/projects/timberline-tree-care-{loop,voiceover}.mp4`, `-poster.webp` | Screen recording of the Timberline Tree Care demo (fictional brand). Photos: Pixabay 5831756, 4567686, 843732 | Own work; Pixabay Content License |
 | Voiceovers on both | ElevenLabs premade "Eric"; music "Hopeful" (Pixabay 614905) about 14 dB under the voice | ElevenLabs terms; Pixabay Content License |
 
+## Project media: Nurture and Close workflow screenshots (2026-11-24)
+
+- `public/projects/{freight,upholstery,tree}-{nurture,close}-workflow.webp`: own screenshots of the six demo workflows in the
+  GoHighLevel workflow builder (demo sub-account, drafts), captured at 100% zoom in overlapping strips and stitched. Canvas
+  area only (no account name, avatar or ids). No third-party content.
+
 ## Explainer soundtrack (`public/audio/explainer-ghl-v2.mp3`)
 
 | Part | Source | License |

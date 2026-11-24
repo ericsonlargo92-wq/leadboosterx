@@ -3,7 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown, Maximize2, Pause, Play, Volume2 } from "lucide-react";
 import { Lightbox, type LightboxImage } from "~/components/Lightbox";
 import { Container, CtaBlock, Pill } from "~/components/ui";
-import { FILTERS, PROJECTS, type Project, type ProjectFilter } from "~/lib/projects";
+import { FILTERS, PROJECTS, type Project, type ProjectFilter, type WorkflowShot } from "~/lib/projects";
 import { STAGES } from "~/lib/offer";
 import { STAGE_ICONS } from "~/lib/stage-icons";
 import { Reveal } from "~/components/motion";
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_site/projects")({
     seo({
       title: "Projects — GoHighLevel Builds | LeadBoosterX",
       description:
-        "Live work and sample systems built in GoHighLevel: a payment recovery pipeline, freight, upholstery and tree service quote systems (capture, nurture and close), an AI receptionist, a lead funnel and a sales pipeline.",
+        "Freight, upholstery and tree service demo systems built in GoHighLevel: the capture websites and forms, plus screenshots of the real Nurture and Close workflows behind them.",
       path: "/projects",
     }),
   component: ProjectsPage,
@@ -37,8 +37,9 @@ function ProjectsPage() {
       <Pill>Systems &amp; Builds</Pill>
       <h1 className="mt-5 text-4xl font-bold sm:text-5xl">Selected Projects.</h1>
       <p className="mt-4 max-w-2xl text-lg">
-        A mix of live work and sample systems that show how I approach lead generation, booking, and follow-up. Live
-        builds have client details redacted.
+        Three demo systems built in GoHighLevel, each covering Capture, Nurture and Close. Pick a stage to see that part
+        of the build: the website and form for Capture, and the real workflows from the GoHighLevel builder for Nurture
+        and Close.
       </p>
 
       <div role="group" aria-label="Filter projects" className="mt-8 flex flex-wrap gap-2">
@@ -84,6 +85,7 @@ function ProjectsPage() {
           <ProjectCard
             key={p.slug}
             project={p}
+            filter={filter}
             open={openSlug === p.slug}
             onToggle={() => setOpenSlug((s) => (s === p.slug ? null : p.slug))}
             onOpenImage={setLightbox}
@@ -102,11 +104,13 @@ function ProjectsPage() {
 
 function ProjectCard({
   project: p,
+  filter,
   open,
   onToggle,
   onOpenImage,
 }: {
   project: Project;
+  filter: ProjectFilter;
   open: boolean;
   onToggle: () => void;
   onOpenImage: (img: LightboxImage) => void;
@@ -116,6 +120,10 @@ function ProjectCard({
   const nodes = open ? p.workflow : p.workflow.slice(0, PREVIEW_NODES);
   const hidden = p.workflow.length - PREVIEW_NODES;
   const flowId = `flow-${p.slug}`;
+  // Under the Nurture / Close filters a build with workflow screenshots shows that workflow instead of its website.
+  const stageShot = p.workflowShots && (filter === "nurture" || filter === "close") ? p.workflowShots[filter] : null;
+  const stageName = (id: "nurture" | "close") => STAGES.find((s) => s.id === id)?.name ?? id;
+  const openShot = (shot: WorkflowShot) => onOpenImage({ src: shot.src, alt: shot.alt, caption: shot.caption, tall: true });
 
   return (
     <Reveal as="li" className={cx(card, "flex flex-col p-6", wide && "lg:col-span-2")}>
@@ -206,7 +214,22 @@ function ProjectCard({
           </div>
         </div>
 
-        {p.video && <ProjectVideo video={p.video} />}
+        {stageShot ? (
+          <WorkflowShotPanel shot={stageShot} stage={stageName(filter as "nurture" | "close")} onOpen={() => openShot(stageShot)} />
+        ) : (
+          (p.video || p.workflowShots) && (
+            <div className="mt-6 lg:mt-0">
+              {p.video && <ProjectVideo video={p.video} />}
+              {filter === "all" && p.workflowShots && (
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  {(["nurture", "close"] as const).map((id) => (
+                    <WorkflowShotThumb key={id} shot={p.workflowShots![id]} stage={stageName(id)} onOpen={() => openShot(p.workflowShots![id])} />
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        )}
 
         {p.images && (
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:mt-0 lg:grid-cols-1 xl:grid-cols-2">
@@ -317,7 +340,7 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
   };
 
   return (
-    <figure className="mt-6 lg:mt-0">
+    <figure>
       <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-lg shadow-[oklch(0.2_0.05_260/0.15)]">
         <div className="flex items-center gap-1.5 border-b border-border bg-surface px-3 py-2" aria-hidden="true">
           <span className="size-2.5 rounded-full bg-destructive/60" />
@@ -366,5 +389,73 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
       </div>
       <figcaption className="mt-2 text-xs text-muted-foreground">{video.caption}</figcaption>
     </figure>
+  );
+}
+
+/**
+ * A real Nurture or Close workflow from the GoHighLevel builder. The screenshot is tall, so the card shows the top
+ * (trigger and first steps) and "View full workflow" opens the whole thing at reading size.
+ */
+function WorkflowShotPanel({ shot, stage, onOpen }: { shot: WorkflowShot; stage: string; onOpen: () => void }) {
+  return (
+    <figure className="mt-6 lg:mt-0">
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`View the full ${stage} workflow`}
+        className={cx(
+          "group block w-full overflow-hidden rounded-xl border border-border bg-surface text-left shadow-lg shadow-[oklch(0.2_0.05_260/0.15)]",
+          focusRing,
+        )}
+      >
+        <span className="flex items-center justify-between gap-2 border-b border-border px-3 py-2 text-xs">
+          <span className="font-semibold text-foreground">{stage} workflow</span>
+          <span className="text-muted-foreground">GoHighLevel workflow builder</span>
+        </span>
+        <span className="relative block h-[420px] overflow-hidden bg-[#f6f7f9] sm:h-[540px]">
+          <img
+            src={shot.src}
+            alt={shot.alt}
+            width={shot.width}
+            height={shot.height}
+            loading="lazy"
+            className="mx-auto block h-auto w-full max-w-[640px] transition-transform duration-300 group-hover:scale-[1.01]"
+          />
+          <span className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface via-surface/80 to-transparent" />
+          <span className="absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-primary px-4 py-2 text-xs font-bold text-primary-foreground shadow group-hover:bg-primary/90">
+            <Maximize2 className="size-4" aria-hidden="true" />
+            View full workflow
+          </span>
+        </span>
+      </button>
+      <figcaption className="mt-2 text-xs text-muted-foreground">{shot.caption}</figcaption>
+    </figure>
+  );
+}
+
+/** Small preview of a workflow screenshot, used under the website recording in the "All" view. */
+function WorkflowShotThumb({ shot, stage, onOpen }: { shot: WorkflowShot; stage: string; onOpen: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-label={`View the full ${stage} workflow`}
+      className={cx("group block w-full overflow-hidden rounded-xl border border-border bg-surface text-left", focusRing)}
+    >
+      <span className="relative block h-40 overflow-hidden bg-[#f6f7f9]">
+        <img
+          src={shot.src}
+          alt=""
+          width={shot.width}
+          height={shot.height}
+          loading="lazy"
+          className="block h-auto w-full transition-transform duration-300 group-hover:scale-[1.03]"
+        />
+        <span className="absolute right-2 top-2 inline-flex size-7 items-center justify-center rounded-lg bg-surface/90 text-foreground shadow">
+          <Maximize2 className="size-3.5" aria-hidden="true" />
+        </span>
+      </span>
+      <span className="block border-t border-border px-3 py-2 text-xs font-semibold text-foreground">{stage} workflow</span>
+    </button>
   );
 }

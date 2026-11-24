@@ -2,7 +2,8 @@ import { useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { cx, focusRing } from "~/lib/ui";
 
-export type LightboxImage = { src: string; alt: string; caption: string };
+/** `tall` images (full workflow screenshots) open at reading size in a scrollable view instead of being shrunk to fit. */
+export type LightboxImage = { src: string; alt: string; caption: string; tall?: boolean };
 
 /** Full-screen image viewer. Closes on Escape, backdrop click or the close button. */
 export function Lightbox({ image, onClose }: { image: LightboxImage | null; onClose: () => void }) {
@@ -30,7 +31,10 @@ export function Lightbox({ image, onClose }: { image: LightboxImage | null; onCl
       role="dialog"
       aria-modal="true"
       aria-label={image.alt}
-      className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 p-4 animate-in fade-in duration-150"
+      className={cx(
+        "fixed inset-0 z-[70] flex justify-center bg-black/80 p-4 animate-in fade-in duration-150",
+        image.tall ? "items-start overflow-y-auto py-16" : "items-center",
+      )}
       onClick={onClose}
     >
       <button
@@ -39,14 +43,18 @@ export function Lightbox({ image, onClose }: { image: LightboxImage | null; onCl
         onClick={onClose}
         aria-label="Close image"
         className={cx(
-          "absolute right-4 top-4 inline-flex size-10 items-center justify-center rounded-full bg-surface text-foreground shadow-lg hover:bg-hover",
+          "fixed right-4 top-4 z-10 inline-flex size-10 items-center justify-center rounded-full bg-surface text-foreground shadow-lg hover:bg-hover",
           focusRing,
         )}
       >
         <X className="size-5" aria-hidden="true" />
       </button>
-      <figure className="max-h-full max-w-6xl" onClick={(e) => e.stopPropagation()}>
-        <img src={image.src} alt={image.alt} className="max-h-[82vh] w-auto rounded-xl object-contain shadow-2xl" />
+      <figure className={image.tall ? "w-full max-w-[760px]" : "max-h-full max-w-6xl"} onClick={(e) => e.stopPropagation()}>
+        <img
+          src={image.src}
+          alt={image.alt}
+          className={image.tall ? "h-auto w-full rounded-xl shadow-2xl" : "max-h-[82vh] w-auto rounded-xl object-contain shadow-2xl"}
+        />
         <figcaption className="mt-3 text-center text-sm text-white/85">{image.caption}</figcaption>
       </figure>
     </div>
