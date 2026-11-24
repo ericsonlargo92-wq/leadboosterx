@@ -372,7 +372,8 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
                   className={cx("inline-flex items-center gap-2 rounded-full bg-cta px-3.5 py-2 text-xs font-bold text-cta-foreground shadow hover:bg-cta-hover", focusRing)}
                 >
                   <Volume2 className="size-4" aria-hidden="true" />
-                  Watch with voiceover{video.duration ? ` (${video.duration})` : ""}
+                  {video.cta ?? "Watch with voiceover"}
+                  {video.duration ? ` (${video.duration})` : ""}
                 </button>
               )}
               <button
@@ -470,7 +471,7 @@ function WorkflowShotPanel({ shot, stage, onOpen }: { shot: WorkflowShot; stage:
           )}
         >
           <Volume2 className="size-4" aria-hidden="true" />
-          Watch with voiceover ({vo.duration})
+          {vo.cta ?? "Watch with voiceover"} ({vo.duration})
         </button>
       )}
       <figcaption className="mt-2 text-xs text-muted-foreground">{shot.caption}</figcaption>

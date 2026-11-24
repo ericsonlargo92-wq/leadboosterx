@@ -18,7 +18,7 @@ export type Project = {
    * Screen recording shown instead of screenshots: a light silent `loop` that plays while on screen, and an optional
    * narrated `voiceover` version (with sound and controls) that loads only when the visitor asks for it.
    */
-  video?: { loop: string; voiceover?: string; duration?: string; poster: string; caption: string; label: string };
+  video?: { loop: string; voiceover?: string; duration?: string; poster: string; caption: string; label: string; cta?: string };
   /** Spans both columns on desktop (used for builds with media). */
   wide?: boolean;
   /**
@@ -35,7 +35,7 @@ export type WorkflowShot = {
   width: number;
   height: number;
   /** Optional narrated walkthrough: a camera pan down the same workflow with a voice explaining each step. */
-  voiceover?: { src: string; poster: string; duration: string; label: string };
+  voiceover?: { src: string; poster: string; duration: string; label: string; cta?: string };
 };
 
 export type ProjectFilter = "all" | StageId;
@@ -69,6 +69,7 @@ export const PROJECTS: Project[] = [
     video: {
       loop: "/projects/northline-freight-loop.mp4",
       voiceover: "/projects/northline-freight-voiceover.mp4",
+      cta: "See how this site brings in quote requests",
       duration: "0:34",
       poster: "/projects/northline-freight-poster.webp",
       label: "Screen recording of the Northline Freight demo website: video hero, services, how it works, and the quote form being filled in",
@@ -84,6 +85,7 @@ export const PROJECTS: Project[] = [
         height: 1918,
         voiceover: {
           src: "/projects/freight-nurture-workflow-voiceover.mp4",
+          cta: "See how it follows up on every quote",
           poster: "/projects/freight-nurture-workflow-poster.webp",
           duration: "0:38",
           label: "Narrated walkthrough of the freight Nurture workflow in GoHighLevel, panning from the trigger to the end",
@@ -97,6 +99,7 @@ export const PROJECTS: Project[] = [
         height: 2310,
         voiceover: {
           src: "/projects/freight-close-workflow-voiceover.mp4",
+          cta: "See how it turns quote calls into shipments",
           poster: "/projects/freight-close-workflow-poster.webp",
           duration: "0:37",
           label: "Narrated walkthrough of the freight Close workflow in GoHighLevel, panning from the trigger to the won and lost paths",
@@ -126,6 +129,7 @@ export const PROJECTS: Project[] = [
     video: {
       loop: "/projects/ridgeway-upholstery-loop.mp4",
       voiceover: "/projects/ridgeway-upholstery-voiceover.mp4",
+      cta: "See how this site brings in quote requests",
       duration: "0:26",
       poster: "/projects/ridgeway-upholstery-poster.webp",
       label: "Screen recording of the Ridgeway Upholstery demo website: hero quote form being filled in, service cards, project gallery and FAQ",
@@ -171,6 +175,7 @@ export const PROJECTS: Project[] = [
     video: {
       loop: "/projects/timberline-tree-care-loop.mp4",
       voiceover: "/projects/timberline-tree-care-voiceover.mp4",
+      cta: "See how this site brings in estimate requests",
       duration: "0:23",
       poster: "/projects/timberline-tree-care-poster.webp",
       label: "Screen recording of the Timberline Tree Care demo website: hero, estimate form being filled in, service cards and the emergency storm section",
