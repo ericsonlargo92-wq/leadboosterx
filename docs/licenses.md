@@ -43,8 +43,8 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 - `public/projects/{freight,upholstery,tree}-{nurture,close}-workflow.webp`: own screenshots of the six demo workflows in the
   GoHighLevel workflow builder (demo sub-account, drafts), captured at 100% zoom in overlapping strips and stitched. Canvas
   area only (no account name, avatar or ids). No third-party content.
-- `public/projects/{freight,upholstery,tree}-{nurture,close}-workflow-voiceover.mp4` (+ `-poster.webp`): narrated pans down
-  the six workflows. Voice: the owner's own cloned ElevenLabs voice ("Ericson"). Music: custom track generated with
+- `public/projects/{freight,upholstery,tree}-{nurture,close}-workflow-voiceover-v2.mp4` (+ `-poster.webp`): animated, narrated
+  walkthroughs of the six workflows (camera follows the narration, pointer taps each step, step label, simple captions). Voice: the owner's own cloned ElevenLabs voice ("Ericson"). Music: custom track generated with
   ElevenLabs Music (2026-11-24), about 14 dB under the voice.
 - `public/projects/{northline-freight,ridgeway-upholstery,timberline-tree-care}-voiceover-v2.mp4`: the website recordings
   re-voiced in the owner's "Ericson" voice with the same ElevenLabs Music track (replaces the earlier `-voiceover.mp4` files).

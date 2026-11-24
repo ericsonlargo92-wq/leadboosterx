@@ -363,33 +363,58 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
             onPause={() => setPaused(true)}
             className="block aspect-[16/10] w-full bg-background object-contain [&:fullscreen]:bg-black"
           />
+          {!narrated && video.voiceover && (
+            <PlayOverlay label={video.cta ?? "Watch with voiceover"} duration={video.duration} onPlay={startNarrated} />
+          )}
           {!narrated && (
-            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-gradient-to-t from-[oklch(0.15_0.04_258/0.75)] to-transparent p-3">
-              {video.voiceover && (
-                <button
-                  type="button"
-                  onClick={startNarrated}
-                  className={cx("inline-flex items-center gap-2 rounded-full bg-cta px-3.5 py-2 text-xs font-bold text-cta-foreground shadow hover:bg-cta-hover", focusRing)}
-                >
-                  <Volume2 className="size-4" aria-hidden="true" />
-                  {video.cta ?? "Watch with voiceover"}
-                  {video.duration ? ` (${video.duration})` : ""}
-                </button>
+            <button
+              type="button"
+              onClick={togglePause}
+              aria-label={paused ? "Play preview" : "Pause preview"}
+              className={cx(
+                "absolute bottom-3 right-3 z-10 inline-flex size-8 items-center justify-center rounded-full bg-[oklch(0.15_0.04_258/0.7)] text-white hover:bg-[oklch(0.15_0.04_258/0.9)]",
+                focusRing,
               )}
-              <button
-                type="button"
-                onClick={togglePause}
-                aria-label={paused ? "Play preview" : "Pause preview"}
-                className={cx("inline-flex size-8 items-center justify-center rounded-full bg-[oklch(0.15_0.04_258/0.7)] text-white hover:bg-[oklch(0.15_0.04_258/0.9)]", focusRing)}
-              >
-                {paused ? <Play className="size-4" aria-hidden="true" /> : <Pause className="size-4" aria-hidden="true" />}
-              </button>
-            </div>
+            >
+              {paused ? <Play className="size-4" aria-hidden="true" /> : <Pause className="size-4" aria-hidden="true" />}
+            </button>
           )}
         </div>
       </div>
       <figcaption className="mt-2 text-xs text-muted-foreground">{video.caption}</figcaption>
     </figure>
+  );
+}
+
+/**
+ * Big centered play button over a video or workflow preview, so it is obvious the narrated version can be played.
+ * The whole area is the button; the label says what the viewer will learn about their business.
+ */
+function PlayOverlay({ label, duration, onPlay }: { label: string; duration?: string; onPlay: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onPlay}
+      aria-label={`Play with sound: ${label}${duration ? ` (${duration})` : ""}`}
+      className={cx(
+        "group/play absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[oklch(0.15_0.04_258/0.22)] p-4 transition-colors hover:bg-[oklch(0.15_0.04_258/0.34)]",
+        focusRing,
+      )}
+    >
+      <span className="relative inline-flex size-16 items-center justify-center sm:size-20" aria-hidden="true">
+        <span className="absolute inset-0 rounded-full bg-cta/50 motion-safe:animate-[ping_2.2s_cubic-bezier(0,0,0.2,1)_infinite]" />
+        <span className="relative inline-flex size-16 items-center justify-center rounded-full bg-cta text-cta-foreground shadow-xl ring-4 ring-white/70 transition-transform duration-200 group-hover/play:scale-110 sm:size-20">
+          <Play className="ml-1 size-7 fill-current sm:size-8" />
+        </span>
+      </span>
+      <span className="inline-flex max-w-[92%] items-center gap-2 rounded-full bg-[oklch(0.15_0.04_258/0.85)] px-4 py-1.5 text-center text-xs font-semibold text-white shadow sm:text-sm">
+        <Volume2 className="size-4 shrink-0" aria-hidden="true" />
+        <span>
+          {label}
+          {duration ? ` · ${duration}` : ""}
+        </span>
+      </span>
+    </button>
   );
 }
 
@@ -432,48 +457,39 @@ function WorkflowShotPanel({ shot, stage, onOpen }: { shot: WorkflowShot; stage:
   }
   return (
     <figure className="mt-6 lg:mt-0">
-      <button
-        type="button"
-        onClick={onOpen}
-        aria-label={`View the full ${stage} workflow`}
-        className={cx(
-          "group block w-full overflow-hidden rounded-xl border border-border bg-surface text-left shadow-lg shadow-[oklch(0.2_0.05_260/0.15)]",
-          focusRing,
-        )}
-      >
-        <span className="flex items-center justify-between gap-2 border-b border-border px-3 py-2 text-xs">
+      <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-lg shadow-[oklch(0.2_0.05_260/0.15)]">
+        <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2 text-xs">
           <span className="font-semibold text-foreground">{stage} workflow</span>
           <span className="text-muted-foreground">GoHighLevel workflow builder</span>
-        </span>
-        <span className="relative block h-[420px] overflow-hidden bg-[#f6f7f9] sm:h-[540px]">
+        </div>
+        <div className="relative h-[420px] overflow-hidden bg-[#f6f7f9] sm:h-[540px]">
           <img
             src={shot.src}
             alt={shot.alt}
             width={shot.width}
             height={shot.height}
             loading="lazy"
-            className="mx-auto block h-auto w-full max-w-[640px] transition-transform duration-300 group-hover:scale-[1.01]"
+            className="mx-auto block h-auto w-full max-w-[640px]"
           />
           <span className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface via-surface/80 to-transparent" />
-          <span className="absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-primary px-4 py-2 text-xs font-bold text-primary-foreground shadow group-hover:bg-primary/90">
+          {vo ? (
+            <PlayOverlay label={vo.cta ?? "Watch the walkthrough"} duration={vo.duration} onPlay={() => setPlaying(true)} />
+          ) : (
+            <button type="button" onClick={onOpen} aria-label={`View the full ${stage} workflow`} className={cx("absolute inset-0", focusRing)} />
+          )}
+          <button
+            type="button"
+            onClick={onOpen}
+            className={cx(
+              "absolute bottom-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-surface px-4 py-2 text-xs font-bold text-primary shadow hover:bg-hover",
+              focusRing,
+            )}
+          >
             <Maximize2 className="size-4" aria-hidden="true" />
             View full workflow
-          </span>
-        </span>
-      </button>
-      {vo && (
-        <button
-          type="button"
-          onClick={() => setPlaying(true)}
-          className={cx(
-            "mt-3 inline-flex items-center gap-2 rounded-full bg-cta px-3.5 py-2 text-xs font-bold text-cta-foreground shadow hover:bg-cta-hover",
-            focusRing,
-          )}
-        >
-          <Volume2 className="size-4" aria-hidden="true" />
-          {vo.cta ?? "Watch with voiceover"} ({vo.duration})
-        </button>
-      )}
+          </button>
+        </div>
+      </div>
       <figcaption className="mt-2 text-xs text-muted-foreground">{shot.caption}</figcaption>
     </figure>
   );
