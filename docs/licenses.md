@@ -49,12 +49,12 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 - `public/projects/{northline-freight,ridgeway-upholstery,timberline-tree-care}-voiceover-v2.mp4`: the website recordings
   re-voiced in the owner's "Ericson" voice with the same ElevenLabs Music track (replaces the earlier `-voiceover.mp4` files).
 
-## Explainer soundtrack (`public/audio/explainer-ghl-v2.mp3`)
+## Explainer soundtrack (`public/audio/explainer-ghl-v3.mp3`, 57.34 s)
 
 | Part | Source | License |
 | --- | --- | --- |
-| Voiceover | ElevenLabs text-to-speech, premade voice "Eric", generated with Ericson's ElevenLabs account | ElevenLabs terms for the account's plan |
-| Music | ["Hopeful" on Pixabay Music](https://pixabay.com/music/beats-hopeful-614905/) (track 614905) | Pixabay Content License |
+| Voiceover | The owner's own cloned ElevenLabs voice "Ericson" (`o2msbrh3ncbn7eB9dWrN`), one take of the 12-line script with the previous version's pauses between lines re-inserted | ElevenLabs terms for the account's plan |
+| Music | Custom 62 s instrumental generated with ElevenLabs Music (soft piano, plucked guitar, light percussion, warm pads), about 14 dB under the voice | ElevenLabs terms for the account's plan |
 | Sound effects | Self-made LBX sound set (`Personal Brand - Content/assets/sfx/lbx_*.wav`) | Own work |
 
 ## Rebuilding the explainer
@@ -62,13 +62,15 @@ Pixabay Content License: free for commercial use, no attribution required. Clips
 Use the Claude skill `website-explainer-video` (copy in the handover package, `tools/website-explainer-video-skill/`).
 API keys are read from Windows user environment variables (`ELEVENLABS_API_KEY`, `PIXABAY_API_KEY`), never stored in files.
 
-1. Script: `tools/explainer/lines.json` (id, spoken text, display text). Voice: ElevenLabs premade "Eric" (`cjVigY5qzO86Huf0OWal`),
-   eleven_multilingual_v2, stability 0.5, style 0.25, speed 1.0 (skill `tts.mjs`).
+1. Script: `tools/explainer/lines.json` (id, spoken text, display text). Voice: the owner's ElevenLabs voice "Ericson"
+   (`o2msbrh3ncbn7eB9dWrN`), eleven_multilingual_v2, stability 0.5, style 0.25, speed 1.0 (skill `tts.mjs`). That voice leaves almost
+   no gap between lines, so silence is inserted after each line to match the previous take's pacing (about 8 s in total).
 2. Word timings: skill `align.mjs`, then `timeline.py` writes `src/data/explainer-cues.json` and `src/data/explainer-words.json`.
 3. Sound effects on visual beats: `tools/explainer/events.json` (names from the LBX `sfx.json`).
-4. Mix: skill `mix.mjs --music pixabay-hopeful-614905.mp3 --music-gain 0.12 --total 55.66` → music about 14 dB under the voice.
-5. **Save the mix under a new file name** (e.g. `explainer-ghl-v3.mp3`) and update `src` in `src/components/Explainer.tsx`:
+4. Mix: skill `mix.mjs --music <ElevenLabs track> --music-gain 0.2 --total 57.34` → music about 14 dB under the voice; then
+   ffmpeg `loudnorm=I=-16` at 128 kbps. B-roll cuts and sound effects were shifted to the new line timings (piecewise-linear map).
+5. **Save the mix under a new file name** (next: `explainer-ghl-v4.mp3`) and update `src` in `src/components/Explainer.tsx`:
    `/audio/*` is cached for a week, so reusing a name can pair an old soundtrack with new timings for returning visitors.
 
-The 2026-11-24 edit (no 14-day promise) regenerated only the `promise` line and spliced it into the existing voiceover
+History: the 2026-11-24 edit (no 14-day promise) regenerated only the `promise` line and spliced it into the existing voiceover
 (ffmpeg: keep 0–40.66 s, insert the new 4.2 s line at −1.5 dB, keep 47.2 s → end), then re-aligned and re-mixed.

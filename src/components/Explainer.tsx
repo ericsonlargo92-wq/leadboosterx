@@ -744,7 +744,7 @@ export function Explainer() {
 
       <audio
         ref={audioRef}
-        src="/audio/explainer-ghl-v2.mp3"
+        src="/audio/explainer-ghl-v3.mp3"
         preload="none"
         onEnded={() => {
           setPlaying(false);
