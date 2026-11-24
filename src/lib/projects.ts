@@ -68,7 +68,7 @@ export const PROJECTS: Project[] = [
     tools: ["GoHighLevel", "AI Studio", "Forms", "Custom Fields", "Workflows", "Pipelines", "Email & SMS"],
     video: {
       loop: "/projects/northline-freight-loop.mp4",
-      voiceover: "/projects/northline-freight-voiceover-v2.mp4",
+      voiceover: "/projects/northline-freight-voiceover-v3.mp4",
       cta: "See how this site brings in quote requests",
       duration: "0:34",
       poster: "/projects/northline-freight-poster.webp",
