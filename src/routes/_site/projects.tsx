@@ -10,6 +10,7 @@ import { Reveal } from "~/components/motion";
 import { seo } from "~/lib/seo";
 import { projectsJsonLd } from "~/lib/schema-pages";
 import { card, cx, focusRing } from "~/lib/ui";
+import { raise, type Preload } from "~/lib/warm-video";
 
 export const Route = createFileRoute("/_site/projects")({
   head: () =>
@@ -275,13 +276,18 @@ function ProjectCard({
 
 /**
  * Screen recording of a build. The light silent loop starts buffering well before it reaches the screen (so it plays
- * without a delay), plays while visible and pauses when scrolled away. "Watch with voiceover" swaps in the narrated
- * version with sound and controls. Reduced-motion visitors get the poster and the buttons, no autoplay.
+ * without a delay), plays while visible and pauses when scrolled away. The narrated version is its own <video> under
+ * the loop: it warms up while its play button is on screen (see PlayOverlay), so pressing play swaps it in at once.
+ * Reduced-motion visitors get the poster and the buttons, no autoplay.
  */
 function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const narratedRef = useRef<HTMLVideoElement>(null);
   const [narrated, setNarrated] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [preload, setPreload] = useState<Preload>("none");
+  const warm = useCallback((level: Preload) => setPreload((p) => raise(p, level)), []);
   const userPaused = useRef(false);
 
   useEffect(() => {
@@ -319,15 +325,13 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
   }, [narrated]);
 
   const startNarrated = () => {
-    const el = ref.current;
-    if (!el || !video.voiceover) return;
+    const n = narratedRef.current;
+    if (!n || !video.voiceover) return;
+    ref.current?.pause();
+    setPreload("auto");
     setNarrated(true);
-    el.src = video.voiceover;
-    el.muted = false;
-    el.loop = false;
-    el.controls = true;
-    el.currentTime = 0;
-    el.play().catch(() => {});
+    if (n.readyState < 3) setLoading(true);
+    n.play().catch(() => setLoading(false));
   };
 
   const togglePause = () => {
@@ -356,6 +360,7 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
             src={video.loop}
             poster={video.poster}
             aria-label={video.label}
+            aria-hidden={narrated || undefined}
             width={1280}
             height={800}
             muted
@@ -364,11 +369,34 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
             preload="none"
             onPlay={() => setPaused(false)}
             onPause={() => setPaused(true)}
-            className="block aspect-[16/10] w-full bg-background object-contain [&:fullscreen]:bg-black"
+            className={cx("block aspect-[16/10] w-full bg-background object-contain", narrated && "invisible")}
           />
-          {!narrated && video.voiceover && (
-            <PlayOverlay label={video.cta ?? "Watch with voiceover"} duration={video.duration} onPlay={startNarrated} />
+          {video.voiceover && (
+            <video
+              ref={narratedRef}
+              src={video.voiceover}
+              poster={video.poster}
+              aria-label={`${video.label} (with voiceover)`}
+              aria-hidden={!narrated || undefined}
+              tabIndex={narrated ? undefined : -1}
+              width={1280}
+              height={800}
+              controls={narrated}
+              playsInline
+              preload={preload}
+              onPlaying={() => setLoading(false)}
+              onWaiting={() => setLoading(true)}
+              onPause={() => setLoading(false)}
+              className={cx(
+                "absolute inset-0 block size-full bg-background object-contain [&:fullscreen]:bg-black",
+                !narrated && "invisible",
+              )}
+            />
           )}
+          {!narrated && video.voiceover && (
+            <PlayOverlay label={video.cta ?? "Watch with voiceover"} duration={video.duration} onWarm={warm} onPlay={startNarrated} />
+          )}
+          {loading && <LoadingSpinner />}
           {!narrated && (
             <button
               type="button"
@@ -392,15 +420,56 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
 /**
  * Big centered play button over a video or workflow preview, so it is obvious the narrated version can be played.
  * The whole area is the button; the label says what the viewer will learn about their business.
+ * It tells its player to warm up: "metadata" once it has been on screen for a moment, "auto" on hover, focus or touch.
  */
-function PlayOverlay({ label, duration, onPlay }: { label: string; duration?: string; onPlay: () => void }) {
+function PlayOverlay({
+  label,
+  duration,
+  onWarm,
+  onPlay,
+}: {
+  label: string;
+  duration?: string;
+  onWarm?: (level: Preload) => void;
+  onPlay: () => void;
+}) {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !onWarm || typeof IntersectionObserver === "undefined") return;
+    let timer = 0;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        clearTimeout(timer);
+        if (e.isIntersecting)
+          timer = window.setTimeout(() => {
+            onWarm("metadata");
+            io.disconnect();
+          }, 600);
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(el);
+    return () => {
+      clearTimeout(timer);
+      io.disconnect();
+    };
+  }, [onWarm]);
+
+  const intent = () => onWarm?.("auto");
+
   return (
     <button
+      ref={ref}
       type="button"
+      onPointerEnter={intent}
+      onFocus={intent}
+      onTouchStart={intent}
       onClick={onPlay}
       aria-label={`Play with sound: ${label}${duration ? ` (${duration})` : ""}`}
       className={cx(
-        "group/play absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[oklch(0.15_0.04_258/0.22)] p-4 transition-colors hover:bg-[oklch(0.15_0.04_258/0.34)]",
+        "group/play absolute inset-0 z-[5] flex flex-col items-center justify-center gap-3 bg-[oklch(0.15_0.04_258/0.22)] p-4 transition-colors hover:bg-[oklch(0.15_0.04_258/0.34)]",
         focusRing,
       )}
     >
@@ -421,76 +490,114 @@ function PlayOverlay({ label, duration, onPlay }: { label: string; duration?: st
   );
 }
 
+/** Shown over a video while it's fetching enough to play. Doesn't block the native controls. */
+function LoadingSpinner() {
+  return (
+    <span role="status" className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+      <span className="size-12 animate-spin rounded-full border-4 border-white/40 border-t-white shadow-lg" aria-hidden="true" />
+      <span className="sr-only">Loading video</span>
+    </span>
+  );
+}
+
 /**
  * A real Nurture or Close workflow from the GoHighLevel builder. The screenshot is tall, so the card shows the top
- * (trigger and first steps) and "View full workflow" opens the whole thing at reading size.
+ * (trigger and first steps) and "View full workflow" opens the whole thing at reading size. With a narrated
+ * walkthrough, its player sits in the same place in the tree in both views, so what it buffered while the screenshot
+ * was showing is what plays.
  */
 function WorkflowShotPanel({ shot, stage, onOpen }: { shot: WorkflowShot; stage: string; onOpen: () => void }) {
   const [playing, setPlaying] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [preload, setPreload] = useState<Preload>("none");
+  const warm = useCallback((level: Preload) => setPreload((p) => raise(p, level)), []);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const vo = shot.voiceover;
-  if (vo && playing) {
-    return (
-      <figure className="mt-6 lg:mt-0">
-        <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-lg shadow-[oklch(0.2_0.05_260/0.15)]">
-          <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2 text-xs">
-            <span className="font-semibold text-foreground">{stage} workflow · walkthrough</span>
-            <button
-              type="button"
-              onClick={() => setPlaying(false)}
-              className={cx("rounded font-semibold text-primary hover:underline", focusRing)}
-            >
-              Back to screenshot
-            </button>
-          </div>
-          <video
-            src={vo.src}
-            poster={vo.poster}
-            aria-label={vo.label}
-            width={1280}
-            height={800}
-            controls
-            autoPlay
-            playsInline
-            className="block aspect-[16/10] w-full bg-[#f6f7f9] object-contain [&:fullscreen]:bg-black"
-          />
-        </div>
-        <figcaption className="mt-2 text-xs text-muted-foreground">{shot.caption}</figcaption>
-      </figure>
-    );
-  }
+
+  const start = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    setPreload("auto");
+    setPlaying(true);
+    if (v.readyState < 3) setLoading(true);
+    v.play().catch(() => setLoading(false));
+  };
+  const back = () => {
+    videoRef.current?.pause();
+    setLoading(false);
+    setPlaying(false);
+  };
+
   return (
     <figure className="mt-6 lg:mt-0">
       <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-lg shadow-[oklch(0.2_0.05_260/0.15)]">
         <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2 text-xs">
-          <span className="font-semibold text-foreground">{stage} workflow</span>
-          <span className="text-muted-foreground">GoHighLevel workflow builder</span>
-        </div>
-        <div className="relative h-[420px] overflow-hidden bg-[#f6f7f9] sm:h-[540px]">
-          <img
-            src={shot.src}
-            alt={shot.alt}
-            width={shot.width}
-            height={shot.height}
-            loading="lazy"
-            className="mx-auto block h-auto w-full max-w-[640px]"
-          />
-          <span className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface via-surface/80 to-transparent" />
-          {vo ? (
-            <PlayOverlay label={vo.cta ?? "Watch the walkthrough"} duration={vo.duration} onPlay={() => setPlaying(true)} />
+          {playing ? (
+            <>
+              <span className="font-semibold text-foreground">{stage} workflow · walkthrough</span>
+              <button type="button" onClick={back} className={cx("rounded font-semibold text-primary hover:underline", focusRing)}>
+                Back to screenshot
+              </button>
+            </>
           ) : (
-            <button type="button" onClick={onOpen} aria-label={`View the full ${stage} workflow`} className={cx("absolute inset-0", focusRing)} />
+            <>
+              <span className="font-semibold text-foreground">{stage} workflow</span>
+              <span className="text-muted-foreground">GoHighLevel workflow builder</span>
+            </>
           )}
-          <button
-            type="button"
-            onClick={onOpen}
-            className={cx(
-              "absolute bottom-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-surface px-4 py-2 text-xs font-bold text-primary shadow hover:bg-hover",
-              focusRing,
-            )}
-          >
-            <Maximize2 className="size-4" aria-hidden="true" />
-            View full workflow
-          </button>
+        </div>
+        <div className={cx("relative", !playing && "h-[420px] overflow-hidden bg-[#f6f7f9] sm:h-[540px]")}>
+          {vo && (
+            <div className={cx(playing ? "relative" : "invisible absolute inset-0")}>
+              <video
+                ref={videoRef}
+                src={vo.src}
+                poster={vo.poster}
+                aria-label={vo.label}
+                aria-hidden={!playing || undefined}
+                tabIndex={playing ? undefined : -1}
+                width={1280}
+                height={800}
+                controls={playing}
+                playsInline
+                preload={preload}
+                onPlaying={() => setLoading(false)}
+                onWaiting={() => playing && setLoading(true)}
+                onPause={() => setLoading(false)}
+                className="block aspect-[16/10] w-full bg-[#f6f7f9] object-contain [&:fullscreen]:bg-black"
+              />
+              {loading && <LoadingSpinner />}
+            </div>
+          )}
+          {!playing && (
+            <>
+              <img
+                src={shot.src}
+                alt={shot.alt}
+                width={shot.width}
+                height={shot.height}
+                loading="lazy"
+                className="relative mx-auto block h-auto w-full max-w-[640px]"
+              />
+              <span className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface via-surface/80 to-transparent" />
+              {vo ? (
+                <PlayOverlay label={vo.cta ?? "Watch the walkthrough"} duration={vo.duration} onWarm={warm} onPlay={start} />
+              ) : (
+                <button type="button" onClick={onOpen} aria-label={`View the full ${stage} workflow`} className={cx("absolute inset-0", focusRing)} />
+              )}
+              <button
+                type="button"
+                onClick={onOpen}
+                className={cx(
+                  "absolute bottom-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-surface px-4 py-2 text-xs font-bold text-primary shadow hover:bg-hover",
+                  focusRing,
+                )}
+              >
+                <Maximize2 className="size-4" aria-hidden="true" />
+                View full workflow
+              </button>
+            </>
+          )}
         </div>
       </div>
       <figcaption className="mt-2 text-xs text-muted-foreground">{shot.caption}</figcaption>

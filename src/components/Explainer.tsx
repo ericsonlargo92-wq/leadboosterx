@@ -53,6 +53,7 @@ import shotData from "~/data/explainer-shots.json";
 import wordGroups from "~/data/explainer-words.json";
 import { BrandLogo } from "./BrandLogo";
 import { cx, focusRing } from "~/lib/ui";
+import { lowData } from "~/lib/warm-video";
 
 /*
  * A ~57 second animated explainer rendered live in the page. The soundtrack (/audio/explainer-mix.mp3:
@@ -425,7 +426,7 @@ function Cta({ t }: SceneProps) {
 /** Stock footage (Pixabay Content License, see docs/licenses.md), one shot every ~2.5–4 s, timed to the voice. */
 const SHOTS: { src: string; start: number; end: number }[] = shotData.shots;
 
-function BRoll({ t, playing, started }: { t: number; playing: boolean; started: boolean }) {
+function BRoll({ t, playing, started, primed }: { t: number; playing: boolean; started: boolean; primed: boolean }) {
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
   const active = Math.max(0, SHOTS.findLastIndex((s) => t >= s.start));
 
@@ -448,7 +449,10 @@ function BRoll({ t, playing, started }: { t: number; playing: boolean; started: 
     <div aria-hidden="true" className="absolute inset-0 overflow-hidden bg-background">
       {!started && <img src={`/broll/${shotData.poster}`} alt="" className="absolute inset-0 size-full object-cover" />}
       {SHOTS.map((s, i) => {
-        const near = i >= active - 1 && i <= active + 2;
+        // Load the current clip and the next three, so each one is buffered well before its cut.
+        // Before the first play, "primed" (the player is on screen) loads the opening clips.
+        const near = i >= active - 1 && i <= active + 3;
+        const load = (started || primed) && near;
         const local = t - s.start;
         const len = s.end - s.start;
         const inOpacity = i === active ? clamp01(local / 0.3) : i === active - 1 && t - SHOTS[active].start < 0.3 ? 1 : 0;
@@ -461,10 +465,10 @@ function BRoll({ t, playing, started }: { t: number; playing: boolean; started: 
             ref={(el) => {
               refs.current[i] = el;
             }}
-            src={started && near ? `/broll/${s.src}.mp4` : undefined}
+            src={load ? `/broll/${s.src}.mp4` : undefined}
             muted
             playsInline
-            preload={started && near ? "auto" : "none"}
+            preload={load ? "auto" : "none"}
             className="absolute inset-0 size-full object-cover will-change-transform"
             style={{
               opacity: started ? inOpacity : 0,
@@ -562,7 +566,31 @@ export function Explainer() {
   const [ended, setEnded] = useState(false);
   const [muted, setMuted] = useState(false);
   const [captions, setCaptions] = useState(true);
+  const [buffering, setBuffering] = useState(false);
+  // How much of the soundtrack to fetch before play: the header once the player mounts (it mounts only when the
+  // section is near), all of it once the player is on screen or the pointer reaches the play button.
+  const [warm, setWarm] = useState<"metadata" | "auto">("metadata");
+  const rootRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const warmUp = useCallback(() => {
+    if (!lowData()) setWarm("auto");
+  }, []);
+
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          warmUp();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [warmUp]);
 
   const tick = useCallback(() => {
     const a = audioRef.current;
@@ -580,9 +608,11 @@ export function Explainer() {
       setEnded(false);
     }
     setStarted(true);
+    if (a.readyState < 3) setBuffering(true);
     try {
       await a.play();
     } catch {
+      setBuffering(false);
       return;
     }
     setPlaying(true);
@@ -593,6 +623,7 @@ export function Explainer() {
   const pause = useCallback(() => {
     audioRef.current?.pause();
     setPlaying(false);
+    setBuffering(false);
     cancelAnimationFrame(raf.current);
   }, []);
 
@@ -618,7 +649,7 @@ export function Explainer() {
   const streak = !reduce && sceneIndex > 0 && local < 0.45 ? local / 0.45 : null;
 
   return (
-    <div>
+    <div ref={rootRef}>
       <div className="theme-dark @container">
         <div
           className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-background shadow-xl shadow-[oklch(0.2_0.05_260/0.3)] text-[3.5cqw] @xl:aspect-video @xl:text-[1.5cqw]"
@@ -627,7 +658,7 @@ export function Explainer() {
         >
           {/* camera: B-roll and scene move together */}
           <div className="absolute inset-0 origin-center will-change-transform" style={{ transform: `scale(${started && !reduce ? cameraScale(shownT) : 1})` }}>
-            <BRoll t={shownT} playing={playing} started={started} />
+            <BRoll t={shownT} playing={playing} started={started} primed={warm === "auto"} />
             <div
               className="absolute inset-0 z-20 px-[6%] pb-[24%] pt-[6%] [text-shadow:0_2px_18px_rgb(0_0_0/0.45)] @xl:pb-[10%]"
               style={{
@@ -673,10 +704,20 @@ export function Explainer() {
             </div>
           )}
 
+          {started && buffering && (
+            <span role="status" className="pointer-events-none absolute inset-0 z-40 flex items-center justify-center">
+              <span className="size-[3.5em] animate-spin rounded-full border-[0.35em] border-white/30 border-t-white" aria-hidden="true" />
+              <span className="sr-only">Loading</span>
+            </span>
+          )}
+
           {!started && (
             <button
               type="button"
               onClick={play}
+              onPointerEnter={warmUp}
+              onFocus={warmUp}
+              onTouchStart={warmUp}
               className={cx("group absolute inset-0 z-40 flex flex-col items-center justify-center gap-[0.8em] bg-background/70 backdrop-blur-[3px]", focusRing)}
               aria-label="Play the 1-minute explainer"
             >
@@ -745,7 +786,9 @@ export function Explainer() {
       <audio
         ref={audioRef}
         src="/audio/explainer-ghl-v3.mp3"
-        preload="none"
+        preload={warm}
+        onWaiting={() => setBuffering(true)}
+        onPlaying={() => setBuffering(false)}
         onEnded={() => {
           setPlaying(false);
           setEnded(true);

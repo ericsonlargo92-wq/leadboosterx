@@ -91,7 +91,7 @@ export const PROJECTS: Project[] = [
         width: 760,
         height: 1918,
         voiceover: {
-          src: "/projects/freight-nurture-workflow-voiceover-v2.mp4",
+          src: "/projects/freight-nurture-workflow-voiceover-v3.mp4",
           cta: "See how it follows up on every quote",
           poster: "/projects/freight-nurture-workflow-poster.webp",
           duration: "0:38",
@@ -105,7 +105,7 @@ export const PROJECTS: Project[] = [
         width: 760,
         height: 2310,
         voiceover: {
-          src: "/projects/freight-close-workflow-voiceover-v2.mp4",
+          src: "/projects/freight-close-workflow-voiceover-v3.mp4",
           cta: "See how it turns quote calls into shipments",
           poster: "/projects/freight-close-workflow-poster.webp",
           duration: "0:38",
@@ -151,7 +151,7 @@ export const PROJECTS: Project[] = [
         width: 760,
         height: 1851,
         voiceover: {
-          src: "/projects/upholstery-nurture-workflow-voiceover-v2.mp4",
+          src: "/projects/upholstery-nurture-workflow-voiceover-v3.mp4",
           cta: "See how it follows up on every quote request",
           poster: "/projects/upholstery-nurture-workflow-poster.webp",
           duration: "0:43",
@@ -165,7 +165,7 @@ export const PROJECTS: Project[] = [
         width: 760,
         height: 2310,
         voiceover: {
-          src: "/projects/upholstery-close-workflow-voiceover-v2.mp4",
+          src: "/projects/upholstery-close-workflow-voiceover-v3.mp4",
           cta: "See how it turns consultations into paid jobs",
           poster: "/projects/upholstery-close-workflow-poster.webp",
           duration: "0:39",
@@ -211,7 +211,7 @@ export const PROJECTS: Project[] = [
         width: 760,
         height: 1918,
         voiceover: {
-          src: "/projects/tree-nurture-workflow-voiceover-v2.mp4",
+          src: "/projects/tree-nurture-workflow-voiceover-v3.mp4",
           cta: "See how it follows up on every estimate request",
           poster: "/projects/tree-nurture-workflow-poster.webp",
           duration: "0:42",
@@ -225,7 +225,7 @@ export const PROJECTS: Project[] = [
         width: 760,
         height: 2310,
         voiceover: {
-          src: "/projects/tree-close-workflow-voiceover-v2.mp4",
+          src: "/projects/tree-close-workflow-voiceover-v3.mp4",
           cta: "See how it turns site visits into paid jobs",
           poster: "/projects/tree-close-workflow-poster.webp",
           duration: "0:36",
