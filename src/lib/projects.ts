@@ -19,6 +19,11 @@ export type Project = {
    * narrated `voiceover` version (with sound and controls) that loads only when the visitor asks for it.
    */
   video?: { loop: string; voiceover?: string; duration?: string; poster: string; caption: string; label: string; cta?: string };
+  /**
+   * The whole customer journey in one narrated video (website, then Nurture, then Close, with chapter cards).
+   * Played from the card's main video under the "All" filter; the stage filters keep their own walkthroughs.
+   */
+  journey?: { src: string; duration: string; cta: string; label: string; caption: string };
   /** Spans both columns on desktop (used for builds with media). */
   wide?: boolean;
   /**
@@ -82,6 +87,14 @@ export const PROJECTS: Project[] = [
       label: "Screen recording of the Northline Freight demo website: video hero, services, how it works, and the quote form being filled in",
       caption: "Screen recording of the demo site, built in GoHighLevel AI Studio",
     },
+    journey: {
+      src: "/projects/northline-freight-journey-v1.mp4",
+      duration: "2:04",
+      cta: "Watch the full customer journey",
+      label:
+        "Narrated walkthrough of the full Northline Freight customer journey: the demo website that captures quote requests, the Nurture workflow that follows up automatically, and the Close workflow that turns booked calls into won shipments, all built in GoHighLevel",
+      caption: "The full journey: demo site, then the Nurture and Close workflows, built in GoHighLevel",
+    },
     wide: true,
     workflowShots: {
       nurture: {
@@ -142,6 +155,14 @@ export const PROJECTS: Project[] = [
       label: "Screen recording of the Ridgeway Upholstery demo website: hero quote form being filled in, service cards, project gallery and FAQ",
       caption: "Screen recording of the demo site, built in GoHighLevel AI Studio",
     },
+    journey: {
+      src: "/projects/ridgeway-upholstery-journey-v1.mp4",
+      duration: "2:01",
+      cta: "Watch the full customer journey",
+      label:
+        "Narrated walkthrough of the full Ridgeway Upholstery customer journey: the demo website that captures quote requests, the Nurture workflow that follows up automatically, and the Close workflow that turns consultations into paid jobs, all built in GoHighLevel",
+      caption: "The full journey: demo site, then the Nurture and Close workflows, built in GoHighLevel",
+    },
     wide: true,
     workflowShots: {
       nurture: {
@@ -201,6 +222,14 @@ export const PROJECTS: Project[] = [
       poster: "/projects/timberline-tree-care-poster.webp",
       label: "Screen recording of the Timberline Tree Care demo website: hero, estimate form being filled in, service cards and the emergency storm section",
       caption: "Screen recording of the demo site, built in GoHighLevel AI Studio",
+    },
+    journey: {
+      src: "/projects/timberline-tree-care-journey-v1.mp4",
+      duration: "1:53",
+      cta: "Watch the full customer journey",
+      label:
+        "Narrated walkthrough of the full Timberline Tree Care customer journey: the demo website that captures estimate requests, the Nurture workflow that follows up automatically, and the Close workflow that turns site visits into paid jobs, all built in GoHighLevel",
+      caption: "The full journey: demo site, then the Nurture and Close workflows, built in GoHighLevel",
     },
     wide: true,
     workflowShots: {

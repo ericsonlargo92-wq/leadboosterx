@@ -1,14 +1,62 @@
 [
-  ["hook", "You've got GoHighLevel. So why are leads still slipping through?", "You've got GoHighLevel. So why are leads still slipping through?"],
-  ["three", "Most setups break in one of three places.", "Most setups break in one of three places."],
-  ["capture", "Capture: leads come in from ads, forms, calls and messages, and land in five different places.", "Capture: leads come in from ads, forms, calls and messages, and land in five different places."],
-  ["nurture", "Nurture: nobody follows up fast enough, so warm leads go cold.", "Nurture: nobody follows up fast enough, so warm leads go cold."],
-  ["close", "Close: calls get booked, then forgotten. No reminder, no follow-up, no payment link.", "Close: calls get booked, then forgotten. No reminder, no follow-up, no payment link."],
-  ["system", "LeadBoosterX builds one connected system inside GoHighLevel.", "LeadBoosterX builds one connected system inside GoHighLevel."],
-  ["cap2", "Every lead is captured in one place.", "Every lead is captured in one place."],
-  ["nur2", "Every lead is nurtured automatically, with texts, emails and reminders that go out on time.", "Every lead is nurtured automatically, with texts, emails and reminders that go out on time."],
-  ["clo2", "And every booked call has a clear path to close.", "And every booked call has a clear path to close."],
-  ["promise", "Built in your own account, and tested end to end before a single lead goes through it.", "Built in your own account, and tested end to end before a single lead goes through it."],
-  ["contract", "No long-term contract.", "No long-term contract."],
-  ["cta", "LeadBoosterX is run by a HighLevel Certified Admin. Book a free call, and we'll find where your system is leaking.", "LeadBoosterX is run by a HighLevel Certified Admin. Book a free call, and we'll find where your system is leaking."]
+ [
+  "hook",
+  "You've got GoHighLevel. So why are leads still slipping through?",
+  "You've got GoHighLevel. So why are leads still slipping through?"
+ ],
+ [
+  "three",
+  "Most setups break in one of three places.",
+  "Most setups break in one of three places."
+ ],
+ [
+  "capture",
+  "Capture: leads come in from ads, forms, calls and messages, and land in five different places.",
+  "Capture: leads come in from ads, forms, calls and messages, and land in five different places."
+ ],
+ [
+  "nurture",
+  "Nurture: nobody follows up fast enough, so warm leads go cold.",
+  "Nurture: nobody follows up fast enough, so warm leads go cold."
+ ],
+ [
+  "close",
+  "Close: calls get booked, then forgotten. No reminder, no follow-up, no payment link.",
+  "Close: calls get booked, then forgotten. No reminder, no follow-up, no payment link."
+ ],
+ [
+  "system",
+  "LeadBoosterX builds one connected system inside GoHighLevel.",
+  "LeadBoosterX builds one connected system inside GoHighLevel."
+ ],
+ [
+  "cap2",
+  "Every lead is captured in one place.",
+  "Every lead is captured in one place."
+ ],
+ [
+  "nur2",
+  "Every lead is nurtured automatically, with texts, emails and reminders that go out on time.",
+  "Every lead is nurtured automatically, with texts, emails and reminders that go out on time."
+ ],
+ [
+  "clo2",
+  "And every booked call has a clear path to close.",
+  "And every booked call has a clear path to close."
+ ],
+ [
+  "promise",
+  "Built in your own account, and tested end to end before a single lead goes through it.",
+  "Built in your own account, and tested end to end before a single lead goes through it."
+ ],
+ [
+  "contract",
+  "No long-term contract.",
+  "No long-term contract."
+ ],
+ [
+  "cta",
+  "Run by a HighLevel Certified Admin. Book your free discovery call.",
+  "Run by a HighLevel Certified Admin. Book your free discovery call."
+ ]
 ]

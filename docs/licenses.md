@@ -70,8 +70,11 @@ API keys are read from Windows user environment variables (`ELEVENLABS_API_KEY`,
 3. Sound effects on visual beats: `tools/explainer/events.json` (names from the LBX `sfx.json`).
 4. Mix: skill `mix.mjs --music <ElevenLabs track> --music-gain 0.2 --total 57.34` → music about 14 dB under the voice; then
    ffmpeg `loudnorm=I=-16` at 128 kbps. B-roll cuts and sound effects were shifted to the new line timings (piecewise-linear map).
-5. **Save the mix under a new file name** (next: `explainer-ghl-v4.mp3`) and update `src` in `src/components/Explainer.tsx`:
+5. **Save the mix under a new file name** (next: `explainer-ghl-v5.mp3`) and update `src` in `src/components/Explainer.tsx`:
    `/audio/*` is cached for a week, so reusing a name can pair an old soundtrack with new timings for returning visitors.
 
 History: the 2026-11-24 edit (no 14-day promise) regenerated only the `promise` line and spliced it into the existing voiceover
 (ffmpeg: keep 0–40.66 s, insert the new 4.2 s line at −1.5 dB, keep 47.2 s → end), then re-aligned and re-mixed.
+The 2026-11-28 edit regenerated only the `cta` line ("Run by a HighLevel Certified Admin. Book your free discovery call."),
+spliced it in at 48.06 s with a 0.45 s breath after "Admin.", re-mixed to 54.19 s as `explainer-ghl-v4.mp3`, and dropped the logo
+from the closing scene (button: "Book Your Free Discovery Call").

@@ -223,7 +223,15 @@ function ProjectCard({
         ) : (
           (p.video || p.workflowShots) && (
             <div className="mt-6 lg:mt-0">
-              {p.video && <ProjectVideo video={p.video} />}
+              {p.video &&
+                (filter === "all" && p.journey ? (
+                  <ProjectVideo
+                    key="journey"
+                    video={{ ...p.video, voiceover: p.journey.src, duration: p.journey.duration, cta: p.journey.cta, label: p.journey.label, caption: p.journey.caption }}
+                  />
+                ) : (
+                  <ProjectVideo key="site" video={p.video} />
+                ))}
               {filter === "all" && p.workflowShots && (
                 <div className="mt-4 grid grid-cols-2 gap-3">
                   {(["nurture", "close"] as const).map((id) => (

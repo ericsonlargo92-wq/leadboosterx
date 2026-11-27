@@ -51,7 +51,6 @@ import {
 import cueData from "~/data/explainer-cues.json";
 import shotData from "~/data/explainer-shots.json";
 import wordGroups from "~/data/explainer-words.json";
-import { BrandLogo } from "./BrandLogo";
 import { cx, focusRing } from "~/lib/ui";
 import { lowData } from "~/lib/warm-video";
 
@@ -403,12 +402,9 @@ function Cta({ t }: SceneProps) {
   const cert = relWord("highlevel", "cta", "cta");
   return (
     <div className="flex h-full flex-col items-center justify-center text-center">
-      <div style={pop(t, 0.15, 0.6)} className="text-[0.9em]">
-        <BrandLogo size="lg" />
-      </div>
       <p
         style={pop(t, cert)}
-        className="mt-[0.9em] inline-flex items-center gap-[0.4em] rounded-full border border-success/30 bg-success/10 px-[0.8em] py-[0.3em] text-[0.9em] font-semibold text-success"
+        className="inline-flex items-center gap-[0.4em] rounded-full border border-success/30 bg-success/10 px-[0.8em] py-[0.3em] text-[0.9em] font-semibold text-success"
       >
         <BadgeCheck className="size-[1.1em]" aria-hidden="true" />
         HighLevel Certified Admin
@@ -689,7 +685,7 @@ export function Explainer() {
                   focusRing,
                 )}
               >
-                Book a Free Growth Call
+                Book Your Free Discovery Call
                 <ArrowUpRight className="size-[1.1em]" aria-hidden="true" />
               </Link>
             </div>
@@ -785,7 +781,7 @@ export function Explainer() {
 
       <audio
         ref={audioRef}
-        src="/audio/explainer-ghl-v3.mp3"
+        src="/audio/explainer-ghl-v4.mp3"
         preload={warm}
         onWaiting={() => setBuffering(true)}
         onPlaying={() => setBuffering(false)}

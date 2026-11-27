@@ -1,6 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
-  ArrowDown,
   ArrowRight,
   ArrowRightLeft,
   BellRing,
@@ -10,7 +9,6 @@ import {
   ClipboardList,
   Inbox,
   MessageSquareOff,
-  PlayCircle,
   Rocket,
   ShieldCheck,
   TrendingUp,
@@ -18,14 +16,14 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import { LazyExplainer } from "~/components/LazyExplainer";
+import { IntroVideo } from "~/components/IntroVideo";
 import { Reveal, STAGGER } from "~/components/motion";
 import { AmbientGlow, BookCallButton, Container, Pill } from "~/components/ui";
-import { CREDENTIAL, CTA_MICROCOPY, GUARANTEE, RESULTS, STAGES, TRUST } from "~/lib/offer";
+import { GUARANTEE, RESULTS, STAGES, TRUST } from "~/lib/offer";
 import { FAQS, HOME_FAQ_QUESTIONS } from "~/lib/faqs";
 import { seo } from "~/lib/seo";
 import { STAGE_ICONS } from "~/lib/stage-icons";
-import { btnSecondary, card, cx, focusRing, gradientText } from "~/lib/ui";
+import { card, cx, focusRing, gradientText } from "~/lib/ui";
 
 export const Route = createFileRoute("/_site/")({
   head: () =>
@@ -116,34 +114,15 @@ function HomePage() {
       {/* Hero */}
       <section className="theme-dark relative isolate overflow-hidden bg-background">
         <AmbientGlow grid horizon />
-        <Container className="pb-14 pt-12 sm:pt-20 lg:pb-20">
-          <div>
-          <Pill dot>GoHighLevel Specialist · {CREDENTIAL}</Pill>
-          <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-            GoHighLevel Systems That <span className={gradientText}>Capture, Nurture and Close.</span>
+        <Container className="pb-14 pt-8 sm:pt-12 lg:pb-16">
+          {/* The intro video is the hero; the heading stays for search engines and screen readers. */}
+          <h1 className="sr-only">
+            GoHighLevel Systems That Capture, Nurture and Close. I set up, fix and run GoHighLevel so every lead is
+            captured, followed up automatically, and moved to a booked call or a closed sale. No long-term contract.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg">
-            I set up, fix and run GoHighLevel so every lead is captured, followed up automatically, and moved to a booked
-            call or a closed sale.{" "}
-            <strong className="font-semibold text-foreground">No long-term contract.</strong>
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <BookCallButton />
-            <Link to="/" hash="how-it-works" className={btnSecondary}>
-              See How It Works
-              <ArrowDown className="size-4" aria-hidden="true" />
-            </Link>
-          </div>
-          <p className="mt-3 text-sm text-muted-foreground">{CTA_MICROCOPY}</p>
-          <Link
-            to="/"
-            hash="explainer"
-            className={cx("mt-5 inline-flex items-center gap-2 rounded-full text-sm font-semibold text-accent-foreground hover:text-foreground", focusRing)}
-          >
-            <PlayCircle className="size-5" aria-hidden="true" />
-            Watch the 1-minute explainer
-          </Link>
-          </div>
+          <Reveal>
+            <IntroVideo large />
+          </Reveal>
 
           <ul className="mt-10 grid gap-3 border-t border-border pt-6 sm:grid-cols-3" aria-label="Background">
             {TRUST.map((t, i) => (
@@ -153,22 +132,6 @@ function HomePage() {
               </Reveal>
             ))}
           </ul>
-        </Container>
-      </section>
-
-      {/* Explainer */}
-      <section id="explainer" className="scroll-mt-20" aria-labelledby="explainer-title">
-        <Container className="py-16 lg:py-20">
-          <Reveal>
-            <Pill>In one minute</Pill>
-            <h2 id="explainer-title" className="mt-5 text-3xl font-bold sm:text-4xl">
-              How It Works, Start to Finish
-            </h2>
-            <p className="mt-3 max-w-2xl">Where GoHighLevel setups leak, the system that fixes it, and how it gets built.</p>
-          </Reveal>
-          <Reveal delay={0.1} className="mt-8">
-            <LazyExplainer />
-          </Reveal>
         </Container>
       </section>
 

@@ -55,6 +55,8 @@ export function projectsJsonLd() {
     name: "GoHighLevel projects by LeadBoosterX",
     itemListElement: PROJECTS.map((p, i) => {
       const videos = [];
+      if (p.journey && p.video)
+        videos.push(video(`${p.title}: the full customer journey`, p.journey.label, p.journey.src, p.video.poster, p.journey.duration));
       if (p.video?.voiceover)
         videos.push(video(`${p.title}: website walkthrough`, p.video.label, p.video.voiceover, p.video.poster, p.video.duration));
       for (const id of ["nurture", "close"] as const) {

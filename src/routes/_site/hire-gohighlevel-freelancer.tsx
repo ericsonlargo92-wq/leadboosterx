@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, BadgeCheck, Check, ChevronDown, ExternalLink } from "lucide-react";
+import { LazyExplainer } from "~/components/LazyExplainer";
 import { Reveal, STAGGER } from "~/components/motion";
 import { BookCallButton, Container, CtaBlock, Pill } from "~/components/ui";
 import { PROFILES } from "~/lib/config";
@@ -50,6 +51,20 @@ function HirePage() {
             verify the credential
           </Link>
         </p>
+
+        {/* Explainer */}
+        <section id="explainer" className="mt-14 scroll-mt-20" aria-labelledby="explainer-title">
+          <Reveal>
+            <Pill>In one minute</Pill>
+            <h2 id="explainer-title" className="mt-5 text-3xl font-bold sm:text-4xl">
+              How It Works, Start to Finish
+            </h2>
+            <p className="mt-3 max-w-2xl">Where GoHighLevel setups leak, the system that fixes it, and how it gets built.</p>
+          </Reveal>
+          <Reveal delay={0.1} className="mt-8">
+            <LazyExplainer />
+          </Reveal>
+        </section>
 
         {/* Ways to work together */}
         <h2 className="mt-14 text-3xl font-bold sm:text-4xl">Ways to Hire Me</h2>

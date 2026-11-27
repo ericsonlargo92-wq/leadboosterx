@@ -1,5 +1,5 @@
 {
- "total": 55.27,
+ "total": 52.12,
  "cues": [
   {
    "id": "hook",
@@ -69,9 +69,9 @@
   },
   {
    "id": "cta",
-   "text": "LeadBoosterX is run by a HighLevel Certified Admin. Book a free call, and we'll find where your system is leaking.",
+   "text": "Run by a HighLevel Certified Admin. Book your free discovery call.",
    "start": 48.06,
-   "end": 55.22
+   "end": 52.07
   }
  ]
 }
