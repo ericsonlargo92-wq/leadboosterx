@@ -22,7 +22,7 @@ export function packagesJsonLd() {
         description: `${p.tagline} ${p.who} Includes: ${p.includes.join("; ")}.`,
         provider: { "@id": BUSINESS },
         areaServed: { "@type": "Place", name: "Worldwide" },
-        url: `${SITE_URL}/packages`,
+        url: `${SITE_URL}/services#packages`,
       },
     })),
   };

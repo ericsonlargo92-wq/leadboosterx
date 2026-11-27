@@ -1,8 +1,10 @@
 /**
- * Copy for the "Hire a GoHighLevel Freelancer & Virtual Assistant" page (/hire-gohighlevel-freelancer).
+ * Copy for the "Hire me" half of the Services page (/services#hire; /hire-gohighlevel-freelancer redirects there).
  * Facts only from the rest of the site: no rates, no availability promises beyond "hours that overlap your business day".
  */
-export const HIRE_PATH = "/hire-gohighlevel-freelancer";
+export const SERVICES_PATH = "/services";
+/** Where the hiring options live (kept for links and structured data). */
+export const HIRE_PATH = "/services#hire";
 
 export const WORK_TYPES = [
   {

@@ -351,7 +351,7 @@ function HomePage() {
                 <p className="mt-2">
                   On a free 30-minute call we'll look at your GoHighLevel setup — or the one you need — find where leads
                   slip through, and decide what to fix first.{" "}
-                  <Link to="/packages" className={cx("rounded font-semibold text-primary hover:underline", focusRing)}>
+                  <Link to="/services" hash="packages" className={cx("rounded font-semibold text-primary hover:underline", focusRing)}>
                     See the packages
                   </Link>
                   .
