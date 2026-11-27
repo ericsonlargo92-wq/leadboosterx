@@ -70,17 +70,9 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
 function ProfileCard({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-2.5">
-      <div className="flex gap-3 lg:block">
-        <img
-          src="/images/ericson.webp"
-          loading="lazy"
-          decoding="async"
-          alt="Ericson Largo, founder of LeadBoosterX"
-          width={800}
-          height={1000}
-          className="aspect-[4/5] w-20 shrink-0 rounded-xl object-cover lg:max-h-[30vh] lg:w-full lg:object-[50%_20%]"
-        />
-        <div className="min-w-0 space-y-1.5 px-1 py-1 lg:pt-2.5">
+      <div>
+        {/* No photo here: Ericson introduces himself in the homepage intro video. */}
+        <div className="min-w-0 space-y-1.5 px-1 py-1">
           <p className="flex items-center gap-2 text-sm font-medium text-foreground">
             <span className="relative flex size-2.5" aria-hidden="true">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60" />

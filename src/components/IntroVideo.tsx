@@ -5,7 +5,7 @@ import { raise, type Preload } from "~/lib/warm-video";
 
 export const INTRO_VIDEO = {
   src: "/projects/ericson-largo-intro-v2.mp4",
-  poster: "/projects/ericson-largo-intro-poster-v3.webp",
+  poster: "/projects/ericson-largo-intro-poster-v4.webp",
   duration: "1:07",
   label:
     "Ericson Largo's intro: HighLevel Certified Admin and founder of LeadBoosterX, his background at Intuit and AI for Business, the Capture, Nurture and Close system, and real GoHighLevel builds",
